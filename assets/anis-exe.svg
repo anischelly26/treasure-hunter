@@ -1,0 +1,35 @@
+<svg width="1200" height="460" viewBox="0 0 1200 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(835 176) rotate(147) scale(620 440)">
+    <stop stop-color="#21180A"/><stop offset="0.44" stop-color="#090806"/><stop offset="1" stop-color="#030303"/>
+  </radialGradient>
+  <linearGradient id="gold" x1="330" y1="100" x2="930" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#6A4814"/><stop offset=".55" stop-color="#E4B85B"/><stop offset="1" stop-color="#7F591D"/></linearGradient>
+  <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <clipPath id="clip"><rect width="1200" height="460" rx="28"/></clipPath>
+</defs>
+<g clip-path="url(#clip)">
+<rect width="1200" height="460" fill="url(#bg)"/>
+<g opacity=".38" stroke="#D6AA50">
+  <circle cx="905" cy="224" r="124"><animate attributeName="r" values="118;128;118" dur="6s" repeatCount="indefinite"/></circle>
+  <circle cx="905" cy="224" r="171" opacity=".32" stroke-dasharray="3 9"><animateTransform attributeName="transform" type="rotate" from="0 905 224" to="360 905 224" dur="28s" repeatCount="indefinite"/></circle>
+  <circle cx="905" cy="224" r="219" opacity=".18" stroke-dasharray="1 15"><animateTransform attributeName="transform" type="rotate" from="360 905 224" to="0 905 224" dur="42s" repeatCount="indefinite"/></circle>
+</g>
+<circle cx="905" cy="224" r="6" fill="#E4B85B" filter="url(#glow)"><animate attributeName="opacity" values=".35;1;.35" dur="2.2s" repeatCount="indefinite"/></circle>
+<path d="M780 224H1030" stroke="url(#gold)" opacity=".34"/><path d="M905 99V349" stroke="url(#gold)" opacity=".18"/>
+<g font-family="monospace">
+<text x="70" y="72" fill="#D6AA50" font-size="14" letter-spacing="4">IDENTITY // VERIFIED</text>
+<text x="70" y="190" fill="#F2F1EA" font-size="92" font-weight="700" letter-spacing="-5">ANIS.EXE</text>
+<text x="74" y="236" fill="#A2A19A" font-size="18" letter-spacing="5">SOFTWARE ENGINEER × AI BUILDER</text>
+<text x="74" y="302" fill="#6F6E68" font-size="14">BUILDING SOFTWARE THAT UNDERSTANDS, TRANSFORMS &amp; AUTOMATES.</text>
+<text x="74" y="370" fill="#79FFB0" font-size="13" letter-spacing="2">● SYSTEM ONLINE</text>
+<text x="244" y="370" fill="#6F6E68" font-size="13" letter-spacing="2">TUNIS // WORLDWIDE</text>
+</g>
+<rect x="0" y="0" width="1200" height="2" fill="#D6AA50" opacity=".22"><animate attributeName="y" values="0;458;0" dur="7s" repeatCount="indefinite"/></rect>
+<g fill="#E4B85B">
+  <circle cx="1090" cy="70" r="1"><animate attributeName="opacity" values=".1;1;.1" dur="1.8s" repeatCount="indefinite"/></circle>
+  <circle cx="760" cy="90" r="1.3"><animate attributeName="opacity" values="1;.1;1" dur="2.7s" repeatCount="indefinite"/></circle>
+  <circle cx="1020" cy="390" r="1"><animate attributeName="opacity" values=".2;1;.2" dur="3.1s" repeatCount="indefinite"/></circle>
+</g>
+<rect x=".5" y=".5" width="1199" height="459" rx="27.5" stroke="#FFFFFF" stroke-opacity=".1"/>
+</g>
+</svg>
