@@ -56,6 +56,8 @@ Full-stack team project covering CV parsing, skill extraction and matching, cand
 
 `React` `Node.js` `Express` `MongoDB` `Explainable AI` `Agile/Scrum`
 
+→ [Read case study](https://github.com/anischelly26/treasure-hunter/blob/main/case-studies/orange-xai-portal.md)
+
 ### `MISSION_03 // MONOPRIX // FILES → CENTRAL DATA`
 **Sales Data Centralization**
 
@@ -63,12 +65,16 @@ Centralized daily store-sales information and automated structured-data imports 
 
 `Python` `MySQL` `SQL Server` `XAMPP` `Automation`
 
+→ [Read case study](https://github.com/anischelly26/treasure-hunter/blob/main/case-studies/monoprix-data-centralization.md)
+
 ### `MISSION_04 // AI LAB // SIGNAL → STATE → FORECAST`
 **Hidden Markov Weather Analysis**
 
 Gaussian HMM project with Youssef Mani for latent weather-state inference and forecasting from temperature sequences. The pipeline includes Baum-Welch training, Viterbi decoding, AIC/BIC model selection and forecasting evaluation.
 
 `Python` `hmmlearn` `HMM` `Baum-Welch` `Viterbi` `AIC/BIC`
+
+→ [Read case study](https://github.com/anischelly26/treasure-hunter/blob/main/case-studies/hmm-weather-analysis.md)
 
 ---
 
