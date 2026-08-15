@@ -4,13 +4,9 @@
   <img src="https://raw.githubusercontent.com/anischelly26/treasure-hunter/main/assets/anis-exe.svg" width="100%" alt="ANIS.EXE" />
 </a>
 
-<br/>
-
 ### `SOFTWARE ENGINEER × AI BUILDER`
 
 **AI/ML · Computer Vision · Backend · Full Stack · Intelligent Systems**
-
-<br/>
 
 <a href="https://anischelly26.github.io/treasure-hunter/"><b>▶ ENTER ANIS.EXE</b></a>
 &nbsp;&nbsp;·&nbsp;&nbsp;
@@ -22,7 +18,6 @@
 
 ```text
 anis@core:~$ whoami
-
 ANIS CHELLI
 Final-year Software Engineering student @ MedTech Tunis
 Software Engineer // AI Builder
@@ -31,10 +26,9 @@ Next mission: PFE 2026–2027
 ```
 
 ## `01 // CORE`
+I build software that **understands, transforms and automates** — from computer vision and probabilistic AI to full-stack products, data systems and independent AI experiments.
 
-I build software that **understands, transforms and automates** — from computer vision and probabilistic AI to full-stack products and data systems.
-
-`Vermeg` · `Monoprix` · `Orange Digital Center × MedTech`
+`Vermeg` · `Monoprix` · `Orange Digital Center × MedTech` · `PadelVision` · `Study Abroad AI`
 
 ---
 
@@ -43,7 +37,7 @@ I build software that **understands, transforms and automates** — from compute
 ### `MISSION_01 // VERMEG // SCREEN → CODE`
 **AI UI-to-Code Converter**
 
-End-to-end Python prototype that preprocesses UI screenshots, extracts text, interprets layout and generates HTML/CSS. Developed independently with weekly supervisor reviews.
+End-to-end Python prototype that preprocesses UI screenshots, extracts text, interprets layout and generates HTML/CSS.
 
 `Python` `OpenCV` `Tesseract OCR` `LLaVA` `Ollama` `HTML/CSS`
 
@@ -52,7 +46,7 @@ End-to-end Python prototype that preprocesses UI screenshots, extracts text, int
 ### `MISSION_02 // ORANGE × MEDTECH // CV → MATCH → EXPLAIN`
 **Internship & PFE Management Portal with Explainable AI Shortlisting**
 
-Full-stack team project covering CV parsing, skill extraction and matching, candidate ranking, application workflows, supervisor assignment, evaluation tracking and human-readable explanations for AI shortlisting decisions.
+Full-stack team project covering CV parsing, skill extraction/matching, candidate ranking, application workflows, supervisor assignment, evaluation tracking and human-readable explanations for AI shortlisting decisions.
 
 `React` `Node.js` `Express` `MongoDB` `Explainable AI` `Agile/Scrum`
 
@@ -61,7 +55,7 @@ Full-stack team project covering CV parsing, skill extraction and matching, cand
 ### `MISSION_03 // MONOPRIX // FILES → CENTRAL DATA`
 **Sales Data Centralization**
 
-Centralized daily store-sales information and automated structured-data imports with Python, with a focus on data integrity, faster access, query efficiency and reduced manual handling.
+Centralized daily store-sales information and automated structured-data imports with Python, with a focus on data integrity, faster access and query efficiency.
 
 `Python` `MySQL` `SQL Server` `XAMPP` `Automation`
 
@@ -70,16 +64,31 @@ Centralized daily store-sales information and automated structured-data imports 
 ### `MISSION_04 // AI LAB // SIGNAL → STATE → FORECAST`
 **Hidden Markov Weather Analysis**
 
-Gaussian HMM project with Youssef Mani for latent weather-state inference and forecasting from temperature sequences. The pipeline includes Baum-Welch training, Viterbi decoding, AIC/BIC model selection and forecasting evaluation.
+Gaussian HMM project with Youssef Mani for latent weather-state inference and forecasting from temperature sequences.
 
 `Python` `hmmlearn` `HMM` `Baum-Welch` `Viterbi` `AIC/BIC`
 
 → [Read case study](https://github.com/anischelly26/treasure-hunter/blob/main/case-studies/hmm-weather-analysis.md)
 
+### `MISSION_05 // PADELVISION // MOVEMENT → METRICS → COACHING`
+**PadelVision AI**
+
+Sports-AI R&D project for padel stroke and movement analysis. The current reference dataset models stroke phases, objectives and body-position directions for right-handed players, grounded in padel biomechanics/performance literature and explicitly marked for coach validation before being treated as ground truth.
+
+`Computer Vision` `Sports AI` `Biomechanics` `Movement Analysis` `Performance Analytics`
+
+→ [Read case study](https://github.com/anischelly26/treasure-hunter/blob/main/case-studies/padelvision.md)
+
+### `MISSION_06 // STUDY ABROAD AI // PROFILE → OPTIONS → DECISION`
+**AI Study Abroad Assistant**
+
+AI-assisted international study guidance project. I’m keeping the public description intentionally high-level until the source/repository files are uploaded, so the portfolio does not claim features that are not yet documented.
+
+`AI` `Recommendation` `EdTech` `Decision Support`
+
 ---
 
 ## `03 // ARSENAL`
-
 ```text
 AI SYSTEMS    → Machine Learning · NLP · Computer Vision · OCR · XAI · HMM
 AI TOOLING    → OpenCV · Tesseract · LLaVA · Ollama · hmmlearn
@@ -92,7 +101,6 @@ SYSTEMS       → Git · GitHub · Linux · Windows · Azure · Agile/Scrum
 ---
 
 ## `04 // SIGNALS`
-
 ```text
 ACADEMIC      → MedTech Tunis // Software Engineering // Expected 2027
 GAME DEV      → SDL2 academic project // top exhibition category
@@ -103,7 +111,6 @@ STATUS        → AVAILABLE FOR PFE 2026–2027
 ---
 
 ## `05 // NEXT MISSION`
-
 ```text
 > objective
 PFE 2026–2027 / international software engineering opportunity
@@ -114,8 +121,6 @@ PERMISSION GRANTED.
 ```
 
 <div align="center">
-
-**The README is only the gateway.**
 
 ### [ENTER THE INTERACTIVE SYSTEM ↗](https://anischelly26.github.io/treasure-hunter/)
 
