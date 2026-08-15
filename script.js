@@ -8,6 +8,7 @@ const sequence = [
   'boot sequence initiated...',
   'loading neural modules...',
   'mounting project archive...',
+  'indexing internship missions...',
   'checking identity signature...',
   '<span class="ok">identity: ANIS CHELLI // VERIFIED</span>',
   '<span class="ok">ACCESS GRANTED</span>'
@@ -20,7 +21,7 @@ function renderLine(){
   const p = document.createElement('div');
   p.innerHTML = '> ' + sequence[line++];
   bootLines.appendChild(p);
-  setTimeout(renderLine, 260);
+  setTimeout(renderLine, 245);
 }
 renderLine();
 
@@ -99,13 +100,18 @@ closeBtn.addEventListener('click',closeTerminal);
 addEventListener('keydown',e=>{if(e.key==='Escape')closeTerminal();if(e.key==='`'&&!e.metaKey&&!e.ctrlKey){e.preventDefault();openTerminal();}});
 
 const commands = {
-  help:`<span class="cmd">AVAILABLE COMMANDS</span><br>whoami &nbsp; projects &nbsp; skills &nbsp; status &nbsp; contact &nbsp; clear &nbsp; sudo hire anis`,
-  whoami:`<span class="green">ANIS CHELLI</span><br>Software Engineer // AI Builder<br><span class="dim">Mission: build software that thinks, transforms and ships.</span>`,
-  projects:`<span class="cmd">MISSION_01</span> UI Reconstruction Engine — OpenCV + OCR → HTML<br><span class="cmd">MISSION_02</span> AI Recruitment Engine — NLP + ranking + explainability<br><span class="cmd">MISSION_03</span> Data Automation — Python + MySQL`,
-  skills:`AI SYSTEMS → Computer Vision, NLP, OCR, multimodal workflows<br>ENGINEERING → Python, Java, JavaScript, C<br>WEB → React, Node.js, HTML/CSS<br>DATA → MySQL, SQL`,
-  status:`<span class="green">● AVAILABLE FOR NEXT MISSION</span><br>Final-year Software Engineering student @ MedTech<br>PFE target: 2026–2027`,
-  contact:`GitHub → <a href="https://github.com/anischelly26" target="_blank">github.com/anischelly26 ↗</a><br>Email → <a href="mailto:anischelly95@gmail.com">anischelly95@gmail.com ↗</a>`,
-  'sudo hire anis':`<span class="green">PERMISSION GRANTED.</span><br>Recruiter mode unlocked.<br>Opening communication channel...<br><a href="mailto:anischelly95@gmail.com">[ SEND TRANSMISSION ↗ ]</a>`
+  help:`<span class="cmd">AVAILABLE COMMANDS</span><br>whoami &nbsp; projects &nbsp; experience &nbsp; skills &nbsp; status &nbsp; vermeg &nbsp; orange &nbsp; monoprix &nbsp; hmm &nbsp; contact &nbsp; clear &nbsp; sudo hire anis`,
+  whoami:`<span class="green">ANIS CHELLI</span><br>Final-year Software Engineering student @ MedTech<br>Software Engineer // AI Builder<br><span class="dim">Focus: AI/ML · backend · full-stack · intelligent systems.</span>`,
+  projects:`<span class="cmd">MISSION_01</span> Vermeg — AI UI-to-Code Converter<br><span class="cmd">MISSION_02</span> Orange × MedTech — Explainable AI Internship & PFE Portal<br><span class="cmd">MISSION_03</span> Monoprix — Sales Data Centralization<br><span class="cmd">MISSION_04</span> AI Lab — Hidden Markov Weather Analysis`,
+  experience:`VERMEG → AI internship // Python UI-to-code prototype<br>MONOPRIX → Data management internship // centralized sales-data workflows<br>ORANGE DIGITAL CENTER × MEDTECH → Full-stack XAI senior project`,
+  skills:`AI → Machine Learning, NLP, Computer Vision, OCR, Explainable AI, HMM<br>AI TOOLING → OpenCV, Tesseract, LLaVA, Ollama, hmmlearn<br>ENGINEERING → Python, Java, JavaScript, C, PHP<br>WEB → React, Node.js, Express, HTML/CSS<br>DATA → MySQL, SQL Server, MongoDB<br>SYSTEMS → Git, GitHub, Linux, Windows, Azure, Agile/Scrum`,
+  status:`<span class="green">● AVAILABLE FOR NEXT MISSION</span><br>Final-year Software Engineering student @ MedTech<br>PFE target: 2026–2027<br>Target domains: AI/ML, backend, full-stack product engineering`,
+  vermeg:`<span class="cmd">MISSION_01 // VERMEG</span><br>Built an end-to-end Python prototype that converts UI screenshots into HTML/CSS.<br>Pipeline: OpenCV preprocessing → Tesseract OCR → LLaVA via Ollama → code generation.<br><span class="dim">Developed independently with weekly supervisor reviews.</span>`,
+  orange:`<span class="cmd">MISSION_02 // ORANGE × MEDTECH</span><br>Internship & PFE Management Portal with Explainable AI Shortlisting.<br>CV parsing → skill extraction/matching → ranking → human-readable explanation.<br><span class="dim">Full-stack team project with React / Node.js / Express / MongoDB architecture.</span>`,
+  monoprix:`<span class="cmd">MISSION_03 // MONOPRIX</span><br>Centralized daily store-sales data and automated file imports with Python.<br>Focus: MySQL, SQL Server, data integrity, query efficiency and reduced manual handling.`,
+  hmm:`<span class="cmd">MISSION_04 // HIDDEN MARKOV WEATHER ANALYSIS</span><br>Gaussian HMM for latent weather-state inference and forecasting.<br>Baum-Welch training · Viterbi decoding · AIC/BIC model selection · next-step forecasting.<br><span class="dim">Team project with Youssef Mani.</span>`,
+  contact:`GitHub → <a href="https://github.com/anischelly26" target="_blank">github.com/anischelly26 ↗</a><br>School email → <a href="mailto:anis.chelli@medtech.tn">anis.chelli@medtech.tn ↗</a>`,
+  'sudo hire anis':`<span class="green">PERMISSION GRANTED.</span><br>Recruiter mode unlocked.<br>Opening communication channel...<br><a href="mailto:anis.chelli@medtech.tn">[ SEND TRANSMISSION ↗ ]</a>`
 };
 
 function addOutput(html, cls=''){
