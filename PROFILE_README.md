@@ -8,7 +8,7 @@
 
 ### `SOFTWARE ENGINEER × AI BUILDER`
 
-**Computer Vision · NLP · Backend · Full Stack · Intelligent Systems**
+**AI/ML · Computer Vision · Backend · Full Stack · Intelligent Systems**
 
 <br/>
 
@@ -24,60 +24,84 @@
 anis@core:~$ whoami
 
 ANIS CHELLI
+Final-year Software Engineering student @ MedTech Tunis
 Software Engineer // AI Builder
-Status: FINAL YEAR
 Location: TUNIS // WORLDWIDE
 Next mission: PFE 2026–2027
 ```
 
+## `01 // CORE`
+
+I build software that **understands, transforms and automates** — from computer vision and probabilistic AI to full-stack products and data systems.
+
+`Vermeg` · `Monoprix` · `Orange Digital Center × MedTech`
+
+---
+
 ## `02 // MISSIONS`
 
-### `MISSION_01 // SCREEN → CODE`
-**UI Reconstruction Engine**
+### `MISSION_01 // VERMEG // SCREEN → CODE`
+**AI UI-to-Code Converter**
 
-Computer-vision + OCR prototype that detects visual interface elements from screenshots, extracts text and geometry, and generates editable HTML.
+End-to-end Python prototype that preprocesses UI screenshots, extracts text, interprets layout and generates HTML/CSS. Developed independently with weekly supervisor reviews.
 
-`Python` `OpenCV` `Tesseract` `OCR` `UI-to-Code`
+`Python` `OpenCV` `Tesseract OCR` `LLaVA` `Ollama` `HTML/CSS`
 
 → [Open mission](https://github.com/anischelly26/ui-to-html-css-translator)
 
-### `MISSION_02 // CV → MATCH`
-**AI Recruitment Engine**
+### `MISSION_02 // ORANGE × MEDTECH // CV → MATCH → EXPLAIN`
+**Internship & PFE Management Portal with Explainable AI Shortlisting**
 
-NLP-based CV matching, ranking and explainability work developed in the Orange / MedTech context.
+Full-stack team project covering CV parsing, skill extraction and matching, candidate ranking, application workflows, supervisor assignment, evaluation tracking and human-readable explanations for AI shortlisting decisions.
 
-`NLP` `Ranking` `Explainable AI`
+`React` `Node.js` `Express` `MongoDB` `Explainable AI` `Agile/Scrum`
 
-### `MISSION_03 // RAW → SYSTEM`
-**Data Automation**
+### `MISSION_03 // MONOPRIX // FILES → CENTRAL DATA`
+**Sales Data Centralization**
 
-Python + MySQL work focused on structured-data import, centralization and automation.
+Centralized daily store-sales information and automated structured-data imports with Python, with a focus on data integrity, faster access, query efficiency and reduced manual handling.
 
-`Python` `MySQL` `Automation`
+`Python` `MySQL` `SQL Server` `XAMPP` `Automation`
+
+### `MISSION_04 // AI LAB // SIGNAL → STATE → FORECAST`
+**Hidden Markov Weather Analysis**
+
+Gaussian HMM project with Youssef Mani for latent weather-state inference and forecasting from temperature sequences. The pipeline includes Baum-Welch training, Viterbi decoding, AIC/BIC model selection and forecasting evaluation.
+
+`Python` `hmmlearn` `HMM` `Baum-Welch` `Viterbi` `AIC/BIC`
 
 ---
 
 ## `03 // ARSENAL`
 
 ```text
-AI SYSTEMS   → Computer Vision · NLP · OCR · Multimodal AI
-ENGINEERING  → Python · Java · JavaScript · C
-WEB          → React · Node.js · HTML · CSS
-DATA         → MySQL · SQL
-TOOLS        → Git · GitHub · Linux · Agile
+AI SYSTEMS    → Machine Learning · NLP · Computer Vision · OCR · XAI · HMM
+AI TOOLING    → OpenCV · Tesseract · LLaVA · Ollama · hmmlearn
+ENGINEERING   → Python · Java · JavaScript · C · PHP
+WEB           → React · Node.js · Express · HTML · CSS
+DATA          → MySQL · SQL Server · MongoDB
+SYSTEMS       → Git · GitHub · Linux · Windows · Azure · Agile/Scrum
 ```
 
 ---
 
-## `04 // NEXT MISSION`
+## `04 // SIGNALS`
 
 ```text
-> status
-● AVAILABLE FOR NEXT MISSION
+ACADEMIC      → MedTech Tunis // Software Engineering // Expected 2027
+GAME DEV      → SDL2 academic project // top exhibition category
+LANGUAGES     → Arabic: Native // English: Fluent // French: Intermediate
+STATUS        → AVAILABLE FOR PFE 2026–2027
+```
 
+---
+
+## `05 // NEXT MISSION`
+
+```text
 > objective
 PFE 2026–2027 / international software engineering opportunity
-AI · Backend · Full Stack · Product Engineering
+AI/ML · Backend · Full Stack · Product Engineering
 
 > sudo hire anis
 PERMISSION GRANTED.
@@ -85,8 +109,10 @@ PERMISSION GRANTED.
 
 <div align="center">
 
-**The GitHub README is only the gateway.**
+**The README is only the gateway.**
 
 ### [ENTER THE INTERACTIVE SYSTEM ↗](https://anischelly26.github.io/treasure-hunter/)
+
+`anis.chelli@medtech.tn`
 
 </div>
