@@ -11,7 +11,16 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 - responsive mobile layout
 - interactive terminal
 - keyboard shortcut: press **`** to open the terminal
-- commands: `help`, `whoami`, `projects`, `skills`, `status`, `contact`, `sudo hire anis`
+- commands: `help`, `whoami`, `projects`, `experience`, `skills`, `status`, `vermeg`, `orange`, `monoprix`, `hmm`, `contact`, `sudo hire anis`
+
+## Verified missions
+
+- **Vermeg** — AI UI-to-Code Converter using Python, OpenCV, Tesseract, LLaVA and Ollama
+- **Orange Digital Center × MedTech** — Internship & PFE Management Portal with Explainable AI shortlisting
+- **Monoprix** — Sales Data Centralization and Python-driven database import automation
+- **Hidden Markov Weather Analysis** — Gaussian HMM, Baum-Welch, Viterbi, AIC/BIC model selection and forecasting
+
+Supporting case studies live in [`case-studies/`](./case-studies/).
 
 ## Run locally
 
@@ -19,11 +28,7 @@ Open `index.html` in a browser, or serve the folder with any static web server.
 
 ## Deployment
 
-The repository includes a GitHub Pages deployment workflow. Once Pages is available for the repository, pushes to `main` deploy the experience automatically.
-
-## Featured mission
-
-The first live project link points to [`ui-to-html-css-translator`](https://github.com/anischelly26/ui-to-html-css-translator), a computer-vision/OCR UI reconstruction prototype.
+The repository includes a GitHub Pages deployment workflow. GitHub Pages must first be enabled in the repository settings; after that, pushes to `main` can deploy the experience automatically.
 
 ---
 
