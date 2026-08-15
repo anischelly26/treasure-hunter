@@ -12,201 +12,25 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <canvas id="space"></canvas>
-  <div class="noise"></div>
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <section class="boot" id="boot">
-    <div class="boot__inner">
-      <div class="boot__mark">AC</div>
-      <div class="boot__lines" id="bootLines"></div>
-      <div class="boot__bar"><span id="bootBar"></span></div>
-      <div class="boot__percent" id="bootPercent">0%</div>
-    </div>
-  </section>
-
+  <canvas id="space"></canvas><div class="noise"></div><div class="cursor-glow" id="cursorGlow"></div>
+  <section class="boot" id="boot"><div class="boot__inner"><div class="boot__mark">AC</div><div class="boot__lines" id="bootLines"></div><div class="boot__bar"><span id="bootBar"></span></div><div class="boot__percent" id="bootPercent">0%</div></div></section>
   <main id="app" class="app hidden">
-    <header class="nav">
-      <a href="#home" class="brand">
-        <span class="brand__icon">AC</span>
-        <span class="brand__text">ANIS.EXE</span>
-      </a>
-      <div class="nav__status"><span class="status-dot"></span> SYSTEM ONLINE</div>
-      <nav class="nav__links">
-        <a href="#missions">MISSIONS</a>
-        <a href="#arsenal">ARSENAL</a>
-        <button id="terminalToggle">TERMINAL_</button>
-      </nav>
-    </header>
-
-    <section id="home" class="hero section">
-      <div class="orb orb--one"></div>
-      <div class="orb orb--two"></div>
-
-      <div class="hero__eyebrow reveal">IDENTITY // VERIFIED</div>
-      <h1 class="hero__title reveal">
-        <span>ANIS</span>
-        <span class="outline">CHELLI</span>
-      </h1>
-      <p class="hero__role reveal">SOFTWARE ENGINEER <span>×</span> AI BUILDER</p>
-      <p class="hero__copy reveal">
-        I build software that understands, transforms and automates — from computer vision and probabilistic AI to full-stack products and data systems.
-      </p>
-
-      <div class="hero__actions reveal">
-        <a class="btn btn--primary" href="#missions"><span>ENTER SYSTEM</span><b>↘</b></a>
-        <button class="btn btn--ghost" id="heroTerminal"><span>OPEN TERMINAL</span><b>⌁</b></button>
-      </div>
-
-      <div class="hero__hud reveal">
-        <div><span>LOCATION</span><b>TUNIS // WORLDWIDE</b></div>
-        <div><span>STATUS</span><b>FINAL YEAR @ MEDTECH</b></div>
-        <div><span>FOCUS</span><b>AI × SOFTWARE</b></div>
-        <div><span>NEXT</span><b>PFE 2026–2027</b></div>
-      </div>
-
-      <div class="scroll-hint">SCROLL TO DESCEND <span>↓</span></div>
-    </section>
-
-    <section class="intro section compact">
-      <div class="section-index">01 / CORE</div>
-      <div class="intro__grid">
-        <h2 class="display reveal">BUILDING<br><span>WHAT'S NEXT.</span></h2>
-        <div class="core-card glass reveal">
-          <div class="card-kicker">CURRENT OBJECTIVE</div>
-          <p>Turn ideas into intelligent, working systems — with strong engineering underneath the AI.</p>
-          <div class="system-line"><span>EDUCATION</span><b>Software Engineering @ MedTech</b></div>
-          <div class="system-line"><span>EXPERIENCE</span><b>Vermeg · Monoprix · Orange Digital Center</b></div>
-          <div class="system-line"><span>ACADEMIC SIGNAL</span><b>SDL2 GAME // TOP EXHIBITION CATEGORY</b></div>
-          <div class="system-line"><span>SIGNAL</span><b class="online">AVAILABLE FOR NEXT MISSION</b></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="missions" class="missions section">
-      <div class="section-index">02 / MISSIONS</div>
-      <div class="section-head">
-        <h2 class="display reveal">SELECTED<br><span>MISSIONS</span></h2>
-        <p class="reveal">Built from real internship and academic work. No fake metrics. No badge wall.</p>
-      </div>
-
-      <div class="mission-grid">
-        <a class="mission mission--featured reveal" href="https://github.com/anischelly26/ui-to-html-css-translator" target="_blank" rel="noreferrer">
-          <div class="mission__top">
-            <span>MISSION_01 // VERMEG</span>
-            <span class="mission__state">SOLO BUILD // AI</span>
-          </div>
-          <div class="mission__body">
-            <div class="mission__code">SCREEN → CODE</div>
-            <h3>AI UI-to-Code Converter</h3>
-            <p>End-to-end Python prototype that preprocesses UI screenshots, extracts text, interprets layout and generates HTML/CSS. Built independently with weekly supervisor reviews.</p>
-          </div>
-          <div class="mission__tags">
-            <span>PYTHON</span><span>OPENCV</span><span>TESSERACT</span><span>LLAVA</span><span>OLLAMA</span>
-          </div>
-          <div class="mission__launch">OPEN MISSION ↗</div>
-        </a>
-
-        <article class="mission reveal">
-          <div class="mission__top">
-            <span>MISSION_02 // ORANGE × MEDTECH</span>
-            <span class="mission__state">TEAM // XAI</span>
-          </div>
-          <div class="mission__body">
-            <div class="mission__code">CV → MATCH → EXPLAIN</div>
-            <h3>Internship & PFE Management Portal</h3>
-            <p>Full-stack platform for CV parsing, skill matching, candidate ranking, supervisor workflows and human-readable explanations for AI shortlisting decisions.</p>
-          </div>
-          <div class="mission__tags">
-            <span>REACT</span><span>NODE.JS</span><span>EXPRESS</span><span>MONGODB</span><span>XAI</span>
-          </div>
-          <div class="mission__launch muted">CASE STUDY // SOURCE INCOMING</div>
-        </article>
-
-        <article class="mission reveal">
-          <div class="mission__top">
-            <span>MISSION_03 // MONOPRIX</span>
-            <span class="mission__state">DATA // AUTOMATION</span>
-          </div>
-          <div class="mission__body">
-            <div class="mission__code">FILES → CENTRAL DATA</div>
-            <h3>Sales Data Centralization</h3>
-            <p>Centralized daily store-sales data and automated structured imports with Python, with a focus on query efficiency, data integrity and reducing repetitive manual handling.</p>
-          </div>
-          <div class="mission__tags">
-            <span>PYTHON</span><span>MYSQL</span><span>SQL SERVER</span><span>XAMPP</span>
-          </div>
-          <div class="mission__launch muted">MONOPRIX // INTERNSHIP</div>
-        </article>
-
-        <article class="mission reveal">
-          <div class="mission__top">
-            <span>MISSION_04 // AI LAB</span>
-            <span class="mission__state">TEAM // PROBABILISTIC ML</span>
-          </div>
-          <div class="mission__body">
-            <div class="mission__code">SIGNAL → STATE → FORECAST</div>
-            <h3>Hidden Markov Weather Analysis</h3>
-            <p>Gaussian HMM project with Youssef Mani for latent weather-state inference and forecasting from temperature sequences, including model selection and decoding.</p>
-          </div>
-          <div class="mission__tags">
-            <span>PYTHON</span><span>HMMLEARN</span><span>BAUM-WELCH</span><span>VITERBI</span><span>AIC/BIC</span>
-          </div>
-          <div class="mission__launch muted">REPOSITORY // PREPARING</div>
-        </article>
-      </div>
-    </section>
-
-    <section id="arsenal" class="arsenal section compact">
-      <div class="section-index">03 / ARSENAL</div>
-      <div class="arsenal__grid">
-        <h2 class="display reveal">TECH<br><span>ARSENAL</span></h2>
-        <div class="arsenal-list">
-          <div class="arsenal-row reveal"><span>AI SYSTEMS</span><b>Machine Learning · NLP · Computer Vision · OCR · XAI · HMM</b><i>01</i></div>
-          <div class="arsenal-row reveal"><span>AI TOOLING</span><b>OpenCV · Tesseract · LLaVA · Ollama · hmmlearn</b><i>02</i></div>
-          <div class="arsenal-row reveal"><span>ENGINEERING</span><b>Python · Java · JavaScript · C · PHP</b><i>03</i></div>
-          <div class="arsenal-row reveal"><span>WEB</span><b>React · Node.js · Express · HTML · CSS</b><i>04</i></div>
-          <div class="arsenal-row reveal"><span>DATA</span><b>MySQL · SQL Server · MongoDB</b><i>05</i></div>
-          <div class="arsenal-row reveal"><span>SYSTEMS</span><b>Git · GitHub · Linux · Windows · Azure · Agile/Scrum</b><i>06</i></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="next section">
-      <div class="next__panel reveal">
-        <div class="section-index">04 / NEXT MISSION</div>
-        <div class="next__question">???</div>
-        <h2>YOUR TEAM<br>COULD BE NEXT.</h2>
-        <p>Seeking a PFE 2026–2027 / international software engineering opportunity in AI/ML, backend or full-stack product development.</p>
-        <button class="btn btn--primary" id="nextTerminal"><span>INITIATE CONTACT</span><b>↗</b></button>
-      </div>
-    </section>
-
-    <footer>
-      <div><span>ANIS.EXE</span> // BUILD 2026</div>
-      <div class="footer__links">
-        <a href="https://github.com/anischelly26" target="_blank" rel="noreferrer">GITHUB ↗</a>
-        <a href="mailto:anis.chelli@medtech.tn">EMAIL ↗</a>
-      </div>
-    </footer>
+    <header class="nav"><a href="#home" class="brand"><span class="brand__icon">AC</span><span class="brand__text">ANIS.EXE</span></a><div class="nav__status"><span class="status-dot"></span> SYSTEM ONLINE</div><nav class="nav__links"><a href="#missions">MISSIONS</a><a href="#arsenal">ARSENAL</a><button id="terminalToggle">TERMINAL_</button></nav></header>
+    <section id="home" class="hero section"><div class="orb orb--one"></div><div class="orb orb--two"></div><div class="hero__eyebrow reveal">IDENTITY // VERIFIED</div><h1 class="hero__title reveal"><span>ANIS</span><span class="outline">CHELLI</span></h1><p class="hero__role reveal">SOFTWARE ENGINEER <span>×</span> AI BUILDER</p><p class="hero__copy reveal">I build software that understands, transforms and automates — from computer vision and probabilistic AI to full-stack products and data systems.</p><div class="hero__actions reveal"><a class="btn btn--primary" href="#missions"><span>ENTER SYSTEM</span><b>↘</b></a><button class="btn btn--ghost" id="heroTerminal"><span>OPEN TERMINAL</span><b>⌁</b></button></div><div class="hero__hud reveal"><div><span>LOCATION</span><b>TUNIS // WORLDWIDE</b></div><div><span>STATUS</span><b>FINAL YEAR @ MEDTECH</b></div><div><span>FOCUS</span><b>AI × SOFTWARE</b></div><div><span>NEXT</span><b>PFE 2026–2027</b></div></div><div class="scroll-hint">SCROLL TO DESCEND <span>↓</span></div></section>
+    <section class="intro section compact"><div class="section-index">01 / CORE</div><div class="intro__grid"><h2 class="display reveal">BUILDING<br><span>WHAT'S NEXT.</span></h2><div class="core-card glass reveal"><div class="card-kicker">CURRENT OBJECTIVE</div><p>Turn ideas into intelligent, working systems — with strong engineering underneath the AI.</p><div class="system-line"><span>EDUCATION</span><b>Software Engineering @ MedTech</b></div><div class="system-line"><span>EXPERIENCE</span><b>Vermeg · Monoprix · Orange Digital Center</b></div><div class="system-line"><span>PROJECT LAB</span><b>PadelVision · Study Abroad AI · HMM</b></div><div class="system-line"><span>SIGNAL</span><b class="online">AVAILABLE FOR NEXT MISSION</b></div></div></div></section>
+    <section id="missions" class="missions section"><div class="section-index">02 / MISSIONS</div><div class="section-head"><h2 class="display reveal">SELECTED<br><span>MISSIONS</span></h2><p class="reveal">Built from real internship, academic and independent project work.</p></div><div class="mission-grid">
+      <a class="mission mission--featured reveal" href="https://github.com/anischelly26/ui-to-html-css-translator" target="_blank" rel="noreferrer"><div class="mission__top"><span>MISSION_01 // VERMEG</span><span class="mission__state">SOLO BUILD // AI</span></div><div class="mission__body"><div class="mission__code">SCREEN → CODE</div><h3>AI UI-to-Code Converter</h3><p>End-to-end Python prototype that preprocesses UI screenshots, extracts text, interprets layout and generates HTML/CSS.</p></div><div class="mission__tags"><span>PYTHON</span><span>OPENCV</span><span>TESSERACT</span><span>LLAVA</span><span>OLLAMA</span></div><div class="mission__launch">OPEN MISSION ↗</div></a>
+      <article class="mission reveal"><div class="mission__top"><span>MISSION_02 // ORANGE × MEDTECH</span><span class="mission__state">TEAM // XAI</span></div><div class="mission__body"><div class="mission__code">CV → MATCH → EXPLAIN</div><h3>Internship & PFE Management Portal</h3><p>Full-stack platform for CV parsing, skill matching, candidate ranking, supervisor workflows and human-readable explanations for AI shortlisting decisions.</p></div><div class="mission__tags"><span>REACT</span><span>NODE.JS</span><span>EXPRESS</span><span>MONGODB</span><span>XAI</span></div><div class="mission__launch muted">CASE STUDY AVAILABLE</div></article>
+      <article class="mission reveal"><div class="mission__top"><span>MISSION_03 // MONOPRIX</span><span class="mission__state">DATA // AUTOMATION</span></div><div class="mission__body"><div class="mission__code">FILES → CENTRAL DATA</div><h3>Sales Data Centralization</h3><p>Centralized daily store-sales data and automated structured imports with Python, with a focus on query efficiency and data integrity.</p></div><div class="mission__tags"><span>PYTHON</span><span>MYSQL</span><span>SQL SERVER</span><span>XAMPP</span></div><div class="mission__launch muted">INTERNSHIP CASE STUDY</div></article>
+      <article class="mission reveal"><div class="mission__top"><span>MISSION_04 // AI LAB</span><span class="mission__state">TEAM // PROBABILISTIC ML</span></div><div class="mission__body"><div class="mission__code">SIGNAL → STATE → FORECAST</div><h3>Hidden Markov Weather Analysis</h3><p>Gaussian HMM project for latent weather-state inference and forecasting from temperature sequences, including model selection and Viterbi decoding.</p></div><div class="mission__tags"><span>PYTHON</span><span>HMMLEARN</span><span>VITERBI</span><span>AIC/BIC</span></div><div class="mission__launch muted">CASE STUDY AVAILABLE</div></article>
+      <article class="mission reveal"><div class="mission__top"><span>MISSION_05 // PADELVISION</span><span class="mission__state">SPORTS AI // R&D</span></div><div class="mission__body"><div class="mission__code">MOVEMENT → METRICS → COACHING</div><h3>PadelVision AI</h3><p>Padel movement-analysis project built around stroke phases, body-position signals and biomechanics-informed reference data for performance analysis and future coaching feedback.</p></div><div class="mission__tags"><span>COMPUTER VISION</span><span>BIOMECHANICS</span><span>MOVEMENT ANALYSIS</span><span>SPORTS AI</span></div><div class="mission__launch muted">REFERENCE DATASET // V0.1</div></article>
+      <article class="mission reveal"><div class="mission__top"><span>MISSION_06 // STUDY ABROAD AI</span><span class="mission__state">AI PRODUCT // PROTOTYPE</span></div><div class="mission__body"><div class="mission__code">PROFILE → OPTIONS → DECISION</div><h3>AI Study Abroad Assistant</h3><p>AI-assisted study-abroad guidance project designed to help students navigate international study options. Technical repository details will be synced when the project files are uploaded.</p></div><div class="mission__tags"><span>AI</span><span>RECOMMENDATION</span><span>EDTECH</span><span>DECISION SUPPORT</span></div><div class="mission__launch muted">SOURCE // INCOMING</div></article>
+    </div></section>
+    <section id="arsenal" class="arsenal section compact"><div class="section-index">03 / ARSENAL</div><div class="arsenal__grid"><h2 class="display reveal">TECH<br><span>ARSENAL</span></h2><div class="arsenal-list"><div class="arsenal-row reveal"><span>AI SYSTEMS</span><b>Machine Learning · NLP · Computer Vision · OCR · XAI · HMM</b><i>01</i></div><div class="arsenal-row reveal"><span>AI TOOLING</span><b>OpenCV · Tesseract · LLaVA · Ollama · hmmlearn</b><i>02</i></div><div class="arsenal-row reveal"><span>ENGINEERING</span><b>Python · Java · JavaScript · C · PHP</b><i>03</i></div><div class="arsenal-row reveal"><span>WEB</span><b>React · Node.js · Express · HTML · CSS</b><i>04</i></div><div class="arsenal-row reveal"><span>DATA</span><b>MySQL · SQL Server · MongoDB</b><i>05</i></div><div class="arsenal-row reveal"><span>SYSTEMS</span><b>Git · GitHub · Linux · Windows · Azure · Agile/Scrum</b><i>06</i></div></div></div></section>
+    <section class="next section"><div class="next__panel reveal"><div class="section-index">04 / NEXT MISSION</div><div class="next__question">???</div><h2>YOUR TEAM<br>COULD BE NEXT.</h2><p>Seeking a PFE 2026–2027 / international software engineering opportunity in AI/ML, backend or full-stack product development.</p><button class="btn btn--primary" id="nextTerminal"><span>INITIATE CONTACT</span><b>↗</b></button></div></section>
+    <footer><div><span>ANIS.EXE</span> // BUILD 2026</div><div class="footer__links"><a href="https://github.com/anischelly26" target="_blank" rel="noreferrer">GITHUB ↗</a><a href="mailto:anis.chelli@medtech.tn">EMAIL ↗</a></div></footer>
   </main>
-
-  <aside class="terminal" id="terminal" aria-hidden="true">
-    <div class="terminal__bar">
-      <div><span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span></div>
-      <span>ANIS_TERMINAL // SECURE SHELL</span>
-      <button id="terminalClose">×</button>
-    </div>
-    <div class="terminal__body" id="terminalOutput">
-      <p><span class="green">ACCESS GRANTED.</span></p>
-      <p>Type <b>help</b> to discover available commands.</p>
-    </div>
-    <form class="terminal__input" id="terminalForm">
-      <label>anis@core:~$</label>
-      <input id="terminalInput" autocomplete="off" spellcheck="false" autofocus />
-    </form>
-  </aside>
-
+  <aside class="terminal" id="terminal" aria-hidden="true"><div class="terminal__bar"><div><span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span></div><span>ANIS_TERMINAL // SECURE SHELL</span><button id="terminalClose">×</button></div><div class="terminal__body" id="terminalOutput"><p><span class="green">ACCESS GRANTED.</span></p><p>Type <b>help</b> to discover available commands.</p></div><form class="terminal__input" id="terminalForm"><label>anis@core:~$</label><input id="terminalInput" autocomplete="off" spellcheck="false" autofocus /></form></aside>
   <script src="script.js"></script>
 </body>
 </html>
