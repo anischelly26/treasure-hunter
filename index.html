@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="ANIS.EXE — interactive software engineering and AI portfolio by Anis Chelly." />
+  <title>ANIS.EXE // AI × SOFTWARE ENGINEERING</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="space"></canvas>
+  <div class="noise"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <section class="boot" id="boot">
+    <div class="boot__inner">
+      <div class="boot__mark">AC</div>
+      <div class="boot__lines" id="bootLines"></div>
+      <div class="boot__bar"><span id="bootBar"></span></div>
+      <div class="boot__percent" id="bootPercent">0%</div>
+    </div>
+  </section>
+
+  <main id="app" class="app hidden">
+    <header class="nav">
+      <a href="#home" class="brand">
+        <span class="brand__icon">AC</span>
+        <span class="brand__text">ANIS.EXE</span>
+      </a>
+      <div class="nav__status"><span class="status-dot"></span> SYSTEM ONLINE</div>
+      <nav class="nav__links">
+        <a href="#missions">MISSIONS</a>
+        <a href="#arsenal">ARSENAL</a>
+        <button id="terminalToggle">TERMINAL_</button>
+      </nav>
+    </header>
+
+    <section id="home" class="hero section">
+      <div class="orb orb--one"></div>
+      <div class="orb orb--two"></div>
+
+      <div class="hero__eyebrow reveal">IDENTITY // VERIFIED</div>
+      <h1 class="hero__title reveal">
+        <span>ANIS</span>
+        <span class="outline">CHELLI</span>
+      </h1>
+      <p class="hero__role reveal">SOFTWARE ENGINEER <span>×</span> AI BUILDER</p>
+      <p class="hero__copy reveal">
+        I build software that understands, transforms and automates.
+        From computer vision and intelligent systems to full-stack products.
+      </p>
+
+      <div class="hero__actions reveal">
+        <a class="btn btn--primary" href="#missions"><span>ENTER SYSTEM</span><b>↘</b></a>
+        <button class="btn btn--ghost" id="heroTerminal"><span>OPEN TERMINAL</span><b>⌁</b></button>
+      </div>
+
+      <div class="hero__hud reveal">
+        <div><span>LOCATION</span><b>TUNIS // WORLDWIDE</b></div>
+        <div><span>STATUS</span><b>FINAL YEAR</b></div>
+        <div><span>FOCUS</span><b>AI × SOFTWARE</b></div>
+        <div><span>NEXT</span><b>PFE 2026–2027</b></div>
+      </div>
+
+      <div class="scroll-hint">SCROLL TO DESCEND <span>↓</span></div>
+    </section>
+
+    <section class="intro section compact">
+      <div class="section-index">01 / CORE</div>
+      <div class="intro__grid">
+        <h2 class="display reveal">BUILDING<br><span>WHAT'S NEXT.</span></h2>
+        <div class="core-card glass reveal">
+          <div class="card-kicker">CURRENT OBJECTIVE</div>
+          <p>Turn ideas into intelligent, working systems — with strong engineering underneath the AI.</p>
+          <div class="system-line"><span>EDUCATION</span><b>Software Engineering @ MedTech</b></div>
+          <div class="system-line"><span>MODE</span><b>Build → Test → Ship</b></div>
+          <div class="system-line"><span>SIGNAL</span><b class="online">AVAILABLE FOR NEXT MISSION</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="missions" class="missions section">
+      <div class="section-index">02 / MISSIONS</div>
+      <div class="section-head">
+        <h2 class="display reveal">SELECTED<br><span>MISSIONS</span></h2>
+        <p class="reveal">Real projects. Clear scope. No fake “10/10 skill bars”.</p>
+      </div>
+
+      <div class="mission-grid">
+        <a class="mission mission--featured reveal" href="https://github.com/anischelly26/ui-to-html-css-translator" target="_blank" rel="noreferrer">
+          <div class="mission__top">
+            <span>MISSION_01</span>
+            <span class="mission__state">PROTOTYPE // ACTIVE</span>
+          </div>
+          <div class="mission__body">
+            <div class="mission__code">SCREEN → CODE</div>
+            <h3>UI Reconstruction Engine</h3>
+            <p>Computer vision + OCR pipeline that detects interface elements from screenshots and reconstructs editable HTML.</p>
+          </div>
+          <div class="mission__tags">
+            <span>PYTHON</span><span>OPENCV</span><span>TESSERACT</span><span>OCR</span>
+          </div>
+          <div class="mission__launch">OPEN MISSION ↗</div>
+        </a>
+
+        <article class="mission reveal">
+          <div class="mission__top">
+            <span>MISSION_02</span>
+            <span class="mission__state">TEAM // AI</span>
+          </div>
+          <div class="mission__body">
+            <div class="mission__code">CV → MATCH</div>
+            <h3>AI Recruitment Engine</h3>
+            <p>NLP-based CV matching, ranking and explainability project developed in the Orange / MedTech context.</p>
+          </div>
+          <div class="mission__tags">
+            <span>NLP</span><span>RANKING</span><span>EXPLAINABLE AI</span>
+          </div>
+          <div class="mission__launch muted">CASE STUDY // COMING</div>
+        </article>
+
+        <article class="mission reveal">
+          <div class="mission__top">
+            <span>MISSION_03</span>
+            <span class="mission__state">DATA // AUTOMATION</span>
+          </div>
+          <div class="mission__body">
+            <div class="mission__code">RAW → SYSTEM</div>
+            <h3>Data Automation</h3>
+            <p>Python and MySQL workflow work focused on centralizing and importing structured business data.</p>
+          </div>
+          <div class="mission__tags">
+            <span>PYTHON</span><span>MYSQL</span><span>AUTOMATION</span>
+          </div>
+          <div class="mission__launch muted">MONOPRIX // EXPERIENCE</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="arsenal" class="arsenal section compact">
+      <div class="section-index">03 / ARSENAL</div>
+      <div class="arsenal__grid">
+        <h2 class="display reveal">TECH<br><span>ARSENAL</span></h2>
+        <div class="arsenal-list">
+          <div class="arsenal-row reveal"><span>AI SYSTEMS</span><b>Computer Vision · NLP · OCR · Multimodal AI</b><i>01</i></div>
+          <div class="arsenal-row reveal"><span>ENGINEERING</span><b>Python · Java · JavaScript · C</b><i>02</i></div>
+          <div class="arsenal-row reveal"><span>WEB</span><b>React · Node.js · HTML · CSS</b><i>03</i></div>
+          <div class="arsenal-row reveal"><span>DATA</span><b>MySQL · SQL</b><i>04</i></div>
+          <div class="arsenal-row reveal"><span>TOOLS</span><b>Git · GitHub · Linux · Agile</b><i>05</i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="next section">
+      <div class="next__panel reveal">
+        <div class="section-index">04 / NEXT MISSION</div>
+        <div class="next__question">???</div>
+        <h2>YOUR TEAM<br>COULD BE NEXT.</h2>
+        <p>Looking for a PFE 2026–2027 / international software engineering opportunity in AI, backend or full-stack product development.</p>
+        <button class="btn btn--primary" id="nextTerminal"><span>INITIATE CONTACT</span><b>↗</b></button>
+      </div>
+    </section>
+
+    <footer>
+      <div><span>ANIS.EXE</span> // BUILD 2026</div>
+      <div class="footer__links">
+        <a href="https://github.com/anischelly26" target="_blank" rel="noreferrer">GITHUB ↗</a>
+        <a href="mailto:anischelly95@gmail.com">EMAIL ↗</a>
+      </div>
+    </footer>
+  </main>
+
+  <aside class="terminal" id="terminal" aria-hidden="true">
+    <div class="terminal__bar">
+      <div><span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span></div>
+      <span>ANIS_TERMINAL // SECURE SHELL</span>
+      <button id="terminalClose">×</button>
+    </div>
+    <div class="terminal__body" id="terminalOutput">
+      <p><span class="green">ACCESS GRANTED.</span></p>
+      <p>Type <b>help</b> to discover available commands.</p>
+    </div>
+    <form class="terminal__input" id="terminalForm">
+      <label>anis@core:~$</label>
+      <input id="terminalInput" autocomplete="off" spellcheck="false" autofocus />
+    </form>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
