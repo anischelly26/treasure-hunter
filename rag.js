@@ -61,7 +61,6 @@
   function createThinkingMessage() {
     const wrapper = document.createElement('div');
     wrapper.className = 'rag-message rag-message--assistant';
-
     const bubble = document.createElement('div');
     bubble.className = 'rag-message__bubble';
     const thinking = document.createElement('span');
@@ -70,12 +69,10 @@
     thinking.innerHTML = '<i></i><i></i><i></i>';
     bubble.appendChild(thinking);
     wrapper.appendChild(bubble);
-
     const meta = document.createElement('div');
     meta.className = 'rag-message__meta';
     meta.textContent = 'RETRIEVING CV PASSAGES // GROK GENERATION';
     wrapper.appendChild(meta);
-
     messages.appendChild(wrapper);
     scrollToLatest();
     return wrapper;
@@ -91,15 +88,39 @@
     }
   }
 
+  function friendlyError(code) {
+    const map = {
+      XAI_KEY_MISSING: 'The RAG service is online, but the XAI_API_KEY is missing on Render.',
+      XAI_AUTH_OR_ACCESS: 'Render reached xAI, but the Grok API key is invalid, revoked, or does not have access to this model.',
+      XAI_BILLING: 'The xAI account needs API credit or billing access before Grok can answer.',
+      XAI_RATE_LIMIT: 'The xAI API rate limit was reached. Please try again shortly.',
+      XAI_REQUEST_REJECTED: 'xAI rejected the Grok request configuration. The backend needs a small API adjustment.',
+      XAI_TIMEOUT: 'Grok took too long to answer. Please try again.',
+      XAI_NETWORK: 'Render could not reach the xAI API.',
+      XAI_BAD_RESPONSE: 'Grok returned an unexpected response format.',
+      XAI_EMPTY_RESPONSE: 'Grok returned an empty answer.',
+      XAI_UPSTREAM: 'The xAI API returned a temporary upstream error.',
+      RETRIEVER_NOT_READY: 'The CV vector retriever is not ready yet. The Render service may still be warming up.',
+      PUBLIC_RATE_LIMIT: 'The public CV demo rate limit has been reached. Please wait a few minutes.',
+    };
+    return map[code] || 'The CV intelligence service is temporarily unavailable. Please try again shortly.';
+  }
+
   async function wakeBackend() {
     if (hasWokenBackend) return;
     hasWokenBackend = true;
     setStatus('warming', 'WAKING RENDER SERVICE');
     try {
       const response = await fetchWithTimeout(`${API_URL}/health`, { method: 'GET' }, 55000);
-      if (!response.ok) throw new Error('health check failed');
+      if (!response.ok) throw new Error('HEALTH_FAILED');
       const health = await response.json();
-      setStatus(health.grok_configured ? 'online' : 'error', health.grok_configured ? 'RAG CORE ONLINE' : 'GROK KEY NOT CONFIGURED');
+      if (!health.retriever_ready) {
+        setStatus('error', 'VECTOR RETRIEVER NOT READY');
+      } else if (!health.grok_configured) {
+        setStatus('error', 'GROK KEY NOT CONFIGURED');
+      } else {
+        setStatus('online', `RAG CORE ONLINE // V${health.version || '?'}`);
+      }
     } catch (_) {
       setStatus('error', 'BACKEND OFFLINE');
     }
@@ -125,12 +146,13 @@
       }, 70000);
 
       let payload = {};
-      try { payload = await response.json(); } catch (_) { /* ignore invalid JSON */ }
+      try { payload = await response.json(); } catch (_) { /* invalid JSON */ }
 
       if (!response.ok) {
-        if (response.status === 429) throw new Error('RATE_LIMIT');
-        if (response.status === 503) throw new Error('NOT_CONFIGURED');
-        throw new Error(payload.detail || `HTTP_${response.status}`);
+        const code = payload.detail || (response.status === 429 ? 'PUBLIC_RATE_LIMIT' : `HTTP_${response.status}`);
+        const err = new Error(code);
+        err.code = code;
+        throw err;
       }
 
       loading.remove();
@@ -143,17 +165,13 @@
       setStatus('online', 'RAG CORE ONLINE');
     } catch (error) {
       loading.remove();
-
-      let message = 'The CV intelligence service is temporarily unavailable. Please try again shortly.';
+      let message;
       if (error?.name === 'AbortError') {
-        message = 'The Render service is taking longer than expected to wake up. Try the question once more in a few seconds.';
-      } else if (error?.message === 'RATE_LIMIT') {
-        message = 'The public demo rate limit has been reached. Please wait a few minutes before asking another question.';
-      } else if (error?.message === 'NOT_CONFIGURED') {
-        message = 'The RAG backend is deployed, but its Grok API key has not been configured on Render yet.';
+        message = 'The Render service is taking longer than expected to wake up. Try once more in a few seconds.';
+      } else {
+        message = friendlyError(error?.code || error?.message);
       }
-
-      createMessage('assistant', message, 'SYSTEM NOTICE');
+      createMessage('assistant', message, `SYSTEM NOTICE // ${error?.code || error?.message || 'NETWORK'}`);
       setStatus('error', 'SERVICE CHECK REQUIRED');
     } finally {
       busy = false;
@@ -178,7 +196,6 @@
 
   input.addEventListener('focus', wakeBackend, { once: true });
 
-  // Initial recruiter-facing greeting is local so the UI feels instant even if Render is asleep.
   createMessage(
     'assistant',
     'Ask me about Anis’s experience, projects, technical skills, education, languages, or PFE objective. I retrieve the most relevant CV passages first, then Grok answers only from that evidence.',
