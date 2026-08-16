@@ -12,11 +12,15 @@ services:
         sync: false
       - key: XAI_MODEL
         value: grok-4.5
+      - key: EMBEDDING_MODEL
+        value: sentence-transformers/all-MiniLM-L6-v2
       - key: ALLOWED_ORIGINS
         value: https://anischelly26.github.io
       - key: RATE_LIMIT_COUNT
         value: "8"
       - key: RATE_LIMIT_WINDOW_SECONDS
         value: "600"
-      - key: XAI_COLLECTION_ID
-        sync: false
+      - key: MIN_SIMILARITY
+        value: "0.24"
+      - key: TOP_K
+        value: "4"
