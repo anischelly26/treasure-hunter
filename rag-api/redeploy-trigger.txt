@@ -1,0 +1,2 @@
+Force Render auto-deploy after RAG backend diagnostics and Grok chat-completions fix.
+Triggered: 2026-08-16T19:05:00+01:00
