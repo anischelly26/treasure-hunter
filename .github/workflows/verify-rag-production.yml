@@ -24,14 +24,7 @@ jobs:
             echo "Health attempt ${attempt}/5"
             if curl -fsS --max-time 60 https://anischelly26-cv-rag.onrender.com/health -o health.json; then
               cat health.json
-              python - <<'PY'
-import json
-with open('health.json', encoding='utf-8') as f:
-    data = json.load(f)
-assert data.get('ok') is True, data
-assert data.get('retriever_ready') is True, data
-print('Health OK:', data.get('version'), data.get('model'))
-PY
+              python -c "import json; d=json.load(open('health.json')); assert d.get('ok') is True, d; assert d.get('retriever_ready') is True, d; print('Health OK:', d.get('version'), d.get('model'))"
               ok=1
               break
             fi
@@ -49,13 +42,4 @@ PY
             --data '{"question":"What did Anis build at Vermeg?"}' \
             -o answer.json
           cat answer.json
-          python - <<'PY'
-import json
-with open('answer.json', encoding='utf-8') as f:
-    data = json.load(f)
-answer = data.get('answer', '')
-assert isinstance(answer, str) and len(answer.strip()) > 20, data
-assert 'temporarily unavailable' not in answer.lower(), data
-assert data.get('sources'), data
-print('Production answer OK:', data.get('retrieval_mode'), data.get('model'))
-PY
+          python -c "import json; d=json.load(open('answer.json')); a=d.get('answer',''); assert isinstance(a,str) and len(a.strip())>20,d; assert 'temporarily unavailable' not in a.lower(),d; assert d.get('sources'),d; print('Production answer OK:', d.get('retrieval_mode'), d.get('model'))"
