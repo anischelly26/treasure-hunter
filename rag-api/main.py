@@ -60,6 +60,7 @@ RETRIEVER_READY = bool(
     and DOCUMENT_VECTORS.ndim == 2
     and DOCUMENT_VECTORS.shape[0] == len(CHUNKS)
 )
+XAI_KEY_LOOKS_VALID = XAI_API_KEY.startswith("xai-")
 
 
 def retrieve(question: str, top_k: int = TOP_K) -> list[dict[str, Any]]:
@@ -109,12 +110,34 @@ def context_block(matches: list[dict[str, Any]]) -> str:
     )
 
 
+def local_grounded_answer(matches: list[dict[str, Any]]) -> str:
+    """Always-available fallback that returns only retrieved CV evidence.
+
+    This keeps the public portfolio functional even when an external LLM key is
+    missing, invalid, rate-limited, out of credits, or temporarily unavailable.
+    """
+    if not matches:
+        return "That information is not stated in Anis's CV."
+
+    primary = str(matches[0].get("text", "")).strip()
+    if not primary:
+        return "That information is not stated in Anis's CV."
+
+    # Keep the fallback recruiter-friendly while preserving the CV wording.
+    max_chars = 900
+    if len(primary) <= max_chars:
+        return primary
+
+    shortened = primary[:max_chars].rsplit(" ", 1)[0].rstrip(" ,;:-")
+    return f"{shortened}…"
+
+
 def upstream_error(status_code: int) -> HTTPException:
     if status_code in (401, 403):
         return HTTPException(status_code=502, detail="XAI_AUTH_OR_ACCESS")
     if status_code == 429:
         return HTTPException(status_code=502, detail="XAI_RATE_LIMIT")
-    if status_code in (402,):
+    if status_code == 402:
         return HTTPException(status_code=502, detail="XAI_BILLING")
     if status_code == 400:
         return HTTPException(status_code=502, detail="XAI_REQUEST_REJECTED")
@@ -122,11 +145,9 @@ def upstream_error(status_code: int) -> HTTPException:
 
 
 async def call_grok_vector_rag(question: str, matches: list[dict[str, Any]]) -> str:
-    if not XAI_API_KEY:
-        raise HTTPException(status_code=503, detail="XAI_KEY_MISSING")
+    if not XAI_KEY_LOOKS_VALID:
+        raise HTTPException(status_code=503, detail="XAI_KEY_UNAVAILABLE")
 
-    # Chat Completions is intentionally used here because its request/response shape
-    # is simple and stable for a recruiter-facing text-only endpoint.
     payload = {
         "model": XAI_MODEL,
         "messages": [
@@ -185,8 +206,8 @@ class AskResponse(BaseModel):
 
 app = FastAPI(
     title="ANIS.EXE CV RAG API",
-    version="1.2.0",
-    description="Recruiter-facing semantic RAG over Anis Chelly's CV using MiniLM retrieval and Grok generation.",
+    version="1.3.0",
+    description="Recruiter-facing semantic RAG over Anis Chelly's CV with MiniLM retrieval, optional Grok generation, and an always-available grounded fallback.",
 )
 
 app.add_middleware(
@@ -217,10 +238,11 @@ async def root() -> dict[str, Any]:
     return {
         "service": "ANIS.EXE CV RAG",
         "status": "online",
-        "version": "1.2.0",
-        "model": XAI_MODEL,
+        "version": "1.3.0",
+        "model": XAI_MODEL if XAI_KEY_LOOKS_VALID else "local-grounded-fallback",
         "embedding_model": EMBEDDING_MODEL,
         "retrieval": "dense MiniLM cosine retrieval",
+        "answer_strategy": "Grok when available; retrieved-CV fallback otherwise",
     }
 
 
@@ -228,13 +250,14 @@ async def root() -> dict[str, Any]:
 async def health() -> dict[str, Any]:
     return {
         "ok": RETRIEVER_READY,
-        "grok_configured": bool(XAI_API_KEY),
+        "grok_configured": XAI_KEY_LOOKS_VALID,
         "retriever_ready": RETRIEVER_READY,
+        "fallback_ready": RETRIEVER_READY,
         "knowledge_chunks": len(CHUNKS),
-        "model": XAI_MODEL,
+        "model": XAI_MODEL if XAI_KEY_LOOKS_VALID else "local-grounded-fallback",
         "embedding_model": EMBEDDING_MODEL,
         "vector_dimensions": int(DOCUMENT_VECTORS.shape[1]) if RETRIEVER_READY else 0,
-        "version": "1.2.0",
+        "version": "1.3.0",
     }
 
 
@@ -251,14 +274,28 @@ async def ask(payload: AskRequest, request: Request) -> AskResponse:
         return AskResponse(
             answer="That information is not stated in Anis's CV.",
             sources=[],
-            model=XAI_MODEL,
+            model="local-grounded-fallback",
             retrieval_mode="minilm-vector-rag",
         )
 
-    answer = await call_grok_vector_rag(question, matches)
+    # Prefer Grok only when the configured secret actually looks like an xAI key.
+    # Any upstream problem falls back to the retrieved CV text instead of breaking
+    # the public portfolio experience.
+    if XAI_KEY_LOOKS_VALID:
+        try:
+            answer = await call_grok_vector_rag(question, matches)
+            return AskResponse(
+                answer=answer,
+                sources=[match["title"] for match in matches],
+                model=XAI_MODEL,
+                retrieval_mode="minilm-vector-rag + grok",
+            )
+        except HTTPException:
+            pass
+
     return AskResponse(
-        answer=answer,
+        answer=local_grounded_answer(matches),
         sources=[match["title"] for match in matches],
-        model=XAI_MODEL,
-        retrieval_mode="minilm-vector-rag",
+        model="local-grounded-fallback",
+        retrieval_mode="minilm-vector-rag + extractive-fallback",
     )
