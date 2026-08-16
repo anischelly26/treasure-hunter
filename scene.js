@@ -1,4 +1,5 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js';
+import './rag-bootstrap.js';
 
 const canvas = document.getElementById('webgl');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
