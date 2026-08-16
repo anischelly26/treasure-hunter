@@ -1,0 +1,53 @@
+{
+  "candidate": "Anis Chelly",
+  "source": "Anis_Chelli_CV_PFE_2026_2027_Spaced(1).pdf",
+  "updated": "2026-08-15",
+  "privacy_note": "Public recruiter knowledge base. Phone number and precise street address are intentionally excluded.",
+  "chunks": [
+    {
+      "id": "profile",
+      "title": "Profile & PFE Objective",
+      "text": "Anis Chelly is a final-year Software Engineering student at MedTech Tunis seeking a PFE internship for 2026-2027 in software engineering, AI/ML, backend, or full-stack development. He has hands-on experience building AI-powered prototypes, automated data workflows, and a full-stack explainable-AI recruitment platform through projects with Vermeg, Monoprix, and Orange Digital Center."
+    },
+    {
+      "id": "education",
+      "title": "Education — MedTech Tunis",
+      "text": "Anis studies Software Engineering at MedTech Tunis from 2022 to the present, with expected graduation in 2027. He is in his final, fifth year. Relevant coursework includes Object-Oriented Programming, Web Development, Artificial Intelligence, Databases, Operating Systems, Software Analysis and Design, Computer Networks, and UX and Requirements Engineering. He earned a Baccalaureate in Computer Science from Lycée Soukra, Tunisia, in 2022."
+    },
+    {
+      "id": "vermeg",
+      "title": "Experience — Vermeg AI Internship",
+      "text": "At Vermeg from July to August 2024, Anis worked as an Artificial Intelligence Intern. He built an end-to-end Python prototype that converts UI screenshots into HTML and CSS using OpenCV image preprocessing, Tesseract OCR, and LLaVA running locally with Ollama. He improved low-contrast text extraction using a custom preprocessing pipeline with contrast and sharpness enhancement, CLAHE, and binarization, and validated generated code syntax and layout relevance."
+    },
+    {
+      "id": "monoprix",
+      "title": "Experience — Monoprix Data Management Internship",
+      "text": "At Monoprix Headquarters in Tunis in July 2024, Anis worked as a Data Management Intern. He designed and implemented a centralized MySQL database and Python scripts to automate sales-data imports and reduce manual data handling."
+    },
+    {
+      "id": "orange",
+      "title": "Project — Orange Digital Center × MedTech Explainable AI Portal",
+      "text": "During 2025-2026, Anis contributed to a full-stack team project for Orange Digital Center × MedTech focused on an Explainable AI Internship and PFE Portal. The system covered CV parsing, skill extraction and matching, candidate ranking and recommendation, and human-readable explanations for AI shortlisting decisions. Anis contributed to data preparation, backend and system logic, and Agile/Scrum delivery. The project scope included application workflows, CV upload, ranking, supervisor assignment, and evaluation tracking."
+    },
+    {
+      "id": "sdl2",
+      "title": "Project — SDL2 Game Development",
+      "text": "In the 2023-2024 MedTech academic year, Anis worked on an SDL2 game development project. The project ranked in the top category at the annual student project exhibition, where he presented it to visitors and evaluators."
+    },
+    {
+      "id": "skills",
+      "title": "Technical Skills",
+      "text": "Programming: Python, Java, JavaScript, C, PHP, HTML and CSS. Web and frameworks: React and Node.js. AI and data: Machine Learning, NLP, Recommendation Systems, OpenCV, Tesseract OCR, LLaVA, and Ollama. Databases: MySQL and SQL Server. Tools and systems: Git, GitHub, XAMPP, Linux, Windows, and Agile/Scrum."
+    },
+    {
+      "id": "languages",
+      "title": "Languages & Additional Information",
+      "text": "Anis speaks Arabic natively, English fluently, and French at an intermediate level. Additional interests and information include a Driving Licence B, boxing, strength training, emerging technologies, piano, and guitar."
+    },
+    {
+      "id": "contact",
+      "title": "Public Contact",
+      "text": "Anis is based in Tunis, Tunisia. Public recruiter contact: anis.chelli@medtech.tn. GitHub: github.com/anischelly26."
+    }
+  ]
+}
