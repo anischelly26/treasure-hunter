@@ -1,0 +1,61 @@
+name: Verify CV RAG Production
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Render auto-deploy
+        run: sleep 45
+
+      - name: Verify live health endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          ok=0
+          for attempt in 1 2 3 4 5; do
+            echo "Health attempt ${attempt}/5"
+            if curl -fsS --max-time 60 https://anischelly26-cv-rag.onrender.com/health -o health.json; then
+              cat health.json
+              python - <<'PY'
+import json
+with open('health.json', encoding='utf-8') as f:
+    data = json.load(f)
+assert data.get('ok') is True, data
+assert data.get('retriever_ready') is True, data
+print('Health OK:', data.get('version'), data.get('model'))
+PY
+              ok=1
+              break
+            fi
+            sleep 30
+          done
+          test "$ok" -eq 1
+
+      - name: Verify live recruiter question
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS --max-time 75 \
+            -X POST https://anischelly26-cv-rag.onrender.com/ask \
+            -H 'Content-Type: application/json' \
+            --data '{"question":"What did Anis build at Vermeg?"}' \
+            -o answer.json
+          cat answer.json
+          python - <<'PY'
+import json
+with open('answer.json', encoding='utf-8') as f:
+    data = json.load(f)
+answer = data.get('answer', '')
+assert isinstance(answer, str) and len(answer.strip()) > 20, data
+assert 'temporarily unavailable' not in answer.lower(), data
+assert data.get('sources'), data
+print('Production answer OK:', data.get('retrieval_mode'), data.get('model'))
+PY
