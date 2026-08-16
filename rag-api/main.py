@@ -23,7 +23,6 @@ EMBEDDING_MODEL = os.getenv(
     "EMBEDDING_MODEL",
     "sentence-transformers/all-MiniLM-L6-v2",
 ).strip()
-XAI_COLLECTION_ID = os.getenv("XAI_COLLECTION_ID", "").strip()
 
 ALLOWED_ORIGINS = [
     origin.strip()
@@ -45,8 +44,7 @@ with DATA_PATH.open("r", encoding="utf-8") as handle:
 CHUNKS: list[dict[str, Any]] = KB["chunks"]
 DOCUMENTS = [f"{chunk['title']}\n{chunk['text']}" for chunk in CHUNKS]
 
-# Dense retrieval layer inspired by the quiz-with-rag architecture, but optimized
-# for a small Render service. FastEmbed runs MiniLM through ONNX instead of PyTorch.
+# Dense retrieval: MiniLM embeddings generated locally on Render via FastEmbed/ONNX.
 EMBEDDER = TextEmbedding(model_name=EMBEDDING_MODEL)
 DOCUMENT_VECTORS = np.asarray(list(EMBEDDER.passage_embed(DOCUMENTS)), dtype=np.float32)
 
@@ -57,6 +55,11 @@ def normalize(vector: np.ndarray) -> np.ndarray:
 
 
 DOCUMENT_VECTORS = np.asarray([normalize(vector) for vector in DOCUMENT_VECTORS], dtype=np.float32)
+RETRIEVER_READY = bool(
+    len(CHUNKS)
+    and DOCUMENT_VECTORS.ndim == 2
+    and DOCUMENT_VECTORS.shape[0] == len(CHUNKS)
+)
 
 
 def retrieve(question: str, top_k: int = TOP_K) -> list[dict[str, Any]]:
@@ -106,13 +109,27 @@ def context_block(matches: list[dict[str, Any]]) -> str:
     )
 
 
+def upstream_error(status_code: int) -> HTTPException:
+    if status_code in (401, 403):
+        return HTTPException(status_code=502, detail="XAI_AUTH_OR_ACCESS")
+    if status_code == 429:
+        return HTTPException(status_code=502, detail="XAI_RATE_LIMIT")
+    if status_code in (402,):
+        return HTTPException(status_code=502, detail="XAI_BILLING")
+    if status_code == 400:
+        return HTTPException(status_code=502, detail="XAI_REQUEST_REJECTED")
+    return HTTPException(status_code=502, detail="XAI_UPSTREAM")
+
+
 async def call_grok_vector_rag(question: str, matches: list[dict[str, Any]]) -> str:
     if not XAI_API_KEY:
-        raise HTTPException(status_code=503, detail="AI backend is not configured yet.")
+        raise HTTPException(status_code=503, detail="XAI_KEY_MISSING")
 
+    # Chat Completions is intentionally used here because its request/response shape
+    # is simple and stable for a recruiter-facing text-only endpoint.
     payload = {
         "model": XAI_MODEL,
-        "input": [
+        "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {
                 "role": "user",
@@ -123,75 +140,36 @@ async def call_grok_vector_rag(question: str, matches: list[dict[str, Any]]) -> 
                 ),
             },
         ],
-        "reasoning": {"effort": "low"},
+        "temperature": 0.2,
     }
 
-    async with httpx.AsyncClient(timeout=40.0) as client:
-        response = await client.post(
-            "https://api.x.ai/v1/responses",
-            headers={
-                "Authorization": f"Bearer {XAI_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            json=payload,
-        )
+    try:
+        async with httpx.AsyncClient(timeout=45.0) as client:
+            response = await client.post(
+                "https://api.x.ai/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {XAI_API_KEY}",
+                    "Content-Type": "application/json",
+                },
+                json=payload,
+            )
+    except httpx.TimeoutException as exc:
+        raise HTTPException(status_code=504, detail="XAI_TIMEOUT") from exc
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=502, detail="XAI_NETWORK") from exc
 
     if response.status_code >= 400:
-        raise HTTPException(status_code=502, detail="Grok is temporarily unavailable.")
-    return extract_output_text(response.json())
+        raise upstream_error(response.status_code)
 
+    try:
+        data = response.json()
+        answer = data["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError, ValueError) as exc:
+        raise HTTPException(status_code=502, detail="XAI_BAD_RESPONSE") from exc
 
-async def call_grok_collection_rag(question: str) -> str:
-    """Optional native xAI Collections RAG if a collection is configured later."""
-    if not XAI_API_KEY:
-        raise HTTPException(status_code=503, detail="AI backend is not configured yet.")
-
-    payload = {
-        "model": XAI_MODEL,
-        "input": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": question},
-        ],
-        "tools": [
-            {
-                "type": "file_search",
-                "vector_store_ids": [XAI_COLLECTION_ID],
-                "max_num_results": 5,
-            }
-        ],
-        "reasoning": {"effort": "low"},
-    }
-
-    async with httpx.AsyncClient(timeout=50.0) as client:
-        response = await client.post(
-            "https://api.x.ai/v1/responses",
-            headers={
-                "Authorization": f"Bearer {XAI_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            json=payload,
-        )
-
-    if response.status_code >= 400:
-        raise HTTPException(status_code=502, detail="Grok collection search is temporarily unavailable.")
-    return extract_output_text(response.json())
-
-
-def extract_output_text(payload: dict[str, Any]) -> str:
-    direct = payload.get("output_text")
-    if isinstance(direct, str) and direct.strip():
-        return direct.strip()
-
-    pieces: list[str] = []
-    for item in payload.get("output", []) or []:
-        for content in item.get("content", []) or []:
-            text = content.get("text")
-            if isinstance(text, str) and text.strip():
-                pieces.append(text.strip())
-    if pieces:
-        return "\n".join(pieces)
-
-    raise HTTPException(status_code=502, detail="Grok returned an unreadable response.")
+    if not isinstance(answer, str) or not answer.strip():
+        raise HTTPException(status_code=502, detail="XAI_EMPTY_RESPONSE")
+    return answer.strip()
 
 
 class AskRequest(BaseModel):
@@ -207,7 +185,7 @@ class AskResponse(BaseModel):
 
 app = FastAPI(
     title="ANIS.EXE CV RAG API",
-    version="1.1.0",
+    version="1.2.0",
     description="Recruiter-facing semantic RAG over Anis Chelly's CV using MiniLM retrieval and Grok generation.",
 )
 
@@ -230,7 +208,7 @@ def enforce_rate_limit(request: Request) -> None:
     while bucket and now - bucket[0] > RATE_LIMIT_WINDOW_SECONDS:
         bucket.popleft()
     if len(bucket) >= RATE_LIMIT_COUNT:
-        raise HTTPException(status_code=429, detail="Rate limit reached. Please try again later.")
+        raise HTTPException(status_code=429, detail="PUBLIC_RATE_LIMIT")
     bucket.append(now)
 
 
@@ -239,21 +217,24 @@ async def root() -> dict[str, Any]:
     return {
         "service": "ANIS.EXE CV RAG",
         "status": "online",
+        "version": "1.2.0",
         "model": XAI_MODEL,
         "embedding_model": EMBEDDING_MODEL,
-        "retrieval": "xAI Collections" if XAI_COLLECTION_ID else "dense MiniLM cosine retrieval",
+        "retrieval": "dense MiniLM cosine retrieval",
     }
 
 
 @app.get("/health")
 async def health() -> dict[str, Any]:
     return {
-        "ok": True,
+        "ok": RETRIEVER_READY,
         "grok_configured": bool(XAI_API_KEY),
+        "retriever_ready": RETRIEVER_READY,
         "knowledge_chunks": len(CHUNKS),
         "model": XAI_MODEL,
         "embedding_model": EMBEDDING_MODEL,
-        "vector_dimensions": int(DOCUMENT_VECTORS.shape[1]),
+        "vector_dimensions": int(DOCUMENT_VECTORS.shape[1]) if RETRIEVER_READY else 0,
+        "version": "1.2.0",
     }
 
 
@@ -262,14 +243,8 @@ async def ask(payload: AskRequest, request: Request) -> AskResponse:
     enforce_rate_limit(request)
     question = payload.question.strip()
 
-    if XAI_COLLECTION_ID:
-        answer = await call_grok_collection_rag(question)
-        return AskResponse(
-            answer=answer,
-            sources=["xAI CV Collection"],
-            model=XAI_MODEL,
-            retrieval_mode="xai-collections",
-        )
+    if not RETRIEVER_READY:
+        raise HTTPException(status_code=503, detail="RETRIEVER_NOT_READY")
 
     matches = retrieve(question)
     if not matches:
