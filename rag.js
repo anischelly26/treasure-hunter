@@ -65,13 +65,13 @@
     bubble.className = 'rag-message__bubble';
     const thinking = document.createElement('span');
     thinking.className = 'rag-thinking';
-    thinking.setAttribute('aria-label', 'Retrieving CV context and asking Grok');
+    thinking.setAttribute('aria-label', 'Retrieving CV context and generating a grounded answer');
     thinking.innerHTML = '<i></i><i></i><i></i>';
     bubble.appendChild(thinking);
     wrapper.appendChild(bubble);
     const meta = document.createElement('div');
     meta.className = 'rag-message__meta';
-    meta.textContent = 'RETRIEVING CV PASSAGES // GROK GENERATION';
+    meta.textContent = 'RETRIEVING CV PASSAGES // GROUNDED ANSWER';
     wrapper.appendChild(meta);
     messages.appendChild(wrapper);
     scrollToLatest();
@@ -90,16 +90,6 @@
 
   function friendlyError(code) {
     const map = {
-      XAI_KEY_MISSING: 'The RAG service is online, but the XAI_API_KEY is missing on Render.',
-      XAI_AUTH_OR_ACCESS: 'Render reached xAI, but the Grok API key is invalid, revoked, or does not have access to this model.',
-      XAI_BILLING: 'The xAI account needs API credit or billing access before Grok can answer.',
-      XAI_RATE_LIMIT: 'The xAI API rate limit was reached. Please try again shortly.',
-      XAI_REQUEST_REJECTED: 'xAI rejected the Grok request configuration. The backend needs a small API adjustment.',
-      XAI_TIMEOUT: 'Grok took too long to answer. Please try again.',
-      XAI_NETWORK: 'Render could not reach the xAI API.',
-      XAI_BAD_RESPONSE: 'Grok returned an unexpected response format.',
-      XAI_EMPTY_RESPONSE: 'Grok returned an empty answer.',
-      XAI_UPSTREAM: 'The xAI API returned a temporary upstream error.',
       RETRIEVER_NOT_READY: 'The CV vector retriever is not ready yet. The Render service may still be warming up.',
       PUBLIC_RATE_LIMIT: 'The public CV demo rate limit has been reached. Please wait a few minutes.',
     };
@@ -116,10 +106,9 @@
       const health = await response.json();
       if (!health.retriever_ready) {
         setStatus('error', 'VECTOR RETRIEVER NOT READY');
-      } else if (!health.grok_configured) {
-        setStatus('error', 'GROK KEY NOT CONFIGURED');
       } else {
-        setStatus('online', `RAG CORE ONLINE // V${health.version || '?'}`);
+        const engine = health.grok_configured ? 'GROK + CV RAG' : 'CV RAG FALLBACK';
+        setStatus('online', `${engine} ONLINE // V${health.version || '?'}`);
       }
     } catch (_) {
       setStatus('error', 'BACKEND OFFLINE');
@@ -136,7 +125,7 @@
 
     createMessage('user', clean, 'RECRUITER QUERY');
     const loading = createThinkingMessage();
-    setStatus('warming', 'VECTOR SEARCH + GROK');
+    setStatus('warming', 'VECTOR SEARCH + ANSWER');
 
     try {
       const response = await fetchWithTimeout(`${API_URL}/ask`, {
@@ -159,7 +148,7 @@
       createMessage(
         'assistant',
         payload.answer || 'No answer was returned.',
-        `${String(payload.retrieval_mode || 'RAG').toUpperCase()} // ${payload.model || 'GROK'}`,
+        `${String(payload.retrieval_mode || 'RAG').toUpperCase()} // ${payload.model || 'CV RAG'}`,
         payload.sources || [],
       );
       setStatus('online', 'RAG CORE ONLINE');
@@ -198,7 +187,7 @@
 
   createMessage(
     'assistant',
-    'Ask me about Anis’s experience, projects, technical skills, education, languages, or PFE objective. I retrieve the most relevant CV passages first, then Grok answers only from that evidence.',
+    'Ask me about Anis’s experience, projects, technical skills, education, languages, or PFE objective. I retrieve the most relevant CV passages and answer only from that evidence. Grok is used when available; a local grounded fallback keeps the assistant working if the external model is unavailable.',
     'ASK_ANIS // CV-GROUNDED RAG',
   );
 })();
