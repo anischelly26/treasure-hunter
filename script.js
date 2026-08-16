@@ -3,32 +3,278 @@ const app = document.getElementById('app');
 const bootLines = document.getElementById('bootLines');
 const bootBar = document.getElementById('bootBar');
 const bootPercent = document.getElementById('bootPercent');
-const sequence = ['boot sequence initiated...','loading neural modules...','mounting project archive...','indexing internship missions...','indexing independent AI projects...','checking identity signature...','<span class="ok">identity: ANIS CHELLI // VERIFIED</span>','<span class="ok">ACCESS GRANTED</span>'];
-let progress=0,line=0;
-function renderLine(){if(line>=sequence.length)return;const p=document.createElement('div');p.innerHTML='> '+sequence[line++];bootLines.appendChild(p);setTimeout(renderLine,235)} renderLine();
-const timer=setInterval(()=>{progress+=Math.floor(Math.random()*8)+3;if(progress>=100){progress=100;clearInterval(timer);setTimeout(()=>{boot.classList.add('done');app.classList.remove('hidden');document.querySelectorAll('.reveal').forEach((el,i)=>{if(el.closest('.hero'))setTimeout(()=>el.classList.add('visible'),110+i*80);});},650);}bootBar.style.width=progress+'%';bootPercent.textContent=progress+'%';},90);
-const canvas=document.getElementById('space'),ctx=canvas.getContext('2d');let dpr=Math.min(window.devicePixelRatio||1,2),w=innerWidth,h=innerHeight,mouse={x:w*.5,y:h*.5},stars=[];
-function resize(){w=innerWidth;h=innerHeight;dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);stars=Array.from({length:Math.min(220,Math.floor(w*h/7000))},()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random(),r:Math.random()*1.1+.15,v:Math.random()*.16+.03}));} resize();addEventListener('resize',resize);addEventListener('pointermove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
-function draw(){ctx.clearRect(0,0,w,h);const parX=(mouse.x-w/2)*.012,parY=(mouse.y-h/2)*.012;for(const s of stars){s.y+=s.v*(.5+s.z);if(s.y>h+5){s.y=-5;s.x=Math.random()*w;}const alpha=.16+s.z*.58;ctx.beginPath();ctx.fillStyle=`rgba(${s.z>.82?215:190},${s.z>.82?169:190},${s.z>.82?79:185},${alpha})`;ctx.arc(s.x+parX*s.z,s.y+parY*s.z,s.r*(.7+s.z),0,Math.PI*2);ctx.fill();}requestAnimationFrame(draw);} draw();
-const glow=document.getElementById('cursorGlow');addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';});
-const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-const terminal=document.getElementById('terminal'),terminalInput=document.getElementById('terminalInput'),terminalOutput=document.getElementById('terminalOutput'),openers=[document.getElementById('terminalToggle'),document.getElementById('heroTerminal'),document.getElementById('nextTerminal')],closeBtn=document.getElementById('terminalClose');
-function openTerminal(){terminal.classList.add('open');terminal.setAttribute('aria-hidden','false');setTimeout(()=>terminalInput.focus(),220)} function closeTerminal(){terminal.classList.remove('open');terminal.setAttribute('aria-hidden','true')} openers.forEach(b=>b&&b.addEventListener('click',openTerminal));closeBtn.addEventListener('click',closeTerminal);addEventListener('keydown',e=>{if(e.key==='Escape')closeTerminal();if(e.key==='`'&&!e.metaKey&&!e.ctrlKey){e.preventDefault();openTerminal();}});
-const commands={
-help:`<span class="cmd">AVAILABLE COMMANDS</span><br>whoami &nbsp; projects &nbsp; experience &nbsp; skills &nbsp; status &nbsp; vermeg &nbsp; orange &nbsp; monoprix &nbsp; hmm &nbsp; padel &nbsp; studyabroad &nbsp; contact &nbsp; clear &nbsp; sudo hire anis`,
-whoami:`<span class="green">ANIS CHELLI</span><br>Final-year Software Engineering student @ MedTech<br>Software Engineer // AI Builder<br><span class="dim">Focus: AI/ML · backend · full-stack · intelligent systems.</span>`,
-projects:`<span class="cmd">MISSION_01</span> Vermeg — AI UI-to-Code Converter<br><span class="cmd">MISSION_02</span> Orange × MedTech — Explainable AI Internship & PFE Portal<br><span class="cmd">MISSION_03</span> Monoprix — Sales Data Centralization<br><span class="cmd">MISSION_04</span> AI Lab — Hidden Markov Weather Analysis<br><span class="cmd">MISSION_05</span> PadelVision — AI movement analysis for padel<br><span class="cmd">MISSION_06</span> Study Abroad AI — AI-assisted international study guidance`,
-experience:`VERMEG → AI internship // Python UI-to-code prototype<br>MONOPRIX → Data management internship // centralized sales-data workflows<br>ORANGE DIGITAL CENTER × MEDTECH → Full-stack XAI senior project<br>INDEPENDENT R&D → PadelVision + Study Abroad AI`,
-skills:`AI → Machine Learning, NLP, Computer Vision, OCR, Explainable AI, HMM<br>AI TOOLING → OpenCV, Tesseract, LLaVA, Ollama, hmmlearn<br>ENGINEERING → Python, Java, JavaScript, C, PHP<br>WEB → React, Node.js, Express, HTML/CSS<br>DATA → MySQL, SQL Server, MongoDB<br>SYSTEMS → Git, GitHub, Linux, Windows, Azure, Agile/Scrum`,
-status:`<span class="green">● AVAILABLE FOR NEXT MISSION</span><br>Final-year Software Engineering student @ MedTech<br>PFE target: 2026–2027<br>Target domains: AI/ML, backend, full-stack product engineering`,
-vermeg:`<span class="cmd">MISSION_01 // VERMEG</span><br>Built an end-to-end Python prototype that converts UI screenshots into HTML/CSS.<br>Pipeline: OpenCV preprocessing → Tesseract OCR → LLaVA via Ollama → code generation.`,
-orange:`<span class="cmd">MISSION_02 // ORANGE × MEDTECH</span><br>Internship & PFE Management Portal with Explainable AI Shortlisting.<br>CV parsing → skill extraction/matching → ranking → human-readable explanation.`,
-monoprix:`<span class="cmd">MISSION_03 // MONOPRIX</span><br>Centralized daily store-sales data and automated file imports with Python.<br>Focus: MySQL, SQL Server, data integrity and query efficiency.`,
-hmm:`<span class="cmd">MISSION_04 // HIDDEN MARKOV WEATHER ANALYSIS</span><br>Gaussian HMM for latent weather-state inference and forecasting.<br>Baum-Welch · Viterbi · AIC/BIC · forecasting.`,
-padel:`<span class="cmd">MISSION_05 // PADELVISION</span><br>Sports-AI R&D project for padel stroke and movement analysis.<br>Reference data models stroke phases, objectives and body-position signals for right-handed players.<br><span class="dim">Current v0.1 directional labels are explicitly marked for coach validation.</span>`,
-studyabroad:`<span class="cmd">MISSION_06 // STUDY ABROAD AI</span><br>AI-assisted international study guidance project.<br><span class="dim">Repository/source details will be synced when the project files are uploaded.</span>`,
-contact:`GitHub → <a href="https://github.com/anischelly26" target="_blank">github.com/anischelly26 ↗</a><br>School email → <a href="mailto:anis.chelli@medtech.tn">anis.chelli@medtech.tn ↗</a>`,
-'sudo hire anis':`<span class="green">PERMISSION GRANTED.</span><br>Recruiter mode unlocked.<br><a href="mailto:anis.chelli@medtech.tn">[ SEND TRANSMISSION ↗ ]</a>`};
-function addOutput(html,cls=''){const p=document.createElement('p');p.className=cls;p.innerHTML=html;terminalOutput.appendChild(p);terminalOutput.scrollTop=terminalOutput.scrollHeight;}
-document.getElementById('terminalForm').addEventListener('submit',e=>{e.preventDefault();const raw=terminalInput.value.trim();if(!raw)return;addOutput(`<span class="dim">anis@core:~$</span> ${raw}`);const cmd=raw.toLowerCase();if(cmd==='clear')terminalOutput.innerHTML='';else if(commands[cmd])addOutput(commands[cmd]);else addOutput(`<span class="dim">command not found:</span> ${raw}<br>Try <span class="cmd">help</span>.`);terminalInput.value='';});
-const hero=document.querySelector('.hero');addEventListener('scroll',()=>{if(scrollY<innerHeight*1.2){const y=scrollY;hero.style.transform=`translateY(${y*.08}px)`;hero.style.opacity=String(Math.max(.2,1-y/(innerHeight*1.15)));}},{passive:true});
+const scrollProgress = document.getElementById('scrollProgress');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const sequence = [
+  'boot sequence initiated...',
+  'initializing WebGL renderer...',
+  'mounting neural project archive...',
+  'loading motion system...',
+  'mapping mission topology...',
+  'checking identity signature...',
+  '<span class="ok">identity: ANIS CHELLI // VERIFIED</span>',
+  '<span class="ok">ACCESS GRANTED</span>',
+];
+
+let progress = 0;
+let line = 0;
+
+function renderLine() {
+  if (line >= sequence.length) return;
+  const row = document.createElement('div');
+  row.innerHTML = `> ${sequence[line++]}`;
+  bootLines.appendChild(row);
+  setTimeout(renderLine, 185);
+}
+renderLine();
+
+const bootTimer = setInterval(() => {
+  progress += Math.floor(Math.random() * 9) + 4;
+  if (progress >= 100) {
+    progress = 100;
+    clearInterval(bootTimer);
+    setTimeout(() => {
+      boot.classList.add('done');
+      app.classList.remove('hidden');
+      startMotionSystem();
+    }, 520);
+  }
+  bootBar.style.width = `${progress}%`;
+  bootPercent.textContent = `${progress}%`;
+}, 80);
+
+// Cursor / ambient light
+const glow = document.getElementById('cursorGlow');
+window.addEventListener('pointermove', (event) => {
+  document.documentElement.style.setProperty('--mx', `${event.clientX}px`);
+  document.documentElement.style.setProperty('--my', `${event.clientY}px`);
+  if (glow) {
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
+  }
+});
+
+// Scroll progress + active section rail
+const railItems = [...document.querySelectorAll('.section-rail span')];
+const sections = [...document.querySelectorAll('main > section[id]')];
+
+function updateScrollUI() {
+  const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const ratio = Math.min(1, window.scrollY / max);
+  if (scrollProgress) scrollProgress.style.width = `${ratio * 100}%`;
+
+  const focusY = window.scrollY + window.innerHeight * 0.46;
+  let active = sections[0]?.id;
+  sections.forEach((section) => {
+    if (section.offsetTop <= focusY) active = section.id;
+  });
+  railItems.forEach((item) => item.classList.toggle('active', item.dataset.target === active));
+}
+window.addEventListener('scroll', updateScrollUI, { passive: true });
+window.addEventListener('resize', updateScrollUI);
+updateScrollUI();
+
+// Magnetic controls
+if (!prefersReducedMotion) {
+  document.querySelectorAll('.magnetic').forEach((element) => {
+    const strength = Number(element.dataset.strength || 14);
+    element.addEventListener('pointermove', (event) => {
+      const rect = element.getBoundingClientRect();
+      const x = (event.clientX - rect.left - rect.width / 2) / rect.width;
+      const y = (event.clientY - rect.top - rect.height / 2) / rect.height;
+      element.style.transform = `translate3d(${x * strength}px, ${y * strength}px, 0)`;
+    });
+    element.addEventListener('pointerleave', () => {
+      element.style.transform = 'translate3d(0,0,0)';
+    });
+  });
+}
+
+// Premium card tilt. It deliberately stays subtle so the portfolio does not become a gamer dashboard.
+if (!prefersReducedMotion && window.matchMedia('(pointer:fine)').matches) {
+  document.querySelectorAll('.tilt-card').forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const px = (event.clientX - rect.left) / rect.width;
+      const py = (event.clientY - rect.top) / rect.height;
+      const rotateY = (px - 0.5) * 5.2;
+      const rotateX = (0.5 - py) * 4.2;
+      card.style.setProperty('--card-x', `${px * 100}%`);
+      card.style.setProperty('--card-y', `${py * 100}%`);
+      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+  });
+}
+
+function fallbackReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+}
+
+function startMotionSystem() {
+  if (!window.gsap || !window.ScrollTrigger || prefersReducedMotion) {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+    return;
+  }
+
+  const { gsap, ScrollTrigger } = window;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero boot reveal
+  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  heroTl
+    .fromTo('.hero__eyebrow', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.55 })
+    .fromTo('.hero-line--solid', { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.95 }, '-=.2')
+    .fromTo('.hero-line--outline', { yPercent: 80, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.05 }, '-=.72')
+    .fromTo('.hero__role', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.55 }, '-=.48')
+    .fromTo('.hero__copy', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.65 }, '-=.38')
+    .fromTo('.hero__actions', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55 }, '-=.42')
+    .fromTo('.hero__signal', { opacity: 0, x: 35 }, { opacity: 1, x: 0, duration: 0.8 }, '-=.52');
+
+  // Hero typography gets pulled apart as the user descends.
+  gsap.to('.hero-line--solid', {
+    xPercent: -13,
+    opacity: 0.28,
+    ease: 'none',
+    scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: 1.1 },
+  });
+  gsap.to('.hero-line--outline', {
+    xPercent: 17,
+    opacity: 0.12,
+    ease: 'none',
+    scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: 1.1 },
+  });
+  gsap.to('.hero__signal', {
+    y: 120,
+    opacity: 0,
+    ease: 'none',
+    scrollTrigger: { trigger: '#home', start: '35% top', end: 'bottom top', scrub: 1 },
+  });
+
+  // Section reveals
+  document.querySelectorAll('.reveal').forEach((element) => {
+    if (element.closest('#home')) return;
+    gsap.fromTo(element,
+      { opacity: 0, y: 36 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: element, start: 'top 87%', toggleActions: 'play none none none' },
+      },
+    );
+  });
+
+  // Mission archive cinematic entrance
+  gsap.fromTo('.mission',
+    { opacity: 0, y: 70, scale: 0.975 },
+    {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      stagger: 0.09,
+      duration: 0.85,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.mission-grid', start: 'top 79%' },
+    },
+  );
+
+  // Slow visual drift gives the cards depth without constant distraction.
+  document.querySelectorAll('.mission__visual').forEach((visual, index) => {
+    gsap.to(visual, {
+      backgroundPosition: `${index % 2 ? 18 : -18}px 24px`,
+      ease: 'none',
+      scrollTrigger: { trigger: visual.closest('.mission'), start: 'top bottom', end: 'bottom top', scrub: 1.8 },
+    });
+  });
+
+  gsap.to('.next__ring', {
+    rotate: 135,
+    scale: 1.08,
+    ease: 'none',
+    scrollTrigger: { trigger: '#next', start: 'top bottom', end: 'bottom top', scrub: 1.5 },
+  });
+
+  ScrollTrigger.refresh();
+}
+
+// Terminal
+const terminal = document.getElementById('terminal');
+const terminalInput = document.getElementById('terminalInput');
+const terminalOutput = document.getElementById('terminalOutput');
+const openers = [
+  document.getElementById('terminalToggle'),
+  document.getElementById('heroTerminal'),
+  document.getElementById('nextTerminal'),
+];
+const closeBtn = document.getElementById('terminalClose');
+
+function openTerminal() {
+  terminal.classList.add('open');
+  terminal.setAttribute('aria-hidden', 'false');
+  setTimeout(() => terminalInput.focus(), 220);
+}
+function closeTerminal() {
+  terminal.classList.remove('open');
+  terminal.setAttribute('aria-hidden', 'true');
+}
+openers.forEach((button) => button?.addEventListener('click', openTerminal));
+closeBtn.addEventListener('click', closeTerminal);
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeTerminal();
+  if (event.key === '`' && !event.metaKey && !event.ctrlKey) {
+    event.preventDefault();
+    openTerminal();
+  }
+});
+
+const commands = {
+  help: `<span class="cmd">AVAILABLE COMMANDS</span><br>whoami &nbsp; projects &nbsp; experience &nbsp; skills &nbsp; graphics &nbsp; status &nbsp; vermeg &nbsp; orange &nbsp; monoprix &nbsp; hmm &nbsp; padel &nbsp; veripath &nbsp; contact &nbsp; clear &nbsp; sudo hire anis`,
+  whoami: `<span class="green">ANIS CHELLI</span><br>Final-year Software Engineering student @ MedTech<br>Software Engineer // AI Builder<br><span class="dim">AI systems · software engineering · intelligent products.</span>`,
+  projects: `<span class="cmd">MISSION_01</span> Vermeg — AI UI-to-Code Converter<br><span class="cmd">MISSION_02</span> Orange × MedTech — Explainable AI PFE Portal<br><span class="cmd">MISSION_03</span> Monoprix — Sales Data Centralization<br><span class="cmd">MISSION_04</span> AI Lab — Hidden Markov Weather Analysis<br><span class="cmd">MISSION_05</span> PadelVision — AI Padel Coach<br><span class="cmd">MISSION_06</span> VeriPath — Study-Abroad Decision AI`,
+  experience: `VERMEG → AI / computer vision internship<br>MONOPRIX → Data systems / automation internship<br>ORANGE DIGITAL CENTER × MEDTECH → Full-stack XAI project<br>INDEPENDENT R&D → PadelVision + VeriPath AI`,
+  skills: `AI → Machine Learning, NLP, Computer Vision, OCR, XAI, HMM<br>AI TOOLING → OpenCV, MediaPipe, Tesseract, LLaVA, Ollama, hmmlearn<br>ENGINEERING → Python, Java, JavaScript, C, PHP<br>WEB → React, Node.js, Express, Streamlit, HTML/CSS<br>DATA → MySQL, SQL Server, MongoDB, pandas<br>CREATIVE WEB → Three.js, GSAP, WebGL, motion UI`,
+  graphics: `<span class="cmd">ANIS.EXE MOTION STACK</span><br>Three.js → real-time WebGL environment<br>GSAP → cinematic timeline animation<br>ScrollTrigger → scroll-scrubbed transitions<br>CSS → glass UI, responsive system, reduced-motion fallback`,
+  status: `<span class="green">● AVAILABLE FOR NEXT MISSION</span><br>Final-year Software Engineering student @ MedTech<br>PFE target: 2026–2027<br>Target: AI/ML · backend · full-stack product engineering`,
+  vermeg: `<span class="cmd">MISSION_01 // VERMEG</span><br>AI UI-to-code prototype.<br>OpenCV → Tesseract OCR → LLaVA/Ollama → HTML/CSS generation.`,
+  orange: `<span class="cmd">MISSION_02 // ORANGE × MEDTECH</span><br>Explainable AI internship/PFE management platform.<br>CV parsing → matching → ranking → explainable shortlisting.`,
+  monoprix: `<span class="cmd">MISSION_03 // MONOPRIX</span><br>Centralized sales-data workflow and Python import automation.`,
+  hmm: `<span class="cmd">MISSION_04 // HMM</span><br>Gaussian Hidden Markov Model for latent weather-state inference and forecasting.<br>Baum-Welch · Viterbi · AIC/BIC.`,
+  padel: `<span class="cmd">MISSION_05 // PADELVISION AI</span><br>Video → MediaPipe pose → movement analysis → tactical strategy, rebuild steps and drills.<br><a href="https://github.com/anischelly26/anischelly26/tree/main/projects/padelvision-ai" target="_blank">[ OPEN PROJECT ↗ ]</a>`,
+  veripath: `<span class="cmd">MISSION_06 // VERIPATH AI</span><br>Profile → academic discovery → transparent recommendation → shortlist → decision support.<br><a href="https://github.com/anischelly26/anischelly26/tree/main/projects/veripath-ai" target="_blank">[ OPEN PROJECT ↗ ]</a>`,
+  studyabroad: `<span class="cmd">VERIPATH AI</span><br>The Study Abroad AI project is now named VeriPath AI.<br>Type <span class="cmd">veripath</span>.`,
+  contact: `GitHub → <a href="https://github.com/anischelly26" target="_blank">github.com/anischelly26 ↗</a><br>Email → <a href="mailto:anis.chelli@medtech.tn">anis.chelli@medtech.tn ↗</a>`,
+  'sudo hire anis': `<span class="green">PERMISSION GRANTED.</span><br>Recruiter mode unlocked.<br><a href="mailto:anis.chelli@medtech.tn">[ SEND TRANSMISSION ↗ ]</a>`,
+};
+
+function addOutput(html, className = '') {
+  const row = document.createElement('p');
+  row.className = className;
+  row.innerHTML = html;
+  terminalOutput.appendChild(row);
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+document.getElementById('terminalForm').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const raw = terminalInput.value.trim();
+  if (!raw) return;
+  addOutput(`<span class="dim">anis@core:~$</span> ${raw}`);
+  const command = raw.toLowerCase();
+  if (command === 'clear') terminalOutput.innerHTML = '';
+  else if (commands[command]) addOutput(commands[command]);
+  else addOutput(`<span class="dim">command not found:</span> ${raw}<br>Try <span class="cmd">help</span>.`);
+  terminalInput.value = '';
+});
