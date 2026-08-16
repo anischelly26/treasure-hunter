@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: anischelly26-cv-rag
+    runtime: python
+    plan: free
+    rootDir: rag-api
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: XAI_API_KEY
+        sync: false
+      - key: XAI_MODEL
+        value: grok-4.5
+      - key: ALLOWED_ORIGINS
+        value: https://anischelly26.github.io
+      - key: RATE_LIMIT_COUNT
+        value: "8"
+      - key: RATE_LIMIT_WINDOW_SECONDS
+        value: "600"
+      - key: XAI_COLLECTION_ID
+        sync: false
