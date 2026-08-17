@@ -11,14 +11,17 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 - responsive mobile layout
 - interactive terminal
 - keyboard shortcut: press **`** to open the terminal
-- commands: `help`, `whoami`, `projects`, `experience`, `skills`, `status`, `vermeg`, `orange`, `monoprix`, `hmm`, `contact`, `sudo hire anis`
+- commands: `help`, `whoami`, `projects`, `experience`, `skills`, `status`, `vermeg`, `orange`, `monoprix`, `hmm`, `padel`, `veripath`, `mlpipeline`, `contact`, `sudo hire anis`
 
-## Verified missions
+## Selected missions
 
 - **Vermeg** — AI UI-to-Code Converter using Python, OpenCV, Tesseract, LLaVA and Ollama
 - **Orange Digital Center × MedTech** — Internship & PFE Management Portal with Explainable AI shortlisting
 - **Monoprix** — Sales Data Centralization and Python-driven database import automation
 - **Hidden Markov Weather Analysis** — Gaussian HMM, Baum-Welch, Viterbi, AIC/BIC model selection and forecasting
+- **PadelVision AI** — computer-vision sports coaching prototype
+- **VeriPath AI** — study-abroad discovery and decision-support system
+- **ML Pipeline** — distributed ingest → clean → train → explain workflow with FastAPI, Supabase, Hugging Face Spaces and Vercel. Presented transparently as a fork / collaborative learning codebase with upstream credit to **Adam Bouacida (`adam12bT`)**.
 
 Supporting case studies live in [`case-studies/`](./case-studies/).
 
