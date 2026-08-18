@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .boot .boot__mark::before{animation-name:signalMarkOrbit!important}
+    @keyframes signalMarkOrbit{to{transform:rotate(360deg)}}
+  </style>
 </head>
 <body>
   <canvas id="webgl" aria-hidden="true"></canvas>
@@ -21,10 +25,10 @@
   <section class="boot" id="boot">
     <div class="boot__grid" aria-hidden="true"></div>
     <div class="boot__inner">
-      <div class="boot__head"><div class="boot__mark">AC</div><span>ANIS OPERATING SYSTEM // BUILD 2026</span></div>
+      <div class="boot__head"><div class="boot__mark">AC</div><span>ANIS SIGNAL // TUNIS · WORLDWIDE</span></div>
       <div class="boot__lines" id="bootLines"></div>
       <div class="boot__bar"><span id="bootBar"></span></div>
-      <div class="boot__meta"><span>SECURE BOOT</span><b id="bootPercent">0%</b></div>
+      <div class="boot__meta"><span>FROM IDEAS TO SYSTEMS</span><b id="bootPercent">0%</b></div>
     </div>
   </section>
 
