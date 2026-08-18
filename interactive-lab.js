@@ -1,1 +1,1 @@
-import './source-backed-lab.js';
+import './source-backed-lab-v2.js';
