@@ -19,6 +19,8 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check source-backed-lab-v2.js
+          node --check portfolio-clarity.js
+          node --check treasure-browser.js
           node --check interactive-lab.js
           node --check treasure-project.js
           node --check scene.js
