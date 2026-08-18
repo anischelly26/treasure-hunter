@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js';
 import './rag-bootstrap.js';
-import './interactive-lab.js';
 import './treasure-project.js';
+import './interactive-lab.js';
 
 const canvas = document.getElementById('webgl');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -23,7 +23,6 @@ scene.add(root);
 const gold = new THREE.Color(0xd7a94f);
 const dimGold = new THREE.Color(0x6b4b14);
 
-// Event-horizon core
 const ringGroup = new THREE.Group();
 ringGroup.position.set(3.6, 0.55, -1.4);
 root.add(ringGroup);
@@ -62,7 +61,6 @@ const haloMaterial = new THREE.MeshBasicMaterial({
 const halo = new THREE.Mesh(haloGeometry, haloMaterial);
 ringGroup.add(halo);
 
-// Particle field
 const particleCount = reducedMotion ? 420 : Math.min(1500, Math.floor((window.innerWidth * window.innerHeight) / 900));
 const positions = new Float32Array(particleCount * 3);
 const sizes = new Float32Array(particleCount);
@@ -91,7 +89,6 @@ const particleMaterial = new THREE.PointsMaterial({
 const particles = new THREE.Points(particlesGeometry, particleMaterial);
 root.add(particles);
 
-// Fine orbital dust around the event horizon
 const dustCount = reducedMotion ? 120 : 420;
 const dustPositions = new Float32Array(dustCount * 3);
 for (let i = 0; i < dustCount; i += 1) {
