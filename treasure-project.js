@@ -10,12 +10,12 @@ if (missionGrid && hero && !missionGrid.querySelector('[data-treasure-project]')
     <div class="mission__visual"><b>08</b><span class="visual-grid"></span></div>
     <div class="mission__top"><span>TREASURE HUNTER</span><span class="mission__state">GAME DEV // SDL2</span></div>
     <div class="mission__body">
-      <div class="mission__code">C → SDL2 → GAME</div>
+      <div class="mission__code">4 LEVELS → COMBAT → SHARK BOSS</div>
       <h3>Treasure Hunter</h3>
-      <p>Academic C/SDL2 game · faithful browser port pending original source/assets.</p>
+      <p>Academic C/SDL2 platform game — now playable as a source-backed browser adaptation.</p>
     </div>
-    <div class="mission__tags"><span>C</span><span>SDL2</span><span>GAME DEV</span></div>
-    <div class="mission__launch">SOURCE NEEDED ↗</div>`;
+    <div class="mission__tags"><span>C</span><span>SDL2</span><span>PLATFORMER</span><span>GAME DEV</span></div>
+    <div class="mission__launch">PLAY REAL DEMO ↗</div>`;
 
   const launch = () => {
     const panel = document.querySelector('.hero-demo');
