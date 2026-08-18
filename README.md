@@ -10,6 +10,9 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 - AI × software engineering positioning
 - responsive mobile layout
 - interactive terminal
+- recruiter-friendly project playground with project name, description, test purpose and source level
+- source-backed project tests instead of generic animations
+- playable Treasure Hunter browser adaptation based on the public C/SDL2 team source
 - keyboard shortcut: press **`** to open the terminal
 - commands: `help`, `whoami`, `projects`, `experience`, `skills`, `status`, `vermeg`, `orange`, `monoprix`, `hmm`, `padel`, `veripath`, `mlpipeline`, `contact`, `sudo hire anis`
 
@@ -22,8 +25,9 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 - **PadelVision AI** — computer-vision sports coaching prototype
 - **VeriPath AI** — study-abroad discovery and decision-support system
 - **ML Pipeline** — distributed ingest → clean → train → explain workflow with FastAPI, Supabase, Hugging Face Spaces and Vercel. Presented transparently as a fork / collaborative learning codebase with upstream credit to **Adam Bouacida (`adam12bT`)**.
+- **Treasure Hunter** — C/SDL2 platform game with four levels, spike hazards, crab enemies, health/combat logic and a final shark boss. The portfolio adaptation reads the original level arrays from the public team source at runtime.
 
-Supporting case studies live in [`case-studies/`](./case-studies/).
+Treasure Hunter source attribution is documented in [`NOTICE-TREASURE-HUNTER.md`](./NOTICE-TREASURE-HUNTER.md). Supporting case studies live in [`case-studies/`](./case-studies/).
 
 ## Run locally
 
@@ -31,7 +35,7 @@ Open `index.html` in a browser, or serve the folder with any static web server.
 
 ## Deployment
 
-The repository includes a GitHub Pages deployment workflow. GitHub Pages must first be enabled in the repository settings; after that, pushes to `main` can deploy the experience automatically.
+The repository includes a GitHub Pages deployment workflow. Pushes to `main` trigger the Pages deployment and JavaScript verification workflows.
 
 ---
 
