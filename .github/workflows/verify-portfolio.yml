@@ -18,10 +18,11 @@ jobs:
           node-version: "22"
       - name: Check JavaScript syntax
         run: |
-          node --check source-backed-lab-v2.js
-          node --check portfolio-clarity.js
+          node --check project-demos.js
           node --check treasure-browser.js
-          node --check interactive-lab.js
           node --check treasure-project.js
+          node --check rag-bootstrap.js
+          node --check rag.js
+          node --check interactive-lab.js
           node --check scene.js
           node --check script.js
