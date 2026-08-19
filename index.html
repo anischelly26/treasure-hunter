@@ -13,6 +13,24 @@
   <style>
     .boot .boot__mark::before{animation-name:signalMarkOrbit!important}
     @keyframes signalMarkOrbit{to{transform:rotate(360deg)}}
+
+    /* HERE has its own product identity. It intentionally does not reuse the
+       computer-vision/orbit artwork used by UI-to-Code. */
+    .mission--here{background:linear-gradient(155deg,rgba(20,28,23,.78),rgba(7,7,7,.92) 52%);border-color:rgba(125,255,178,.17)}
+    .mission--here:hover{border-color:rgba(125,255,178,.42);box-shadow:0 30px 110px rgba(0,0,0,.42),0 0 70px rgba(125,255,178,.035)}
+    .mission__visual--here{background:radial-gradient(circle at 50% 48%,rgba(125,255,178,.08),transparent 28%),linear-gradient(145deg,#08100c,#070707 72%)}
+    .mission__visual--here::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(125,255,178,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(125,255,178,.055) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(circle at center,#000,transparent 77%)}
+    .here-network{position:absolute;inset:0;display:grid;place-items:center;font-family:'DM Mono',monospace}
+    .here-core{position:absolute;width:86px;height:86px;border-radius:50%;display:grid;place-items:center;color:#07100b;background:radial-gradient(circle at 38% 28%,#effff5,#7dffb2 34%,#2d7d50 70%,#0a160f);font:700 24px 'Inter',sans-serif;box-shadow:0 0 0 1px rgba(125,255,178,.42),0 0 48px rgba(125,255,178,.18);z-index:3}
+    .here-core::after{content:"CORE";position:absolute;top:100px;color:#7dffb2;font:7px 'DM Mono',monospace;letter-spacing:.18em}
+    .here-node{position:absolute;min-width:74px;text-align:center;padding:9px 10px;border:1px solid rgba(125,255,178,.2);background:rgba(5,10,7,.82);color:#8b9f91;font:7px 'DM Mono',monospace;letter-spacing:.12em;z-index:2}
+    .here-node b{display:block;margin-top:4px;color:#d8eee0;font-weight:400;font-size:8px}
+    .here-node--need{left:10%;top:20%}.here-node--trust{right:10%;top:20%}.here-node--context{left:10%;bottom:20%}.here-node--human{right:10%;bottom:20%}
+    .here-link{position:absolute;left:50%;top:50%;width:35%;height:1px;transform-origin:left center;background:linear-gradient(90deg,rgba(125,255,178,.52),rgba(125,255,178,.05));z-index:1}
+    .here-link.l1{transform:rotate(215deg)}.here-link.l2{transform:rotate(325deg)}.here-link.l3{transform:rotate(145deg)}.here-link.l4{transform:rotate(35deg)}
+    .here-pulse{position:absolute;width:7px;height:7px;border-radius:50%;background:#7dffb2;box-shadow:0 0 16px #7dffb2;animation:herePulse 1.8s ease-in-out infinite;z-index:4}
+    .here-pulse.p1{left:27%;top:34%}.here-pulse.p2{right:27%;top:34%;animation-delay:-.45s}.here-pulse.p3{left:27%;bottom:34%;animation-delay:-.9s}.here-pulse.p4{right:27%;bottom:34%;animation-delay:-1.3s}
+    @keyframes herePulse{50%{opacity:.28;transform:scale(.7)}}
   </style>
 </head>
 <body>
@@ -119,12 +137,23 @@
       </div>
 
       <div class="mission-grid">
-        <a class="mission mission--featured tilt-card" href="./here/" target="_blank" rel="noreferrer">
-          <div class="mission__visual mission__visual--vision"><span class="visual-orbit"></span><b>00</b></div>
-          <div class="mission__top"><span>HERE</span><span class="mission__state">AI // TRUST</span></div>
-          <div class="mission__body"><div class="mission__code">NEED → UNDERSTAND → MATCH</div><h3>HERE</h3><p>Human need interpretation with trust-aware, explainable matching.</p></div>
-          <div class="mission__tags"><span>AI PRODUCT</span><span>TRUST</span><span>MATCHING</span></div>
-          <div class="mission__launch">LIVE DEMO ↗</div>
+        <a class="mission mission--featured mission--here tilt-card" href="./here/" target="_blank" rel="noreferrer">
+          <div class="mission__visual mission__visual--here">
+            <div class="here-network" aria-hidden="true">
+              <span class="here-link l1"></span><span class="here-link l2"></span><span class="here-link l3"></span><span class="here-link l4"></span>
+              <span class="here-node here-node--need">SIGNAL<b>NEED</b></span>
+              <span class="here-node here-node--trust">POLICY<b>TRUST</b></span>
+              <span class="here-node here-node--context">STATE<b>CONTEXT</b></span>
+              <span class="here-node here-node--human">MATCH<b>HUMAN</b></span>
+              <span class="here-core">H</span>
+              <i class="here-pulse p1"></i><i class="here-pulse p2"></i><i class="here-pulse p3"></i><i class="here-pulse p4"></i>
+            </div>
+            <b>00</b>
+          </div>
+          <div class="mission__top"><span>HERE</span><span class="mission__state">PRODUCT // MATCHING</span></div>
+          <div class="mission__body"><div class="mission__code">NEED → TRUST → HUMAN</div><h3>HERE</h3><p>Need-first AI network that interprets intent and contextual risk, then explains why each person fits.</p></div>
+          <div class="mission__tags"><span>PRODUCT AI</span><span>EXPLAINABLE RANKING</span><span>TRUST &amp; SAFETY</span></div>
+          <div class="mission__launch">LIVE PRODUCT DEMO ↗</div>
         </a>
 
         <a class="mission mission--featured tilt-card" href="https://github.com/anischelly26/ui-to-html-css-translator" target="_blank" rel="noreferrer">
