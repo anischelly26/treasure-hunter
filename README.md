@@ -2,6 +2,17 @@
 
 Interactive portfolio / recruiter experience for **Anis Chelly**.
 
+## ✦ NEW — HERE / Human Intelligence Network
+
+**HERE** is now the lead project in ANIS.EXE: a need-first AI product concept that interprets a human request, evaluates contextual trust and risk, and ranks people by explainable fit instead of popularity.
+
+**[▶ OPEN HERE LIVE DEMO](https://anischelly26.github.io/treasure-hunter/here/)**  
+**[VIEW HERE SOURCE / DEMO FILES](./here/)**
+
+`NEED → UNDERSTAND → TRUST → MATCH`
+
+---
+
 This is intentionally not a conventional portfolio. It behaves more like a software system / game interface:
 
 - cinematic boot sequence
@@ -18,6 +29,7 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 
 ## Selected missions
 
+- **HERE — Human Intelligence Network** — need interpretation, contextual trust/risk modeling and explainable human matching. **[Live demo](https://anischelly26.github.io/treasure-hunter/here/)**
 - **Vermeg** — AI UI-to-Code Converter using Python, OpenCV, Tesseract, LLaVA and Ollama
 - **Orange Digital Center × MedTech** — Internship & PFE Management Portal with Explainable AI shortlisting
 - **Monoprix** — Sales Data Centralization and Python-driven database import automation
