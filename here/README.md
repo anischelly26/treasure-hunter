@@ -2,11 +2,13 @@
 
 **Live demo:** https://anischelly26.github.io/treasure-hunter/here/
 
+> **Independent project:** HERE is a separate product concept. It is **not** the UI-to-HTML / UI-to-Code project and does not use that project’s computer-vision pipeline.
+
 HERE is a need-first human matching concept: describe a real situation in natural language, let the system extract intent, timing, payment, location and contextual risk, then rank people by explainable fit rather than popularity.
 
 ## Demo features
 
-- animated black / warm-gold network interface
+- animated black / green-gold network interface
 - Social / Favor / Mission modes
 - local natural-language interpretation
 - time, payment, location and risk extraction
