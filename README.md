@@ -36,6 +36,7 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 - **Hidden Markov Weather Analysis** — Gaussian HMM, Baum-Welch, Viterbi, AIC/BIC model selection and forecasting
 - **PadelVision AI** — computer-vision sports coaching prototype
 - **VeriPath AI** — study-abroad discovery and decision-support system
+- **Barcelona & Dubai Market Explorer** — in-progress cross-market property analytics MVP with normalized pricing, geospatial signals and interactive comparisons. **[Live MVP](https://barcelona-dubai-market-explorer.rhythmx.chatgpt.site)**
 - **ML Pipeline** — distributed ingest → clean → train → explain workflow with FastAPI, Supabase, Hugging Face Spaces and Vercel. Presented transparently as a fork / collaborative learning codebase with upstream credit to **Adam Bouacida (`adam12bT`)**.
 - **Treasure Hunter** — C/SDL2 platform game with four levels, spike hazards, crab enemies, health/combat logic and a final shark boss. The portfolio adaptation reads the original level arrays from the public team source at runtime.
 
