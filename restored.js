@@ -14,7 +14,7 @@ media.addEventListener('change',()=>{paused=media.matches;setMotion()});setMotio
 const menu=document.querySelector('.menu-toggle'), nav=document.querySelector('.nav__links');
 function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}
 menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});
-nav.querySelectorAll('a,button').forEach(a=>a.addEventListener('click',closeMenu));
+nav.addEventListener('click',e=>{if(e.target.closest('a,button'))closeMenu()});
 addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
 matchMedia('(min-width:981px)').addEventListener('change',closeMenu);
 const sections=[...document.querySelectorAll('main>section[id]')];
@@ -67,4 +67,3 @@ document.querySelector('#terminalForm').addEventListener('submit',e=>{
  terminalInput.value='';
 });
 })();
-
