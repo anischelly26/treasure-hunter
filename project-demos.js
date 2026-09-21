@@ -150,9 +150,11 @@ function wireDemo(panel,type){
   }
 }
 
-const cards=[...missionGrid.querySelectorAll('.mission')].slice(0,7);
-cards.forEach((card,i)=>{
-  const p=projects[i];
+const cards=[...missionGrid.querySelectorAll('.mission')];
+projects.forEach((p)=>{
+  const title=p.type==='ui'?'AI UI-to-Code':p.name;
+  const card=cards.find(c=>c.querySelector('h3')?.textContent.trim()===title);
+  if(!card)return;
   const intro=document.createElement('div');
   intro.className='project-demo-intro';
   intro.innerHTML=`<div class="project-demo-intro__label">INTERACTIVE PROJECT TEST</div><p>${p.test}</p><span class="project-demo-toggle" role="button" tabindex="0">TRY ${p.name.toUpperCase()} <b>＋</b></span><div class="project-demo-panel"><div class="project-demo-head"><div><h4>${p.name}</h4><p>${p.test}</p></div><span class="project-proof">${p.proof}</span></div>${demoMarkup(p.type)}</div>`;
@@ -163,7 +165,8 @@ cards.forEach((card,i)=>{
     document.querySelectorAll('.mission.demo-open').forEach(other=>{if(other!==card){other.classList.remove('demo-open');const t=other.querySelector('.project-demo-toggle b');if(t)t.textContent='＋'}});
     const open=card.classList.toggle('demo-open');
     toggle.querySelector('b').textContent=open?'−':'＋';
-    if(open)setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'center'}),60);
+    toggle.setAttribute('aria-expanded',String(open));
+    if(open)setTimeout(()=>card.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches||document.body.classList.contains('motion-paused')?'auto':'smooth',block:'nearest'}),60);
   };
   toggle.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();act()});
   toggle.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();act()}});

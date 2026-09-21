@@ -28,3 +28,7 @@ jobs:
           node --check script.js
           node --check alpine.js
           node --check alpine-scene.js
+          node --check restored.js
+          node --check case-studies.js
+          node --check portfolio-features.js
+          node --check signal-scene.js

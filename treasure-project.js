@@ -29,5 +29,5 @@ if (missionGrid && !missionGrid.querySelector('[data-treasure-project]')) {
 
   missionGrid.appendChild(treasureCard);
   const count = document.querySelector('.core-metrics div:first-child b');
-  if (count) count.textContent = '08';
+  if (count) count.textContent = String(missionGrid.querySelectorAll('.mission').length).padStart(2,'0');
 }
