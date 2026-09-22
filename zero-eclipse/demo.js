@@ -1,0 +1,36 @@
+/* Small browser adaptation using the supplied V9 sprites; original Java game stays in ZERO-ECLIPSE. */
+(() => {
+'use strict';
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d'),status=document.getElementById('status');
+const overlay=document.getElementById('overlay'),start=document.getElementById('start'),pause=document.getElementById('pause'),restart=document.getElementById('restart');
+const assets={},keys=new Set(),W=960,H=540,world=2400;
+let state='loading',p,fragments,enemies,camera=0,last=0,frame=0,elapsed=0,nova={x:0,y:0};
+const surfaces=[{x:0,y:460,w:830},{x:980,y:460,w:600},{x:1730,y:460,w:670},{x:360,y:355,w:160},{x:620,y:285,w:150},{x:1170,y:350,w:180},{x:1850,y:340,w:180}];
+const mapping={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',KeyW:'jump',ArrowUp:'jump',KeyJ:'attack'};
+function reset(){p={x:70,y:370,w:32,h:62,vy:0,vx:0,face:1,ground:false,hp:3,inv:0,attack:0,cool:0};fragments=[{x:430,y:324},{x:1270,y:319},{x:1940,y:309}];enemies=[{x:610,y:432,left:560,right:740,dir:1,alive:true},{x:1400,y:432,left:1380,right:1530,dir:-1,alive:true},{x:2070,y:432,left:2050,right:2230,dir:1,alive:true}];camera=0;elapsed=0;nova={x:30,y:340};keys.clear();}
+function message(title,text,label){document.getElementById('overlayTitle').textContent=title;document.getElementById('overlayText').textContent=text;start.textContent=label;overlay.hidden=false;}
+function hud(){status.textContent=`Health ${p.hp}/3 · Fragments ${3-fragments.length}/3 · ${fragments.length?'Collect all fragments.':'Portal unlocked — head right.'}`;}
+function play(){if(state==='ready'||state==='won'||state==='lost')reset();state='playing';overlay.hidden=true;pause.disabled=false;restart.disabled=false;pause.textContent='Pause';canvas.focus({preventScroll:true});last=0;loop(performance.now());}
+function stop(){if(state!=='playing')return;state='paused';keys.clear();cancelAnimationFrame(frame);message('Paused','Take your time. Your progress is saved for this run.','Resume');pause.textContent='Resume';}
+start.addEventListener('click',play);pause.addEventListener('click',()=>state==='playing'?stop():play());restart.addEventListener('click',()=>{cancelAnimationFrame(frame);reset();state='ready';play();});
+function hit(){if(p.inv>0)return;p.hp--;p.inv=1.2;p.vy=-230;if(p.hp<=0){state='lost';message('Try another route.','Jump the gaps and press J near an enemy to attack.','Try again');}}
+function jump(){if(p.ground){p.vy=-570;p.ground=false;}}
+function update(dt){elapsed+=dt;p.inv=Math.max(0,p.inv-dt);p.attack=Math.max(0,p.attack-dt);p.cool=Math.max(0,p.cool-dt);const move=Number(keys.has('right'))-Number(keys.has('left'));p.vx+=(move*260-p.vx)*Math.min(1,dt*18);if(move)p.face=move;if(keys.has('jump')){jump();keys.delete('jump');}if(keys.has('attack')&&p.cool===0){p.attack=.23;p.cool=.4;}const oldBottom=p.y+p.h;p.x=Math.max(0,Math.min(world-p.w,p.x+p.vx*dt));p.vy+=1450*dt;p.y+=p.vy*dt;p.ground=false;
+for(const s of surfaces)if(p.vy>=0&&oldBottom<=s.y+2&&p.y+p.h>=s.y&&p.x+p.w>s.x&&p.x<s.x+s.w){p.y=s.y-p.h;p.vy=0;p.ground=true;break;}
+if(p.y>H+100){p.hp--;if(p.hp<=0){state='lost';message('Lost in the crossing.','Watch the gaps. You can clear them with a running jump.','Try again');}else{p.x=p.x<980?650:1400;p.y=330;p.vy=0;p.inv=1.5;}}
+fragments=fragments.filter(f=>Math.hypot(p.x+p.w/2-f.x,p.y+p.h/2-f.y)>42);
+for(const e of enemies){if(!e.alive)continue;e.x+=e.dir*65*dt;if(e.x<e.left||e.x>e.right)e.dir*=-1;const dx=e.x+16-(p.x+p.w/2),dy=Math.abs(e.y+14-(p.y+p.h/2));if(p.attack>0&&dx*p.face>-15&&dx*p.face<100&&dy<65){e.alive=false;continue;}if(Math.abs(dx)<32&&dy<43)hit();}
+nova.x+=(p.x-46-nova.x)*Math.min(1,dt*6);nova.y+=(p.y-22-nova.y)*Math.min(1,dt*5);camera=Math.max(0,Math.min(world-W,p.x-W*.35));if(p.x>2290&&fragments.length===0){state='won';message('Crossing complete.','You recovered every fragment. Explore the desktop V9 build below.','Play again');}hud();}
+function sprite(name,sx,sy,sw,sh,x,y,w,h,flip=false){ctx.save();ctx.translate(Math.round(x+(flip?w:0)),Math.round(y));if(flip)ctx.scale(-1,1);ctx.drawImage(assets[name],sx,sy,sw,sh,0,0,w,h);ctx.restore();}
+function draw(){ctx.imageSmoothingEnabled=false;ctx.drawImage(assets.sky4,0,0,2048,512,0,0,W,H);for(const [name,factor] of [['far4',.15],['mid4',.3]]){const offset=-(camera*factor)%W;ctx.drawImage(assets[name],offset,40,W,H-40);ctx.drawImage(assets[name],offset+W,40,W,H-40);}ctx.save();ctx.translate(-camera,0);
+for(const s of surfaces){ctx.fillStyle='#17272c';ctx.fillRect(s.x,s.y,s.w,s.y===460?80:24);ctx.fillStyle='#71927a';ctx.fillRect(s.x,s.y,s.w,5);ctx.fillStyle='#314348';for(let x=s.x+8;x<s.x+s.w;x+=32)ctx.fillRect(x,s.y+15,18,3);}
+for(const f of fragments){ctx.save();ctx.translate(f.x,f.y);ctx.rotate(Math.PI/4);ctx.fillStyle='#eac779';ctx.fillRect(-9,-9,18,18);ctx.strokeStyle='#fff3c2';ctx.strokeRect(-5,-5,10,10);ctx.restore();}
+ctx.strokeStyle=fragments.length?'#52636b':'#83efdc';ctx.lineWidth=5;ctx.beginPath();ctx.ellipse(2325,402,29,57,0,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#beded5';ctx.font='12px monospace';ctx.textAlign='center';ctx.fillText(fragments.length?'LOCKED':'EXIT',2325,330);
+for(const e of enemies)if(e.alive)sprite('crab_sheet',Math.floor(elapsed*8)%6*32,0,32,32,e.x,e.y,32,32,e.dir<0);
+sprite('nova_sheet',Math.floor(elapsed*8)%6*32,0,32,32,nova.x,nova.y,30,30);const f=p.attack>0?10:Math.abs(p.vx)>10?Math.floor(elapsed*10)%8:0;ctx.globalAlpha=p.inv>0?.6:1;sprite('alex_sheet',f*96,0,96,84,p.x-25,p.y-6,80,70,p.face<0);ctx.globalAlpha=1;if(p.attack>0){ctx.strokeStyle='#aef8eb';ctx.lineWidth=4;ctx.beginPath();ctx.arc(p.x+p.w/2,p.y+32,63,p.face>0?-.8:Math.PI-.8,p.face>0?.8:Math.PI+.8);ctx.stroke();}ctx.restore();}
+function loop(time){cancelAnimationFrame(frame);if(state!=='playing')return;const dt=Math.min((time-(last||time))/1000,.025);last=time;update(dt);draw();if(state==='playing')frame=requestAnimationFrame(loop);}
+canvas.addEventListener('keydown',e=>{if(mapping[e.code]){e.preventDefault();keys.add(mapping[e.code]);}if(e.code==='Escape'){e.preventDefault();stop();}});window.addEventListener('keyup',e=>{if(mapping[e.code])keys.delete(mapping[e.code]);});
+for(const button of document.querySelectorAll('[data-key]')){button.addEventListener('pointerdown',e=>{e.preventDefault();if(state!=='playing')return;button.setPointerCapture(e.pointerId);keys.add(button.dataset.key);});for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,()=>keys.delete(button.dataset.key));}
+window.addEventListener('blur',stop);document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});new IntersectionObserver(es=>{if(!es[0].isIntersecting)stop();}).observe(canvas);
+Promise.all(['alex_sheet','crab_sheet','nova_sheet','sky4','far4','mid4'].map(name=>new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{assets[name]=img;resolve();};img.onerror=reject;img.src=`${name}.png`;}))).then(()=>{reset();draw();state='ready';start.disabled=false;start.textContent='Play browser demo';}).catch(()=>{message('Assets could not load.','Reload the page or download the desktop game below.','Reload');start.disabled=false;start.addEventListener('click',()=>location.reload(),{once:true});});
+})();

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Play a short ZERO ECLIPSE browser demo and download the original V9 Java desktop game.">
+<meta name="theme-color" content="#070b11"><title>ZERO ECLIPSE — Play the demo</title>
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<header><a href="../#missions">← ANIS.EXE / PORTFOLIO</a><a href="https://github.com/anischelly26/ZERO-ECLIPSE" target="_blank" rel="noopener">GITHUB ↗</a></header>
+<main>
+<div class="title"><div><p class="eyebrow">JAVA GAME / V9</p><h1>ZERO <span>ECLIPSE</span></h1></div><p class="summary">A short playable browser adaptation.<br>Original V9 characters and environment art.</p></div>
+<section class="game" aria-label="ZERO ECLIPSE browser demo">
+<div class="hud"><span id="status" role="status">Collect 3 fragments. Reach the portal.</span><button id="pause" disabled>Pause</button><button id="restart" disabled>Restart</button></div>
+<div class="stage">
+<canvas id="game" width="960" height="540" tabindex="0" aria-label="Game area. Move with A and D or arrow keys, jump with Space, attack with J.">This game needs a browser with Canvas support.</canvas>
+<div class="overlay" id="overlay"><p class="eyebrow">THE NIGHT CROSSING</p><h2 id="overlayTitle">Find a way through.</h2><p id="overlayText">Recover three fragments, watch the gaps, and reach the portal with NOVA.</p><button id="start" disabled>Loading assets…</button></div>
+</div>
+<div class="controls" aria-label="Touch game controls"><div><button data-key="left" aria-label="Move left">←</button><button data-key="right" aria-label="Move right">→</button></div><div><button data-key="jump">Jump</button><button data-key="attack">Attack</button></div></div>
+<p class="keyguide"><b>A / D</b> move &nbsp; <b>Space</b> jump &nbsp; <b>J</b> attack &nbsp; <b>Esc</b> pause · Keyboard controls activate inside the game.</p>
+</section>
+<section class="details" id="desktop"><div><p class="eyebrow">THE DESKTOP GAME</p><h2>Explore the V9 build.</h2><p>The download is the original Java game supplied for this project, with its graphics and audio. This browser demo is a smaller adaptation with one short level; it does not include the full V9 game or its AI systems.</p></div><div class="download"><button id="download">Download V9 desktop game · 12.9 MB</button><p id="downloadStatus" role="status">Requires Java 21 or newer. No account needed.</p><p>Run the downloaded file with:</p><code>java -jar ZERO_ECLIPSE_V9.jar</code><a href="https://github.com/anischelly26/ZERO-ECLIPSE" target="_blank" rel="noopener">Source code &amp; instructions ↗</a></div></section>
+</main><footer>ZERO ECLIPSE / Anis Chelli · Game prototype in development</footer>
+<script src="demo.js" defer></script><script src="download.js" defer></script>
+</body></html>
