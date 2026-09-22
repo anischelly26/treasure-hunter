@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="restored.css?v=20260921b" />
+  <link rel="stylesheet" href="hero-bubbles.css" />
   <style>
     .boot .boot__mark::before{animation-name:signalMarkOrbit!important}
     @keyframes signalMarkOrbit{to{transform:rotate(360deg)}}
@@ -71,6 +72,7 @@
     </aside>
 
     <section id="home" class="hero section">
+      <canvas id="heroBubbles" class="hero__bubbles" aria-hidden="true"></canvas>
       <div class="hero__scanline" aria-hidden="true"></div>
       <div class="signal-stage" aria-hidden="true">
         <svg class="signal-fallback" viewBox="0 0 600 600" fill="none">
@@ -297,6 +299,7 @@
   <button class="motion-control" id="motion" aria-pressed="false">PAUSE MOTION <span>Ⅱ</span></button>
   <dialog class="case-dialog" id="case-study" aria-labelledby="case-title"><button class="dialog-close" aria-label="Close case study">CLOSE ×</button><div id="case-content"></div></dialog>
   <script src="restored.js?v=20260921b" defer></script>
+  <script src="hero-bubbles.js" defer></script>
   <script src="case-studies.js" defer></script>
   <script type="module" src="portfolio-features.js?v=20260921b"></script>
   <script type="module" src="signal-scene.js"></script>
