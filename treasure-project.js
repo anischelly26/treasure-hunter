@@ -6,7 +6,8 @@ if (missionGrid && !missionGrid.querySelector('[data-treasure-project]')) {
   treasureCard.dataset.project = 'treasure';
   treasureCard.dataset.treasureProject = 'true';
   treasureCard.innerHTML = `
-    <div class="mission__visual"><b>10</b><span class="visual-grid"></span></div>
+    <div class="mission__visual mission__visual--art"><img src="assets/treasure-hunter.webp" width="1200" height="675" loading="lazy" decoding="async" alt="Concept key art for Treasure Hunter showing a side-scrolling platform, crab enemy and distant shark boss"></div>
+    <small class="mission__art-caption">CONCEPT IMAGE // ILLUSTRATIVE</small>
     <div class="mission__top"><span>TREASURE HUNTER</span><span class="mission__state">GAME DEV // SDL2</span></div>
     <div class="mission__body">
       <div class="mission__code">4 LEVELS → COMBAT → SHARK BOSS</div>
