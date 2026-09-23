@@ -3,9 +3,10 @@ const missionGrid = document.querySelector('.mission-grid');
 if (missionGrid && !missionGrid.querySelector('[data-treasure-project]')) {
   const treasureCard = document.createElement('article');
   treasureCard.className = 'mission mission--accent tilt-card';
+  treasureCard.dataset.project = 'treasure';
   treasureCard.dataset.treasureProject = 'true';
   treasureCard.innerHTML = `
-    <div class="mission__visual"><b>08</b><span class="visual-grid"></span></div>
+    <div class="mission__visual"><b>10</b><span class="visual-grid"></span></div>
     <div class="mission__top"><span>TREASURE HUNTER</span><span class="mission__state">GAME DEV // SDL2</span></div>
     <div class="mission__body">
       <div class="mission__code">4 LEVELS → COMBAT → SHARK BOSS</div>
@@ -27,7 +28,7 @@ if (missionGrid && !missionGrid.querySelector('[data-treasure-project]')) {
       </div>
     </div>`;
 
-  missionGrid.appendChild(treasureCard);
+  missionGrid.insertBefore(treasureCard, missionGrid.querySelector('[data-project="veripath"]'));
   const count = document.querySelector('.core-metrics div:first-child b');
   if (count) count.textContent = String(missionGrid.querySelectorAll('.mission').length).padStart(2,'0');
 }

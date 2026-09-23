@@ -2,9 +2,9 @@
 
 Interactive portfolio / recruiter experience for **Anis Chelly**.
 
-## ✦ NEW — HERE / Human Intelligence Network
+## HERE / Human Intelligence Network
 
-**HERE** is now the lead project in ANIS.EXE: a need-first AI product concept that interprets a human request, evaluates contextual trust and risk, and ranks people by explainable fit instead of popularity.
+**HERE** is a need-first AI product concept that interprets a human request, evaluates contextual trust and risk, and ranks people by explainable fit instead of popularity.
 
 **[▶ OPEN HERE LIVE DEMO](https://anischelly26.github.io/treasure-hunter/here/)**  
 **[VIEW HERE SOURCE / DEMO FILES](./here/)**
@@ -27,17 +27,17 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 
 ## Selected missions
 
-- **HERE — Human Intelligence Network** — need interpretation, contextual trust/risk modeling and explainable human matching.
-- **ZERO: ECLIPSE** — cinematic 2D action adventure game focused on gameplay systems, AI behaviors, combat mechanics and custom game architecture.
 - **Vermeg** — AI UI-to-Code Converter using Python, OpenCV, Tesseract, LLaVA and Ollama
 - **Orange Digital Center × MedTech** — Internship & PFE Management Portal with Explainable AI shortlisting
+- **ZERO: ECLIPSE** — cinematic 2D action adventure game focused on gameplay systems, AI behaviors, combat mechanics and custom game architecture.
 - **Monoprix** — Sales Data Centralization and Python-driven database import automation
+- **HERE — Human Intelligence Network** — need interpretation, contextual trust/risk modeling and explainable human matching.
 - **Hidden Markov Weather Analysis** — Gaussian HMM, Baum-Welch, Viterbi, AIC/BIC model selection and forecasting
-- **PadelVision AI** — computer-vision sports coaching prototype
-- **VeriPath AI** — study-abroad discovery and decision-support system
 - **Barcelona & Dubai Market Explorer** — in-progress cross-market property analytics MVP with normalized pricing, geospatial signals and interactive comparisons.
+- **PadelVision AI** — computer-vision sports coaching prototype
 - **ML Pipeline** — distributed ingest → clean → train → explain workflow with FastAPI, Supabase, Hugging Face Spaces and Vercel.
 - **Treasure Hunter** — C/SDL2 platform game with four levels, spike hazards, crab enemies, health/combat logic and a final shark boss.
+- **VeriPath AI** — study-abroad discovery and decision-support system
 
 ## Run locally
 
