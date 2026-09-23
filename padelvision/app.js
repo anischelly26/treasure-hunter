@@ -134,7 +134,12 @@ async function analyze() {
     $('#report').scrollIntoView({behavior:'smooth',block:'start'});
   } catch(e) {
     console.error('PadelVision analysis failed',e);
-    error('Pose analysis could not run. Check internet access for the model, use a short H.264 MP4, then retry.');
+    const detail=String(e?.message||e);
+    if (/activeTexture|kGpuService|WebGL|create_context/i.test(detail)) {
+      error('This browser could not create the graphics context MediaPipe needs. Try enabling hardware acceleration or run the linked Python application.');
+    } else {
+      error('Pose analysis could not run. Check internet access for the model, use a short H.264 MP4, then retry.');
+    }
   } finally {
     landmarker?.close();landmarker=null; // VIDEO mode needs a new timestamp sequence for the next run.
     processing=false;analyzeButton.disabled=!selectedFile;

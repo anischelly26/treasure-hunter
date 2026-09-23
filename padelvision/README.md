@@ -30,7 +30,7 @@ The underlying research code uses `Streamlit → OpenCV → MediaPipe → moveme
 - Seven named windows are **equal-time navigation**, not detected stroke phases.
 - Geometry is image-space and sensitive to camera placement and occlusion.
 - The original reference labels need qualified padel-coach validation. Original Python scores are prototype heuristics.
-- An internet connection is required to fetch the model and runtime on the first run. Unsupported video codecs will fail clearly.
+- An internet connection is required to fetch the model and runtime. MediaPipe also requires a working browser graphics context even with its CPU inference delegate; browsers with disabled WebGL may fail. Unsupported video codecs will fail clearly. The linked Python application is an alternative on machines where browser inference cannot run.
 
 ## Next steps
 

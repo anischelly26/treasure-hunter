@@ -22,5 +22,5 @@ The app is static and runs on GitHub Pages. It fetches MediaPipe from a pinned C
 
 - File size and duration limits bound memory and analysis time.
 - Only a single pose is processed. Detection coverage is reported so missing landmarks are visible.
-- MediaPipe `VIDEO` mode receives increasing timestamps and each new analysis reuses the model. Browser video decoding and remote model loading can fail; the UI shows a retryable error.
+- MediaPipe `VIDEO` mode receives increasing timestamps; each new analysis creates a fresh landmarker so its timestamp sequence starts over. Browser graphics context creation, video decoding and remote model loading can fail; the UI shows a retryable error. The CPU delegate still needs a working graphics context for MediaPipe image preprocessing.
 - No external user video URL, backend upload or local-storage session database.
