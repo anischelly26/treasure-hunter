@@ -1,31 +1,21 @@
-# PadelVision AI — movement analysis studio
+# PadelVision AI — team movement studio
 
-**[Open the browser application](https://anischelly26.github.io/treasure-hunter/padelvision/)** · **[Inspect the original Python/Streamlit source](https://github.com/anischelly26/anischelly26/tree/main/projects/padelvision-ai)**
+[Open the live team application](https://anischelly26.github.io/treasure-hunter/padelvision/) · [Inspect the browser code](../padelvision/) · [Original Python stroke research](https://github.com/anischelly26/anischelly26/tree/main/projects/padelvision-ai)
 
 ## Problem
 
-Raw padel footage is difficult to review systematically. PadelVision organizes a short, single-stroke recording into pose observations that a player and coach can inspect together.
+Padel partners need to review *how they move together* across a rally, not just one player's stroke. A fixed-camera recording can help identify when the pair advances, stays deep or occupies different netward positions, with the original frames available for coach review.
 
-## Implemented
+## What works now
 
-- Existing Python/Streamlit v0.5: video upload, OpenCV frame reading and annotated export, MediaPipe 33-landmark tracking, basic angles, directional comparisons with a movement reference database, and a local strategy-oriented coaching interface. It can run locally with `streamlit run app.py` from the linked source folder.
-- Hosted browser demo v0.6: upload an MP4/WebM/MOV (subject to browser decoding), sample up to 2 frames per second locally, run the MediaPipe Pose Landmarker, inspect detected skeletons at phase-window timestamps, measure tracking coverage, median 2D elbow flexion and relative stance width, and download the measurements as JSON. No login, API key or video upload to a server.
+The browser demo accepts a local 3–90 second video, asks the user which side of a visible net contains their team, and runs a pretrained MediaPipe Pose Landmarker for up to four people on sampled frames. It selects two players on the chosen side, associates positions across frames, draws the two skeletons and reports pair coverage, together-near-net share, deeper share and depth difference. The report suggests *practice to test* based on transparent screen-space rules and can export measurements with optional coach annotations. No account, server video upload or made-up accuracy score is involved.
 
-## Method
+The original Python/Streamlit v0.5 project covers individual stroke and movement-reference research. It is a separate local app, not the hosted team model.
 
-The user selects the stroke and dominant hand. A MediaPipe model locates body landmarks in sampled video frames. The report describes what was tracked and measured. Its seven timeline sections divide the clip evenly for navigation; they are **not automatically recognized movement phases**. Measurements are camera dependent. The browser demo does not compare the uploaded video to coach-approved reference technique.
+## Research status
 
-## Boundaries
+The **body-pose model is pretrained**, but no team-fault or best-strategy model has been trained. The current rule cues cannot establish whether a pair should attack more to win, whether a volley happened or who caused a mistake. The optional coach labels exported with each rally can support a future model; [`training/train.py`](../padelvision/training/train.py) requires independent match groups and compares results with a baseline before saving a local research candidate. No labelled team dataset or candidate weights are shipped.
 
-The model does not detect the racket, ball, contact instant or actual stroke class. No validated technique or tactical score is produced. The existing Python movement reference labels require coach validation; its prototype score is not a scientifically validated performance grade. Privacy and speed depend on the browser and device; the hosted demo processes frames locally and downloads the model on first use.
+## Limits and next work
 
-MediaPipe's browser pose inference requires a working graphics context even when using its CPU delegate; the UI explains this browser-specific failure and links to the runnable Python source.
-
-## Next validation steps
-
-1. Obtain coach-reviewed reference clips and labels with consent.
-2. Assess pose tracking across camera angles, lighting, occlusion and player styles.
-3. Develop and evaluate stroke segmentation and ball/racket tracking separately.
-4. Only after validation, test technique feedback against coach assessment.
-
-See [architecture](../padelvision/docs/architecture.md) and [methodology](../padelvision/docs/methodology.md).
+Single-camera positions are not calibrated court coordinates. Feet must be visible; player identities may switch when teammates cross or a camera cuts. Real tactical advice requires ball/racket and opponent context, actual outcomes, multiple qualified coach labels and held-out matches. See the [measurement method](../padelvision/docs/methodology.md), [architecture](../padelvision/docs/architecture.md) and [training protocol](../padelvision/docs/training.md).

@@ -1,9 +1,20 @@
-# Methodology and limitations
+# Team positioning methodology v0.7
 
-The user selects the stroke and handedness. The hosted app decodes the video in the browser, samples at up to 2 fps and runs Google's Pose Landmarker on each sampled frame. For detected poses, it measures elbow flexion as the angle at shoulder–elbow–wrist in video pixel coordinates. Relative stance width is ankle distance divided by shoulder distance in the same plane; it is unitless and does not estimate real-world court distance. Medians summarize available values. Coverage is detected samples / total sampled frames.
+MediaPipe supplies up to four human poses per sampled frame. For each visible person, PadelVision uses the midpoint of the two ankles as an approximate screen-space foot location. It retains detections on the selected side of the user-set net line (plus a 2.5% image-height margin), orders the two selected players by image foot position, then maps subsequent detections to previous player positions with the lower total displacement. It does **not** re-identify players across cuts, occlusions or player crossings.
 
-The timeline has seven equally sized time windows labelled ready position, preparation, backswing, acceleration, contact window, follow-through and recovery. Those are **review labels**, not phase predictions. Clicking one seeks to the nearest sampled frame and overlays the actual detected landmarks; a window label does not prove that a given action occurred.
+The approximate netward depth is `(1 - foot_y) / (1 - net_y)` for the camera-near half and `foot_y / net_y` for the far half, clamped to `[0,1]`. Both feet must be visible. These values normalize screen positions against the net guide and **do not measure court distances or speed**.
 
-No racket or ball keypoints, impact detection, swing speed, movement efficiency, tactical assessment, injury assessment or AI performance grade is implemented in the hosted demo. Camera position, player overlap, poor light and video decoding influence results. The Python research project has additional movement-reference heuristics and a prototype score; its labels require coach validation and its phases use equal-time segmentation. Do not present the score as validated.
+For frames with both teammates, the report calculates:
 
-Before any coaching claims, collect consented clips spanning skill levels and camera views, obtain multiple qualified coach annotations, measure inter-rater agreement, assess landmark robustness and compare feedback to held-out expert assessments.
+| Metric | Screen-space definition |
+| --- | --- |
+| Pair coverage | Frames with both selected poses ÷ sampled frames. |
+| Together near net | Share where both estimated depths are at least 0.64. |
+| Both deeper | Share where both estimated depths are at most 0.38. |
+| Depth difference | Share where absolute depth difference exceeds 0.23. |
+| Narrow pairing | Share with horizontal foot separation below 0.12 of image width. |
+| Median gap | Median absolute horizontal foot separation as share of image width. |
+
+If fewer than `max(6, ceil(55% of samples))` paired frames are available, the UI refuses to suggest a style. Otherwise, if more than 55% of paired frames have both players near the net, it describes the pair as **net-forward** and proposes a paired volley drill. If more than 55% have both deeper, it describes **defense-first positioning** and proposes a transition drill. Otherwise it describes a **mixed/transition** pattern. A depth difference above 35% of paired frames prompts a transition review; narrow horizontal pairing above 35% prompts a camera-aware lateral-coverage review. These thresholds are engineering hypotheses, **not learned from coaching data**. The percentages indicate where bodies appear; they say nothing about a successful volley, an error or the optimal plan against a particular opponent.
+
+The seven timeline tiles are equal-time navigation windows. Every report statement is derived from sampled detections and the user-entered court guide. No ball, racket, shot events, opponent strategy, rally outcome, score, injury status or actual team fault is inferred. Coaches should review the selected frames in context. Camera perspective can distort every threshold. More work is needed on calibration, stable multi-person tracking and coach validation before any tactical model or decisive recommendation is appropriate.
