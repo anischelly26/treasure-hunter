@@ -14,6 +14,8 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.restored *,.restored *::before,.restored *::after{animation:none!important;transition:none!important}.signal-stage{transform:none!important}}
 
 /* Keep the supplied project illustrations intact at every card width. */
-.mission__visual--art,.mission--featured .mission__visual--art{height:auto}
+.mission .mission__visual--art,
+.mission.mission--featured .mission__visual--art,
+.mission.demo-open .mission__visual.mission__visual--art{height:auto!important}
 .mission__visual--art img{display:block;width:100%;height:auto}
 .mission__art-caption{display:block;margin:-16px 0 18px;color:#8f8b81;font:9px var(--mono);letter-spacing:.1em}
