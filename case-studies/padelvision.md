@@ -1,6 +1,6 @@
 # PadelVision AI — movement analysis studio
 
-**[Open the browser application](../padelvision/)** · **[Inspect the original Python/Streamlit source](https://github.com/anischelly26/anischelly26/tree/main/projects/padelvision-ai)**
+**[Open the browser application](https://anischelly26.github.io/treasure-hunter/padelvision/)** · **[Inspect the original Python/Streamlit source](https://github.com/anischelly26/anischelly26/tree/main/projects/padelvision-ai)**
 
 ## Problem
 
@@ -18,6 +18,8 @@ The user selects the stroke and dominant hand. A MediaPipe model locates body la
 ## Boundaries
 
 The model does not detect the racket, ball, contact instant or actual stroke class. No validated technique or tactical score is produced. The existing Python movement reference labels require coach validation; its prototype score is not a scientifically validated performance grade. Privacy and speed depend on the browser and device; the hosted demo processes frames locally and downloads the model on first use.
+
+MediaPipe's browser pose inference requires a working graphics context even when using its CPU delegate; the UI explains this browser-specific failure and links to the runnable Python source.
 
 ## Next validation steps
 
