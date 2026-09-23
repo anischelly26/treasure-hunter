@@ -62,12 +62,6 @@ const projects = [
     type:'hmm'
   },
   {
-    name:'PadelVision AI',
-    test:'Choose a stroke, toggle observed movement directions, then compare them with the project reference.',
-    proof:'REAL ENGINE LOGIC',
-    type:'padel'
-  },
-  {
     name:'VeriPath AI',
     test:'Choose a profile and run the real compatibility formula against the synthetic demo catalogue.',
     proof:'REAL RANKING LOGIC',

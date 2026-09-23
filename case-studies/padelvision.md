@@ -1,47 +1,29 @@
-# PadelVision AI
+# PadelVision AI — movement analysis studio
 
-## Mission
+**[Open the browser application](../padelvision/)** · **[Inspect the original Python/Streamlit source](https://github.com/anischelly26/anischelly26/tree/main/projects/padelvision-ai)**
 
-**Movement → Metrics → Coaching**
+## Problem
 
-PadelVision is a sports-AI R&D project focused on structuring padel stroke and movement analysis so that future computer-vision systems can compare observed movement against meaningful reference patterns.
+Raw padel footage is difficult to review systematically. PadelVision organizes a short, single-stroke recording into pose observations that a player and coach can inspect together.
 
-## Current reference dataset
+## Implemented
 
-The current v0.1 dataset organizes right-handed padel movement by:
+- Existing Python/Streamlit v0.5: video upload, OpenCV frame reading and annotated export, MediaPipe 33-landmark tracking, basic angles, directional comparisons with a movement reference database, and a local strategy-oriented coaching interface. It can run locally with `streamlit run app.py` from the linked source folder.
+- Hosted browser demo v0.6: upload an MP4/WebM/MOV (subject to browser decoding), sample up to 2 frames per second locally, run the MediaPipe Pose Landmarker, inspect detected skeletons at phase-window timestamps, measure tracking coverage, median 2D elbow flexion and relative stance width, and download the measurements as JSON. No login, API key or video upload to a server.
 
-- stroke type and variant
-- ordered movement phases
-- phase objective
-- head/gaze behavior
-- center-of-mass direction
-- trunk and pelvis/hip movement
-- shoulder, elbow and wrist directions
-- knee and foot actions
-- racket and ball-contact direction
-- tempo and notes
+## Method
 
-The dataset includes strokes such as volleys, serve and bandeja and treats the movement labels as a **starting ontology**, not final biomechanical truth.
+The user selects the stroke and dominant hand. A MediaPipe model locates body landmarks in sampled video frames. The report describes what was tracked and measured. Its seven timeline sections divide the clip evenly for navigation; they are **not automatically recognized movement phases**. Measurements are camera dependent. The browser demo does not compare the uploaded video to coach-approved reference technique.
 
-## Validation philosophy
+## Boundaries
 
-The reference work is informed by:
+The model does not detect the racket, ball, contact instant or actual stroke class. No validated technique or tactical score is produced. The existing Python movement reference labels require coach validation; its prototype score is not a scientifically validated performance grade. Privacy and speed depend on the browser and device; the hosted demo processes frames locally and downloads the model on first use.
 
-- official padel rules for context
-- systematic/scoping reviews on padel performance analysis and measurable outcomes
-- biomechanics and injury literature
-- shoulder-kinematics research in padel strokes
+## Next validation steps
 
-Crucially, the current directional labels are explicitly marked as **needing qualified coach validation** before they should be treated as ground truth.
+1. Obtain coach-reviewed reference clips and labels with consent.
+2. Assess pose tracking across camera angles, lighting, occlusion and player styles.
+3. Develop and evaluate stroke segmentation and ball/racket tracking separately.
+4. Only after validation, test technique feedback against coach assessment.
 
-## Why it matters
-
-The goal is to create a defensible bridge between raw player video/motion data and useful coaching feedback rather than inventing arbitrary movement scores.
-
-## Direction
-
-Future work can connect this reference model to pose estimation, stroke recognition, movement-phase segmentation and player feedback.
-
----
-
-**Anis Chelly // ANIS.EXE // Sports AI R&D**
+See [architecture](../padelvision/docs/architecture.md) and [methodology](../padelvision/docs/methodology.md).
