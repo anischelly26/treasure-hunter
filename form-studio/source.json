@@ -1,6 +1,6 @@
 {
   "repository": "anischelly26/ui-to-html-css-translator",
-  "ref": "18f86076e8ef385d6ebfcfca636ae9275b7deaf3",
+  "ref": "170b66271a0eab31778d94b5bd726ca7ee9963a2",
   "mode": "demo",
   "build": "npm --prefix web run build:demo"
 }
