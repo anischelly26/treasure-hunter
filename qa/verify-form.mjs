@@ -59,6 +59,9 @@ try {
   assert.match(await image.getAttribute('src'), /form-studio-dark.webp$/);
   assert.equal(await page.getByRole('button', { name: 'Dark', exact: true }).getAttribute('aria-pressed'), 'true');
   assert.equal(await page.getByRole('button', { name: 'Light', exact: true }).getAttribute('aria-pressed'), 'false');
+  await page.locator('.mobile-story img').scrollIntoViewIfNeeded();
+  await page.locator('.mobile-story img').evaluate(image => image.decode());
+  await page.evaluate(() => window.scrollTo(0, 0));
   const evidence = resolve(root, 'qa/evidence');
   await mkdir(evidence, { recursive: true });
   await page.screenshot({ path: resolve(evidence, 'form-desktop.png'), animations: 'disabled' });
