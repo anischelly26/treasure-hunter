@@ -1,29 +1,13 @@
 import assert from 'node:assert/strict';
-import { createServer } from 'node:http';
-import { readFile, mkdir } from 'node:fs/promises';
-import { dirname, extname, resolve, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { mkdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { chromium } from '@playwright/test';
+import { root, servePortfolio } from './server.mjs';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.json': 'application/json' };
-const server = createServer(async (request, response) => {
-  try {
-    const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
-    const path = resolve(root, `.${pathname.endsWith('/') ? `${pathname}index.html` : pathname}`);
-    if (!path.startsWith(`${root}${sep}`)) { response.writeHead(403).end(); return; }
-    const body = await readFile(path);
-    response.writeHead(200, { 'Content-Type': mime[extname(path)] || 'application/octet-stream' }).end(body);
-  } catch { response.writeHead(404).end(); }
-});
+const server = await servePortfolio();
 let browser;
 try {
-  let base = process.env.PORTFOLIO_BASE_URL;
-  if (!base) {
-    await new Promise(done => server.listen(0, '127.0.0.1', done));
-    base = `http://127.0.0.1:${server.address().port}/`;
-  }
-  base = base.endsWith('/') ? base : `${base}/`;
+  const base = server.baseURL;
   browser = await chromium.launch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
   // Core navigation must work without optional 3D assets, external fonts or AI services.
@@ -35,7 +19,7 @@ try {
   const card = page.locator('[data-project="vermeg"]');
   await card.getByRole('heading', { name: 'FORM Studio', exact: true }).waitFor();
   assert.match(await card.innerText(), /57 CHECKS PASSED/);
-  assert.equal(await card.locator('.mission__launch').getAttribute('href'), 'case-studies/form-vision-to-code.html');
+  assert.equal(await card.locator('.mission__launch').getAttribute('href'), 'form-studio/');
   await card.scrollIntoViewIfNeeded();
   await card.locator('img').evaluate(image => image.decode());
   assert.equal(await card.locator('img').evaluate(image => image.complete && image.naturalWidth > 0), true);
@@ -47,7 +31,7 @@ try {
   assert.equal(await dialog.getByRole('link', { name: 'EXPLORE THE STUDIO' }).getAttribute('href'), 'case-studies/form-vision-to-code.html');
   await page.keyboard.press('Escape');
   await dialog.waitFor({ state: 'hidden' });
-  await card.locator('.mission__launch').click();
+  await page.goto(new URL('case-studies/form-vision-to-code.html', base).href);
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.getByRole('heading', { name: 'A screenshot. A starting point. A workspace.' }).waitFor();
@@ -86,5 +70,5 @@ try {
   console.log('Portfolio navigation, dated case study, real screenshots, keyboard theme controls and 390px layout passed.');
 } finally {
   await browser?.close();
-  if (server.listening) await new Promise(done => server.close(done));
+  await server.close();
 }

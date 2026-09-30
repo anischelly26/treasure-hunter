@@ -3,6 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "scripts": { "test": "node verify-form.mjs" },
+  "scripts": { "test": "node verify.mjs" },
   "devDependencies": { "@playwright/test": "1.63.0" }
 }

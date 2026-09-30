@@ -1,2 +1,6 @@
 qa/node_modules/
 qa/evidence/
+form-studio/index.html
+form-studio/assets/
+.form-source/
+_site/

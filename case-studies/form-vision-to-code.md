@@ -2,7 +2,7 @@
 
 **Origin:** VERMEG internship, July–August 2024.  
 **Current work:** personal product rebuild, September 2026.  
-[Visual case study](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source and setup](https://github.com/anischelly26/ui-to-html-css-translator)
+[Interactive demo](https://anischelly26.github.io/treasure-hunter/form-studio/) · [Visual case study](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source and setup](https://github.com/anischelly26/ui-to-html-css-translator)
 
 The initial screenshot-to-code prototype became a studio for reviewing and refining reconstructions. The 2026 rebuild adds a React/TypeScript frontend, typed FastAPI service and shared CLI pipeline.
 
@@ -43,4 +43,6 @@ The editable sample workspace is explicitly labeled. OCR confidence measures tex
 
 ## Current limits
 
-The complete application runs locally or in Docker; this portfolio page is a static case study. The backend is a bounded single-process studio for a trusted operator. Live Ollama generation, physical devices, Safari/Firefox, full accessibility compliance and production load remain unverified. Public multi-user hosting would require identity, tenant isolation and durable distributed jobs.
+The browser demo runs the real React studio: edit HTML/CSS, compare the example, test responsive previews, save workspaces, import/export backups and download protected HTML. It makes no API requests and stores work in a separate demo database. Uploaded images stay local; the demo does not fabricate OCR results. OCR, element correction, model generation and sanitized ZIP export require the complete local/Docker Python app.
+
+The backend is a bounded single-process studio for a trusted operator. Live Ollama generation, physical devices, Safari/Firefox, full accessibility compliance and production load remain unverified. Public multi-user hosting would require identity, tenant isolation and durable distributed jobs.

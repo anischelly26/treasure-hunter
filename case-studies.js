@@ -9,7 +9,7 @@
       decisions: 'Used one page-level Tesseract pass, bounded image processing and worker jobs, isolated previews, and shared CLI/API logic. IndexedDB autosave, validated backups and complete reconstruction Undo make review a repeatable workflow. Ollama vision generation is optional.',
       result: '57 checks passed: 39 Python tests, 14 workspace tests and 4 Chromium journeys. The production Docker runtime and real upload → OCR → correction → Undo → ZIP flow were verified. The case study shows actual light, dark and 390px captures.',
       caveat: 'Current scope: a local, single-operator studio. Live Ollama generation, production load, physical devices and full accessibility compliance remain unverified. The 2026 rebuild is separate from the original VERMEG internship.',
-      links: [['EXPLORE THE STUDIO', 'case-studies/form-vision-to-code.html'], ['PROJECT SOURCE', 'https://github.com/anischelly26/ui-to-html-css-translator'], ['VERIFIED CI', 'https://github.com/anischelly26/ui-to-html-css-translator/actions/runs/36707003245']]
+      links: [['LIVE DEMO', 'form-studio/'], ['EXPLORE THE STUDIO', 'case-studies/form-vision-to-code.html'], ['PROJECT SOURCE', 'https://github.com/anischelly26/ui-to-html-css-translator'], ['VERIFIED CI', 'https://github.com/anischelly26/ui-to-html-css-translator/actions/runs/36707003245']]
     },
     orange: {
       title: 'Shortlisting with a reason.',

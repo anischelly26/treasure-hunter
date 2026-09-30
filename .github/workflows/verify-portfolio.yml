@@ -13,9 +13,29 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Read the pinned FORM source revision
+        id: form-source
+        run: |
+          node --input-type=module <<'JS'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const source = JSON.parse(readFileSync('form-studio/source.json', 'utf8'));
+          if (!/^[a-f0-9]{40}$/.test(source.ref)) throw new Error('Pin a full FORM commit SHA.');
+          appendFileSync(process.env.GITHUB_OUTPUT, `ref=${source.ref}\n`);
+          JS
+      - name: Check out the verified FORM app
+        uses: actions/checkout@v4
+        with:
+          repository: anischelly26/ui-to-html-css-translator
+          ref: ${{ steps.form-source.outputs.ref }}
+          path: .form-source
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
+      - name: Build the actual studio in browser demo mode
+        run: |
+          npm --prefix .form-source/web ci
+          npm --prefix .form-source/web run build:demo
+          node qa/build-demo.mjs
       - name: Check JavaScript syntax
         run: |
           node --check project-demos.js
@@ -34,6 +54,10 @@ jobs:
           node --check signal-scene.js
           node --check case-studies/form-case.js
           node --check qa/verify-form.mjs
+          node --check qa/verify-demo.mjs
+          node --check qa/server.mjs
+          node --check qa/build-demo.mjs
+          node --check qa/stage-site.mjs
       - name: Install verification dependencies
         run: npm ci --prefix qa
       - name: Install Chromium
@@ -46,3 +70,9 @@ jobs:
         with:
           name: portfolio-browser-evidence
           path: qa/evidence
+      - name: Stage verified site files
+        run: node qa/stage-site.mjs
+      - name: Package the verified site for Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site

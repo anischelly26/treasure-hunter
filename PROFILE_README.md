@@ -41,7 +41,7 @@ Personal September 2026 rebuild of the 2024 VERMEG internship prototype. Inspect
 
 `React` `TypeScript` `FastAPI` `OpenCV` `Tesseract OCR` `Docker`
 
-→ [Explore the studio](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source and setup](https://github.com/anischelly26/ui-to-html-css-translator)
+→ [Try the live demo](https://anischelly26.github.io/treasure-hunter/form-studio/) · [Explore the studio](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source and setup](https://github.com/anischelly26/ui-to-html-css-translator)
 
 Local, single-operator scope; live Ollama generation and production scale remain unverified.
 

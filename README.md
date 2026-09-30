@@ -27,7 +27,7 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 
 ## Selected missions
 
-- **FORM — Vision to Code Studio** — personal 2026 rebuild of the VERMEG internship prototype: React/TypeScript, FastAPI, editable OCR, responsive previews, persistent workspaces and sanitized HTML/CSS exports. [Explore the studio](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source](https://github.com/anischelly26/ui-to-html-css-translator)
+- **FORM — Vision to Code Studio** — personal 2026 rebuild of the VERMEG internship prototype: React/TypeScript, FastAPI, editable OCR, responsive previews, persistent workspaces and sanitized HTML/CSS exports. [Live demo](https://anischelly26.github.io/treasure-hunter/form-studio/) · [Case study](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source](https://github.com/anischelly26/ui-to-html-css-translator)
 - **Orange Digital Center × MedTech** — Internship & PFE Management Portal with Explainable AI shortlisting
 - **ZERO: ECLIPSE** — cinematic 2D action adventure game focused on gameplay systems, AI behaviors, combat mechanics and custom game architecture.
 - **Monoprix** — Sales Data Centralization and Python-driven database import automation
@@ -41,7 +41,9 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 
 ## FORM verification
 
-The FORM case study uses actual application screenshots from a passing Chromium workflow. 39 Python tests, 14 workspace tests and 4 Chromium journeys passed on 30 September 2026. [CI evidence](https://github.com/anischelly26/ui-to-html-css-translator/actions/runs/36707003245). The full application runs locally or in Docker; the portfolio case study is a static presentation. Live Ollama generation and production scale remain unverified.
+**[Try the FORM interactive demo](https://anischelly26.github.io/treasure-hunter/form-studio/)** — edit code, compare responsive previews, save workspaces, import/export backups and download protected HTML. No backend or sign-in is needed. Screenshot OCR, element correction, model generation and sanitized ZIP export require the full local/Docker app.
+
+The FORM case study uses actual application screenshots from a passing Chromium workflow. 39 Python tests, 14 workspace tests and 4 Chromium journeys passed on 30 September 2026. [CI evidence](https://github.com/anischelly26/ui-to-html-css-translator/actions/runs/36707003245). Live Ollama generation and production scale remain unverified.
 
 ## Run locally
 
@@ -51,7 +53,9 @@ Open `index.html` in a browser, or serve the folder with any static web server.
 
 The repository includes a GitHub Pages deployment workflow.
 
-Publishing first runs JavaScript syntax checks and a Chromium portfolio journey. That journey checks the FORM card and case-study dialog, real image loading, keyboard theme selection and the 390px case-study layout. A failing verification blocks the Pages deployment. Run it locally with `npm ci --prefix qa`, `npx --prefix qa playwright install chromium`, and `npm test --prefix qa`.
+Publishing checks out the exact FORM revision pinned in `form-studio/source.json` and builds its React app in demo mode. Chromium journeys check the case study and live demo, including editing, persistence, safe downloads, backup/import, absence of API requests and the 390px layout. Only the verified site artifact is deployed; a failing check blocks publication. Generated bundles are not maintained as a second source code copy.
+
+To prepare a local demo from your FORM checkout, run its `npm --prefix web run build:demo`, then `node qa/build-demo.mjs /path/to/ui-to-html-css-translator` in this repository. Install browser checks with `npm ci --prefix qa` and `npx --prefix qa playwright install chromium`, then run `npm test --prefix qa`.
 
 ---
 
