@@ -1,7 +1,7 @@
 {
   "candidate": "Anis Chelly",
   "source": "Anis_Chelli_CV_PFE_2026_2027_Spaced(1).pdf",
-  "updated": "2026-08-15",
+  "updated": "2026-09-30",
   "privacy_note": "Public recruiter knowledge base. Phone number and precise street address are intentionally excluded.",
   "chunks": [
     {
@@ -18,6 +18,11 @@
       "id": "vermeg",
       "title": "Experience — Vermeg AI Internship",
       "text": "At Vermeg from July to August 2024, Anis worked as an Artificial Intelligence Intern. He built an end-to-end Python prototype that converts UI screenshots into HTML and CSS using OpenCV image preprocessing, Tesseract OCR, and LLaVA running locally with Ollama. He improved low-contrast text extraction using a custom preprocessing pipeline with contrast and sharpness enhancement, CLAHE, and binarization, and validated generated code syntax and layout relevance."
+    },
+    {
+      "id": "form-studio",
+      "title": "Project — FORM Vision to Code Studio (September 2026)",
+      "text": "In September 2026, the public VERMEG screenshot-to-code repository was personally rebuilt as FORM Vision to Code Studio, separately from the July–August 2024 internship. It uses React, TypeScript, FastAPI, OpenCV and Tesseract OCR, with editable detected elements, responsive source/preview comparison, HTML/CSS editing, IndexedDB autosave, validated workspace backup/import, complete reconstruction Undo and sanitized ZIP export. The verified revision passed 39 Python tests, 14 workspace tests and 4 Chromium journeys; its unprivileged Docker runtime and actual upload-to-OCR-to-export workflow were checked. Ollama vision generation is optional and was not live-tested. Current scope is local and single-operator; production scale, multi-user hosting and full accessibility compliance are not claimed. Source: https://github.com/anischelly26/ui-to-html-css-translator. Case study: https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html."
     },
     {
       "id": "monoprix",
@@ -49,5 +54,9 @@
       "title": "Public Contact",
       "text": "Anis is based in Tunis, Tunisia. Public recruiter contact: anis.chelli@medtech.tn. GitHub: github.com/anischelly26."
     }
+  ],
+  "project_sources": [
+    "https://github.com/anischelly26/ui-to-html-css-translator",
+    "https://github.com/anischelly26/ui-to-html-css-translator/actions/runs/36707003245"
   ]
 }

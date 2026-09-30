@@ -35,13 +35,15 @@ I build software that **understands, transforms and automates** — from compute
 ## `02 // MISSIONS`
 
 ### `MISSION_01 // VERMEG // SCREEN → CODE`
-**AI UI-to-Code Converter**
+**FORM — Vision to Code Studio**
 
-End-to-end Python prototype that preprocesses UI screenshots, extracts text, interprets layout and generates HTML/CSS.
+Personal September 2026 rebuild of the 2024 VERMEG internship prototype. Inspect and correct extracted elements, edit HTML/CSS, compare responsive previews, save workspaces and export sanitized code. 57 automated checks passed; production Docker and real OCR workflows verified.
 
-`Python` `OpenCV` `Tesseract OCR` `LLaVA` `Ollama` `HTML/CSS`
+`React` `TypeScript` `FastAPI` `OpenCV` `Tesseract OCR` `Docker`
 
-→ [Open mission](https://github.com/anischelly26/ui-to-html-css-translator)
+→ [Explore the studio](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source and setup](https://github.com/anischelly26/ui-to-html-css-translator)
+
+Local, single-operator scope; live Ollama generation and production scale remain unverified.
 
 ### `MISSION_02 // ORANGE × MEDTECH // CV → MATCH → EXPLAIN`
 **Internship & PFE Management Portal with Explainable AI Shortlisting**

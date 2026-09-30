@@ -11,14 +11,14 @@
   const motionButton = document.querySelector('#motion');
   const data = {
     vermeg: {
-      title: 'From screenshot to editable interface.',
-      meta: 'VERMEG / AI INTERNSHIP / JULY–AUGUST 2024',
-      problem: 'A screenshot contains pixels, not reusable interface structure. Low-contrast text and mixed visual elements make direct extraction unreliable.',
-      contribution: 'Built a Python prototype combining screenshot preprocessing, text extraction and HTML/CSS generation during the Vermeg internship.',
-      decisions: 'Used OpenCV preprocessing—including contrast enhancement, CLAHE and binarization—to improve the input to Tesseract. LLaVA ran locally through Ollama to interpret the interface and support code generation.',
-      result: 'Produced an end-to-end prototype and checked generated-code syntax and layout relevance. It is presented as a prototype, not a production-grade pixel-perfect converter.',
-      caveat: 'No independently verified accuracy percentage or performance benchmark is claimed.',
-      links: [['PROJECT SOURCE', 'https://github.com/anischelly26/ui-to-html-css-translator'], ['PROJECT PLAYGROUND', 'playground.html#missions']]
+      title: 'FORM — Vision to Code Studio.',
+      meta: 'VERMEG ORIGIN / INTERNSHIP 2024 / PERSONAL REBUILD 2026',
+      problem: 'A screenshot contains pixels, not reusable structure. Generated markup also needs review, correction and a reliable place to continue working.',
+      contribution: 'Rebuilt the 2024 internship prototype as FORM in September 2026: a React/TypeScript studio with a typed FastAPI backend, OCR reconstruction, responsive previews, code editing and sanitized HTML/CSS export.',
+      decisions: 'Used one page-level Tesseract pass, bounded image processing and worker jobs, isolated previews, and shared CLI/API logic. IndexedDB autosave, validated backups and complete reconstruction Undo make review a repeatable workflow. Ollama vision generation is optional.',
+      result: '57 checks passed: 39 Python tests, 14 workspace tests and 4 Chromium journeys. The production Docker runtime and real upload → OCR → correction → Undo → ZIP flow were verified. The case study shows actual light, dark and 390px captures.',
+      caveat: 'Current scope: a local, single-operator studio. Live Ollama generation, production load, physical devices and full accessibility compliance remain unverified. The 2026 rebuild is separate from the original VERMEG internship.',
+      links: [['EXPLORE THE STUDIO', 'case-studies/form-vision-to-code.html'], ['PROJECT SOURCE', 'https://github.com/anischelly26/ui-to-html-css-translator'], ['VERIFIED CI', 'https://github.com/anischelly26/ui-to-html-css-translator/actions/runs/36707003245']]
     },
     orange: {
       title: 'Shortlisting with a reason.',

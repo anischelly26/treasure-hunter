@@ -1,8 +1,7 @@
 name: Verify Portfolio
 
 on:
-  push:
-    branches: ["main"]
+  workflow_call:
   workflow_dispatch:
 
 permissions:
@@ -11,6 +10,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -32,3 +32,17 @@ jobs:
           node --check case-studies.js
           node --check portfolio-features.js
           node --check signal-scene.js
+          node --check case-studies/form-case.js
+          node --check qa/verify-form.mjs
+      - name: Install verification dependencies
+        run: npm ci --prefix qa
+      - name: Install Chromium
+        run: npx --prefix qa playwright install --with-deps chromium
+      - name: Verify FORM portfolio journey
+        run: npm test --prefix qa
+      - name: Keep browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-browser-evidence
+          path: qa/evidence

@@ -19,3 +19,8 @@
 .mission.demo-open .mission__visual.mission__visual--art{height:auto!important}
 .mission__visual--art img{display:block;width:100%;height:auto}
 .mission__art-caption{display:block;margin:-16px 0 18px;color:#8f8b81;font:9px var(--mono);letter-spacing:.1em}
+
+/* A real studio capture replaces the old concept illustration. */
+.mission__visual--studio{overflow:hidden;border:1px solid rgba(125,255,178,.15);border-radius:6px}
+.mission__visual--studio img{aspect-ratio:16/10;object-fit:cover;object-position:top}
+.mission--form .mission__art-caption{line-height:1.7;color:#aac9b5}
