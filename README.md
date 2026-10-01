@@ -27,6 +27,8 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 
 ## Selected missions
 
+- **AURA Music House** — first-person browser music workstation with nine connected rooms, editable MIDI, Web Audio synthesis, a mixer, WAV export, seven guided lessons and a living-room console game. [Try live](https://aura-music-studio.rhythmx.chatgpt.site) · [Source](https://github.com/anischelly26/Aura-music-house)
+
 - **FORM — Vision to Code Studio** — personal 2026 rebuild of the VERMEG internship prototype: React/TypeScript, FastAPI, editable OCR, responsive previews, persistent workspaces and sanitized HTML/CSS exports. [Live demo](https://anischelly26.github.io/treasure-hunter/form-studio/) · [Case study](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source](https://github.com/anischelly26/ui-to-html-css-translator)
 - **Orange Digital Center × MedTech** — Internship & PFE Management Portal with Explainable AI shortlisting
 - **ZERO: ECLIPSE** — cinematic 2D action adventure game focused on gameplay systems, AI behaviors, combat mechanics and custom game architecture.
