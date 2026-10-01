@@ -51,6 +51,8 @@ jobs:
           node --check restored.js
           node --check case-studies.js
           node --check portfolio-features.js
+          node --check project-ratings.js
+          node --check qa/verify-ratings.mjs
           node --check signal-scene.js
           node --check case-studies/form-case.js
           node --check qa/verify-form.mjs
@@ -62,6 +64,8 @@ jobs:
         run: npm ci --prefix qa
       - name: Install Chromium
         run: npx --prefix qa playwright install --with-deps chromium
+      - name: Verify shared ratings against the deployed service
+        run: node qa/verify-ratings.mjs
       - name: Verify FORM portfolio journey
         run: npm test --prefix qa
       - name: Keep browser evidence

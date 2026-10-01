@@ -47,6 +47,10 @@ This is intentionally not a conventional portfolio. It behaves more like a softw
 
 The FORM case study uses actual application screenshots from a passing Chromium workflow. 39 Python tests, 14 workspace tests and 4 Chromium journeys passed on 30 September 2026. [CI evidence](https://github.com/anischelly26/ui-to-html-css-translator/actions/runs/36707003245). Live Ollama generation and production scale remain unverified.
 
+## Shared project ratings
+
+All 12 project cards offer anonymous 1–5 star ratings, with shared averages and vote counts stored in a Cloudflare D1 database through the companion [ratings service](https://anis-project-ratings.rhythmx.chatgpt.site). A browser can change its existing vote for each project. Local storage holds only a random browser identifier; clearing it or using another browser creates a new identity. Votes persist independently of GitHub Pages deployments. The service accepts writes from the public portfolio origin and validates scores, projects and request size, with rate limits.
+
 ## Run locally
 
 Open `index.html` in a browser, or serve the folder with any static web server.
