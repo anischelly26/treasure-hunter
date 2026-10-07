@@ -324,6 +324,25 @@ const presets: Record<string, Preset> = {
     tint: 0.03,
     narrow: { scale: 1.9, y: 0.25 },
   },
+  // — A drawing board: a dark ruled sheet, lavender with one amber line.
+  "p-mech": {
+    c1: "#b9a4e6",
+    c2: "#15121f",
+    c3: "#e0a64a",
+    morph: 1,
+    water: 0.2,
+    scale: 1.3,
+    y: -0.32,
+    rotX: -1.0,
+    rotZ: 0.22,
+    strength: 0.2,
+    density: 0.6,
+    speed: 0.07,
+    lines: 0.7,
+    brightness: 0.72,
+    rim: 0.3,
+    narrow: { brightness: 0.5 },
+  },
   // — Index: calm; row hovers lend it their palette.
   index: {
     c1: "#2a2f38",

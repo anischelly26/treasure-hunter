@@ -1,6 +1,6 @@
 # Anis Chelly — Portfolio
 
-A single continuous experience: one WebGL shader world that follows the page from the hero to the last line, enormous type, and eight projects that each get their own atmosphere. Built with Next.js 16, React 19, TypeScript, Lenis, GSAP ScrollTrigger and React Three Fiber.
+A single continuous experience: one WebGL shader world that follows the page from the hero to the last line, enormous type, and nine projects that each get their own atmosphere. Built with Next.js 16, React 19, TypeScript, Lenis, GSAP ScrollTrigger and React Three Fiber.
 
 ```bash
 npm install

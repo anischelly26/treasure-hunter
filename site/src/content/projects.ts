@@ -21,6 +21,10 @@ import bcnVillas from "@/assets/projects/bcn-villas.jpg";
 import bcnRoi from "@/assets/projects/bcn-roi.jpg";
 import sqlDashboard from "@/assets/projects/sql-dashboard.png";
 import eclipseSky from "@/assets/projects/eclipse-sky.png";
+import mechPart from "@/assets/projects/mech-part.jpg";
+import mechProblems from "@/assets/projects/mech-problems.jpg";
+import mechLab from "@/assets/projects/mech-lab.jpg";
+import mechVehicle from "@/assets/projects/mech-vehicle.jpg";
 import hereConcept from "@/assets/projects/here-concept.webp";
 import hmmConcept from "@/assets/projects/hmm-concept.webp";
 import mlConcept from "@/assets/projects/ml-pipeline-concept.webp";
@@ -564,12 +568,72 @@ export const projects: Project[] = [
       gallery: [],
     },
   },
+  {
+    slug: "aura-mech",
+    num: "09",
+    name: "AURA MECH",
+    title: ["AURA", "MECH"],
+    category: "Desktop / 3D / Local-first AI",
+    year: "2026",
+    tech: ["Electron", "TypeScript", "Three.js", "MediaPipe Hands", "whisper.cpp", "Ollama"],
+    summary:
+      "A Windows desktop lab for understanding machines. Take an engine apart in 3D, pick a car and follow air, coolant and power through its parts, or start from a symptom and rule causes out — by mouse, by sentence, or with a hand in front of the camera. Ordinary use never calls a cloud model.",
+    flow: ["Pick", "Trace", "Rule out"],
+    cover: {
+      src: mechPart,
+      alt: "AURA MECH's Garage: a turbocharger at the centre of a component graph, with air, exhaust and oil lines running to the parts it connects to, over a generic 3D concept model",
+      kind: "capture",
+      caption: "Actual application — component graph · car photo Vauxford, CC BY-SA 4.0",
+    },
+    links: [{ label: "Source", href: "https://github.com/anischelly26/aura-mech" }],
+    world: "p-mech",
+    layout: "rise",
+    study: {
+      role: "Design and engineering",
+      context: "Personal project · v0.13.0 · Windows desktop",
+      problem:
+        "What you need to know about a car is scattered across parts catalogues, forum threads and service manuals, and most of it assumes you already know what connects to what. A beginner looking at a fault has no map from a symptom to the handful of parts that could be behind it.",
+      idea: "One desktop lab where the connections are the interface. A part sits in the centre with what feeds it on one side and what it feeds on the other; a symptom sits in the centre with its possible causes around it. Answers come from data on the computer, and anything unverified says so on screen.",
+      how: [
+        "A phrase router answers commands, part explanations, assembly order, comparisons and quizzes from an 88-entry knowledge pack on the device. A connected model is reached only when you ask for it.",
+        "The Garage holds 72 brands, 225 model generations and 445 engine variants. Fuel type and drivetrain decide which systems a car has, so an electric car never lists spark plugs.",
+        "Selecting a part draws its typed connections — air, fuel, exhaust, coolant, oil, electrical — and “what happens if the water pump fails” stops the lines that part drives.",
+        "Problems maps 39 symptoms onto 187 shared causes. Ruling one out strikes it and marks the next; every answer is worded as a possibility, never a diagnosis.",
+        "One gesture controller drives every page from hand landmarks: the index fingertip is the cursor, bending it is a click, an open palm opens a menu. Every action also has a mouse and keyboard path.",
+        "Speech is optional and local: whisper.cpp for recognition, Piper for the voice, Ollama for a small language model.",
+      ],
+      architecture: [
+        { label: "Input", note: "Mouse, typed or spoken sentence, hand landmarks" },
+        { label: "Gesture controller", note: "Hands and time in, intents out — no DOM" },
+        { label: "Phrase router", note: "Local commands, knowledge, cache, search" },
+        { label: "Garage · Problems", note: "Taxonomy, brand packs and cause maps, validated at build" },
+        { label: "3D Lab", note: "Three.js concept models — explode, section, animate" },
+        { label: "Main process", note: "Electron, sandboxed pages, a fixed list of operations" },
+        { label: "Local AI", note: "Optional: whisper.cpp · Piper · Ollama" },
+      ],
+      process: [
+        "The 0.7 main window — the lab, the camera loop and the music page — survives only as a compiled bundle; its TypeScript source was not recovered.",
+        "Everything since is an additive layer in readable TypeScript that hooks into that bundle through a small set of exact-string patches. Remove one file and the window is 0.7 again.",
+        "Garage data is merged, never overwritten: an importer gives every brand, generation and variant a canonical key and writes disagreements to a conflict log.",
+        "Before a version is installed, the packaged app is driven over the DevTools protocol with typed sentences and simulated 21-point hands.",
+      ],
+      result:
+        "76 automated tests pass, covering the router, ingestion, gestures, the Garage, Problems, music and a loopback Spotify sign-in against a stub. Scripted walk-throughs of the packaged app finished with no page errors and no external request. 112 of the 225 model generations carry a credited photograph from Wikimedia Commons.",
+      caveat:
+        "The vehicle data, the cause maps and 52 of the 88 knowledge entries were drafted by AI from general knowledge and are unreviewed; the app labels them unverified. No part numbers, no price feed and no vehicle-specific 3D ship. Hand control has been exercised with simulated landmarks only, not yet a real camera. The published repository holds the local layer, data, tools and tests — not the compiled 0.7 window, so it does not build the whole app on its own.",
+      gallery: [
+        { src: mechProblems, alt: "Problems page: engine overheating in the centre with eight possible causes around it, most common first", kind: "capture", caption: "Problems — a symptom and what could be behind it" },
+        { src: mechVehicle, alt: "Garage page for a BMW 320d: a generic sedan outline with its systems marked, labelled unverified", kind: "capture", caption: "A car's systems on a generic outline · photo Vauxford, CC BY-SA 4.0" },
+        { src: mechLab, alt: "The Lab: an inline-four engine separated along its axes, with its thirteen parts listed", kind: "capture", caption: "The Lab — an inline-four taken apart" },
+      ],
+    },
+  },
 ];
 
 export const archive: ArchiveProject[] = [
   {
     slug: "here",
-    num: "09",
+    num: "10",
     name: "HERE — Human Intelligence Network",
     category: "Product AI / Matching",
     year: "2026",
@@ -581,7 +645,7 @@ export const archive: ArchiveProject[] = [
   },
   {
     slug: "veripath-ai",
-    num: "10",
+    num: "11",
     name: "VeriPath AI",
     category: "Recommender / EdTech",
     year: "2026",
@@ -592,7 +656,7 @@ export const archive: ArchiveProject[] = [
   },
   {
     slug: "hmm-weather",
-    num: "11",
+    num: "12",
     name: "Hidden Markov Weather Analysis",
     category: "Probabilistic ML",
     year: "2025",
@@ -604,7 +668,7 @@ export const archive: ArchiveProject[] = [
   },
   {
     slug: "ml-pipeline",
-    num: "12",
+    num: "13",
     name: "Distributed ML Pipeline",
     category: "MLOps / Collaboration",
     year: "2026",
@@ -615,7 +679,7 @@ export const archive: ArchiveProject[] = [
   },
   {
     slug: "treasure-hunter",
-    num: "13",
+    num: "14",
     name: "Treasure Hunter",
     category: "Game / C + SDL2",
     year: "2025",
@@ -628,7 +692,7 @@ export const archive: ArchiveProject[] = [
 
 /** Something a visitor can run right now. */
 export type Demo = {
-  /** Set when the demo belongs to one of the eight featured projects. */
+  /** Set when the demo belongs to one of the featured projects. */
   slug?: string;
   name: string;
   what: string;

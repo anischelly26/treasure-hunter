@@ -46,8 +46,8 @@ try {
   page.on('response', response => { if (response.status() >= 400) failed.push(response.status() + ' ' + response.url()); });
   await page.goto(base);
   await page.getByRole('heading', { level: 1, name: 'Anis Chelly' }).waitFor();
-  assert.equal(await page.locator('article.project').count(), 8);
-  assert.equal(await page.locator('.index__row').count(), 13);
+  assert.equal(await page.locator('article.project').count(), 9);
+  assert.equal(await page.locator('.index__row').count(), 14);
   for (const image of await page.locator('article.project .project__picture').all()) {
     await image.scrollIntoViewIfNeeded();
     await image.evaluate(img => img.decode());
@@ -104,7 +104,7 @@ try {
   await motion.context.close();
 
   assert.deepEqual(errors, []);
-  console.log('Portfolio home, 8 project scenes, 13 index rows, hosted demos, case study, résumé, classic site and 390px layout passed.');
+  console.log('Portfolio home, 9 project scenes, 14 index rows, hosted demos, case study, résumé, classic site and 390px layout passed.');
 } finally {
   await browser?.close();
   await new Promise(done => server.close(done));
