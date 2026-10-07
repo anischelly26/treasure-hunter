@@ -585,7 +585,10 @@ export const projects: Project[] = [
       kind: "capture",
       caption: "Actual application — component graph · car photo Vauxford, CC BY-SA 4.0",
     },
-    links: [{ label: "Source", href: "https://github.com/anischelly26/aura-mech" }],
+    links: [
+      { label: "Open the lab", href: demo("aura-mech/") },
+      { label: "Source", href: "https://github.com/anischelly26/Aura-mech" },
+    ],
     world: "p-mech",
     layout: "rise",
     study: {
@@ -620,7 +623,7 @@ export const projects: Project[] = [
       result:
         "76 automated tests pass, covering the router, ingestion, gestures, the Garage, Problems, music and a loopback Spotify sign-in against a stub. Scripted walk-throughs of the packaged app finished with no page errors and no external request. 112 of the 225 model generations carry a credited photograph from Wikimedia Commons.",
       caveat:
-        "The vehicle data, the cause maps and 52 of the 88 knowledge entries were drafted by AI from general knowledge and are unreviewed; the app labels them unverified. No part numbers, no price feed and no vehicle-specific 3D ship. Hand control has been exercised with simulated landmarks only, not yet a real camera. The published repository holds the local layer, data, tools and tests — not the compiled 0.7 window, so it does not build the whole app on its own.",
+        "The vehicle data, the cause maps and 52 of the 88 knowledge entries were drafted by AI from general knowledge and are unreviewed; the app labels them unverified. No part numbers, no price feed and no vehicle-specific 3D ship. Hand control has been exercised with simulated landmarks only, not yet a real camera. The published repository holds the local layer, data, tools and tests — not the compiled 0.7 window, so it does not build the whole app on its own. The browser demo is that window without the desktop process behind it: voice goes through the browser's own speech recognition, and connected AI, Spotify and the local models are off.",
       gallery: [
         { src: mechProblems, alt: "Problems page: engine overheating in the centre with eight possible causes around it, most common first", kind: "capture", caption: "Problems — a symptom and what could be behind it" },
         { src: mechVehicle, alt: "Garage page for a BMW 320d: a generic sedan outline with its systems marked, labelled unverified", kind: "capture", caption: "A car's systems on a generic outline · photo Vauxford, CC BY-SA 4.0" },
@@ -733,6 +736,14 @@ export const demos: Demo[] = [
     needs: "In the browser · desktop build needs Java 21",
     href: demo("zero-eclipse/"),
     world: "p-eclipse",
+  },
+  {
+    slug: "aura-mech",
+    name: "AURA MECH",
+    what: "The desktop app's own window: take an engine apart, type “BMW 320d 2018” and follow a turbocharger's connections, or start from “my engine is overheating”.",
+    needs: "In the browser · WebGL · camera optional, for hand control",
+    href: demo("aura-mech/"),
+    world: "p-mech",
   },
   {
     name: "HERE",

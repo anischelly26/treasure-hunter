@@ -63,9 +63,23 @@ try {
     const response = await context.request.get(local(href).split('#')[0]);
     assert.equal(response.status(), 200, 'Demo does not load: ' + href);
   }
-  for (const name of ['aura', 'form-studio', 'padelvision', 'zero-eclipse', 'here']) assert.ok(hosted.some(href => href === live + name + '/'), 'Demo not linked: ' + name);
-  assert.equal(await page.locator('article.project a.button--solid').count(), 5);
+  for (const name of ['aura', 'form-studio', 'padelvision', 'zero-eclipse', 'aura-mech', 'here']) assert.ok(hosted.some(href => href === live + name + '/'), 'Demo not linked: ' + name);
+  assert.equal(await page.locator('article.project a.button--solid').count(), 6);
   assert.equal(await page.locator('.nav__links a[href$="#demos"]').count(), 1);
+
+  // AURA MECH is the desktop app's own window: it must start in a plain browser, with or without WebGL,
+  // fetch nothing from elsewhere, and answer a typed sentence from the data served beside it.
+  const mech = await context.newPage();
+  mech.setDefaultTimeout(20_000);
+  mech.on('pageerror', error => errors.push('aura-mech: ' + error.message));
+  mech.on('response', response => { if (response.status() >= 400) failed.push(response.status() + ' ' + response.url()); });
+  await mech.goto(base + 'aura-mech/');
+  await mech.waitForFunction(() => document.querySelectorAll('.mech-header nav button').length === 6);
+  await mech.keyboard.press('Escape');
+  await mech.getByLabel('Ask AURA MECH').fill('BMW 320d 2018');
+  await mech.getByLabel('Ask AURA MECH').press('Enter');
+  await mech.getByRole('heading', { name: 'BMW 3 Series 320d' }).waitFor();
+  await mech.close();
 
   // A case study, the résumé, and the pages that kept their old addresses.
   await page.goto(base + 'work/aura-music-house/');
@@ -104,7 +118,7 @@ try {
   await motion.context.close();
 
   assert.deepEqual(errors, []);
-  console.log('Portfolio home, 9 project scenes, 14 index rows, hosted demos, case study, résumé, classic site and 390px layout passed.');
+  console.log('Portfolio home, 9 project scenes, 14 index rows, hosted demos, the AURA MECH window, case study, résumé, classic site and 390px layout passed.');
 } finally {
   await browser?.close();
   await new Promise(done => server.close(done));
