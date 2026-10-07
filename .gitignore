@@ -3,4 +3,11 @@ qa/evidence/
 form-studio/index.html
 form-studio/assets/
 .form-source/
+aura/index.html
+aura/studio.js
+aura/src/
+aura/assets/
+aura/LICENSE
+aura/THIRD_PARTY_NOTICES.txt
+.aura-source/
 _site/

@@ -28,6 +28,21 @@ jobs:
           repository: anischelly26/ui-to-html-css-translator
           ref: ${{ steps.form-source.outputs.ref }}
           path: .form-source
+      - name: Read the pinned AURA source revision
+        id: aura-source
+        run: |
+          node --input-type=module <<'JS'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const source = JSON.parse(readFileSync('aura/source.json', 'utf8'));
+          if (!/^[a-f0-9]{40}$/.test(source.ref)) throw new Error('Pin a full AURA commit SHA.');
+          appendFileSync(process.env.GITHUB_OUTPUT, `ref=${source.ref}\n`);
+          JS
+      - name: Check out the pinned AURA music house
+        uses: actions/checkout@v4
+        with:
+          repository: anischelly26/Aura-music-house
+          ref: ${{ steps.aura-source.outputs.ref }}
+          path: .aura-source
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
@@ -36,6 +51,11 @@ jobs:
           npm --prefix .form-source/web ci
           npm --prefix .form-source/web run build:demo
           node qa/build-demo.mjs
+      - name: Build the AURA music house from its pinned source
+        run: |
+          npm --prefix .aura-source ci
+          npm --prefix .aura-source run build
+          node qa/build-aura.mjs
       - name: Check JavaScript syntax
         run: |
           node --check project-demos.js
@@ -59,6 +79,7 @@ jobs:
           node --check qa/verify-demo.mjs
           node --check qa/server.mjs
           node --check qa/build-demo.mjs
+          node --check qa/build-aura.mjs
           node --check qa/stage-site.mjs
       - name: Install verification dependencies
         run: npm ci --prefix qa

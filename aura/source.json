@@ -1,0 +1,5 @@
+{
+  "repository": "anischelly26/Aura-music-house",
+  "ref": "81db5313b7f9f20e9d17f36037579be54771f54f",
+  "build": "npm run build"
+}

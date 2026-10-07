@@ -15,4 +15,5 @@ for (const file of files) {
   await copyFile(resolve(root, file), target);
 }
 await cp(resolve(root, 'form-studio'), resolve(output, 'form-studio'), { recursive: true });
-console.log('Staged verified portfolio files and FORM demo for GitHub Pages.');
+await cp(resolve(root, 'aura'), resolve(output, 'aura'), { recursive: true });
+console.log('Staged verified portfolio files, the FORM demo and the AURA build for GitHub Pages.');
