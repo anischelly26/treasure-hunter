@@ -15,7 +15,7 @@ try {
   await context.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.abort());
   const page = await context.newPage();
   page.setDefaultTimeout(15_000);
-  await page.goto(base);
+  await page.goto(new URL('classic.html', base).href);
   const card = page.locator('[data-project="vermeg"]');
   await card.getByRole('heading', { name: 'FORM Studio', exact: true }).waitFor();
   assert.match(await card.innerText(), /57 CHECKS PASSED/);

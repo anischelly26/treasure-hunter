@@ -1,0 +1,306 @@
+/* ——— Tokens ——————————————————————————————————————————————— */
+:root {
+  --bg: #080706;
+  --ink: #efe9dd;
+  --ink-2: rgb(239 233 221 / 0.64);
+  --ink-3: rgb(239 233 221 / 0.36);
+  --rule: rgb(239 233 221 / 0.16);
+  --accent: #ff4a1c;
+
+  --gutter: clamp(1.1rem, 3.2vw, 3.4rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.7, 0, 0.2, 1);
+
+  --display: var(--font-display), "Arial Narrow", Arial, sans-serif;
+  --outline: var(--font-outline), var(--font-display), "Arial Narrow", Arial, sans-serif;
+  --serif: var(--font-serif), "Iowan Old Style", "Times New Roman", serif;
+  --mono-family: var(--font-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Layers. The shader canvas sits at 1; type can pass behind it (0) or in front (2). */
+  --z-behind: 0;
+  --z-world: 1;
+  --z-content: 2;
+  --z-nav: 50;
+  --z-grain: 60;
+  --z-cursor: 70;
+  --z-loader: 80;
+}
+
+/* ——— Reset ———————————————————————————————————————————————— */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Nothing may widen the layout viewport on phones; clip keeps sticky working. */
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(239 233 221 / 0.28) transparent;
+}
+
+html.has-lenis,
+html.has-lenis body {
+  height: auto;
+}
+
+body {
+  margin: 0;
+  /* clip, not hidden: hidden would turn body into a scroll container and break sticky. */
+  overflow-x: clip;
+  font-family: var(--display);
+  font-size: clamp(1rem, 0.42vw + 0.9rem, 1.2rem);
+  font-weight: 400;
+  font-stretch: 100%;
+  line-height: 1.45;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+#content:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ——— Type ————————————————————————————————————————————————— */
+.display {
+  font-family: var(--display);
+  font-weight: 800;
+  /* Weight and width are variables so scenes can animate the axes directly. */
+  font-variation-settings:
+    "wght" var(--wght, 800),
+    "wdth" var(--wdth, 75);
+  text-transform: uppercase;
+  line-height: 0.84;
+  letter-spacing: -0.008em;
+}
+
+.mono {
+  font-family: var(--mono-family);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  font-variation-settings: normal;
+  line-height: 1.55;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Outlined type uses the overlap-free static cut, so only the true contour is drawn. */
+.hollow {
+  font-family: var(--outline);
+  font-variation-settings: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+
+/* A masked line: content slides inside a box that clips it. */
+.line {
+  display: block;
+  overflow: hidden;
+  padding: 0.1em 0.05em 0.04em;
+  margin: -0.1em -0.05em -0.04em;
+}
+
+.line__inner {
+  display: block;
+  will-change: transform;
+}
+
+.chars {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+.textlink {
+  font-family: var(--mono-family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 0.35em;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.6s var(--ease-out);
+}
+
+.textlink:hover {
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9em;
+  padding: 1em 1.5em;
+  border: 1px solid var(--ink-3);
+  border-radius: 999px;
+  font-family: var(--mono-family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  background: rgb(8 7 6 / 0.35);
+  transition:
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out);
+}
+
+.button:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+/* The primary action: the thing you can actually run. */
+.button--solid {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.button--solid:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.magnetic {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ——— Utilities ———————————————————————————————————————————— */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.8rem 1.1rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--mono-family);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip:focus {
+  transform: none;
+}
+
+/* World markers: invisible points whose document position keys a scene state. */
+.marker {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #7dff9b;
+  box-shadow: 0 0 0 0 rgb(125 255 155 / 0.5);
+}
+
+.motion .dot {
+  animation: ping 2.6s var(--ease-out) infinite;
+}
+
+@keyframes ping {
+  70%,
+  100% {
+    box-shadow: 0 0 0 0.6rem rgb(125 255 155 / 0);
+  }
+}
+
+/* Whether a picture is a capture of running software or illustrative artwork. */
+[data-kind] {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.7em;
+  border-radius: 50%;
+  background: var(--ink);
+  vertical-align: 0.05em;
+}
+
+[data-kind="concept"] {
+  background: none;
+  box-shadow: inset 0 0 0 1px var(--ink);
+}

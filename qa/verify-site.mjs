@@ -1,0 +1,111 @@
+import assert from 'node:assert/strict';
+import { createServer } from 'node:http';
+import { mkdir, readFile, stat } from 'node:fs/promises';
+import { extname, resolve, sep } from 'node:path';
+import { chromium } from '@playwright/test';
+import { root } from './server.mjs';
+
+// Serves _site under the public base path, exactly as GitHub Pages does.
+const site = resolve(root, '_site');
+const prefix = '/treasure-hunter';
+const live = 'https://anischelly26.github.io' + prefix + '/';
+const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.txt': 'text/plain' };
+const server = createServer(async (request, response) => {
+  try {
+    const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+    if (!pathname.startsWith(prefix + '/')) { response.writeHead(404).end(); return; }
+    let path = resolve(site, '.' + pathname.slice(prefix.length));
+    if (!path.startsWith(site + sep) && path !== site) { response.writeHead(403).end(); return; }
+    if (pathname.endsWith('/') || (await stat(path)).isDirectory()) path = resolve(path, 'index.html');
+    const body = await readFile(path);
+    response.writeHead(200, { 'Content-Type': mime[extname(path)] || 'application/octet-stream' }).end(body);
+  } catch { response.writeHead(404).end(); }
+});
+await new Promise((done, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', done); });
+const base = 'http://127.0.0.1:' + server.address().port + prefix + '/';
+const local = href => href.startsWith(live) ? base + href.slice(live.length) : href;
+
+let browser;
+try {
+  browser = await chromium.launch();
+  const errors = [];
+  const open = async (options) => {
+    const context = await browser.newContext(options);
+    // The portfolio must stand on its own: no third-party request is needed to render it.
+    const origin = new URL(base).origin;
+    await context.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.abort());
+    const page = await context.newPage();
+    page.setDefaultTimeout(20_000);
+    page.on('pageerror', error => errors.push(error.message));
+    return { context, page };
+  };
+
+  // Home: the document itself, without motion.
+  const { context, page } = await open({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+  const failed = [];
+  page.on('response', response => { if (response.status() >= 400) failed.push(response.status() + ' ' + response.url()); });
+  await page.goto(base);
+  await page.getByRole('heading', { level: 1, name: 'Anis Chelly' }).waitFor();
+  assert.equal(await page.locator('article.project').count(), 8);
+  assert.equal(await page.locator('.index__row').count(), 13);
+  for (const image of await page.locator('article.project .project__picture').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate(img => img.decode());
+    assert.equal(await image.evaluate(img => img.complete && img.naturalWidth > 0), true);
+  }
+
+  // Demos are first-class: listed on the home page, and every hosted one answers.
+  const demos = await page.locator('.demos__link').evaluateAll(links => links.map(a => a.href));
+  assert.ok(demos.length >= 6, 'The live demos list is missing.');
+  const hosted = demos.filter(href => href.startsWith(live));
+  assert.ok(hosted.length >= 6);
+  for (const href of hosted) {
+    const response = await context.request.get(local(href).split('#')[0]);
+    assert.equal(response.status(), 200, 'Demo does not load: ' + href);
+  }
+  for (const name of ['aura', 'form-studio', 'padelvision', 'zero-eclipse', 'here']) assert.ok(hosted.some(href => href === live + name + '/'), 'Demo not linked: ' + name);
+  assert.equal(await page.locator('article.project a.button--solid').count(), 5);
+  assert.equal(await page.locator('.nav__links a[href$="#demos"]').count(), 1);
+
+  // A case study, the résumé, and the pages that kept their old addresses.
+  await page.goto(base + 'work/aura-music-house/');
+  await page.getByRole('heading', { level: 1, name: 'AURA Music House' }).waitFor();
+  assert.equal(await page.getByRole('link', { name: /Live demo/ }).first().getAttribute('href'), live + 'aura/');
+  await page.locator('.study__frame img').evaluate(img => img.decode());
+  await page.goto(base + 'resume/');
+  await page.getByRole('heading', { level: 1, name: 'Anis Chelly' }).waitFor();
+  assert.match(await (await context.request.get(base + 'resume.html')).text(), /url=resume\//);
+  const classic = await context.request.get(base + 'classic.html');
+  assert.equal(classic.status(), 200);
+  assert.match(await classic.text(), /ANIS\.EXE/);
+  assert.deepEqual(failed, []);
+
+  const evidence = resolve(root, 'qa/evidence');
+  await mkdir(evidence, { recursive: true });
+  await page.goto(base);
+  await page.locator('#demos').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: resolve(evidence, 'site-demos.png'), animations: 'disabled' });
+  await context.close();
+
+  // Phone width: nothing may widen the page.
+  const phone = await open({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+  await phone.page.goto(base);
+  await phone.page.getByRole('heading', { level: 1, name: 'Anis Chelly' }).waitFor();
+  assert.equal(await phone.page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), true);
+  await phone.page.screenshot({ path: resolve(evidence, 'site-mobile.png'), animations: 'disabled' });
+  await phone.context.close();
+
+  // With motion on: the choreographed version must start and lift its loader, with or without WebGL.
+  const motion = await open({ viewport: { width: 1440, height: 900 } });
+  await motion.page.goto(base);
+  await motion.page.waitForFunction(() => document.documentElement.dataset.ready === '1', null, { timeout: 30_000 });
+  await motion.page.waitForTimeout(1500);
+  await motion.page.screenshot({ path: resolve(evidence, 'site-desktop.png') });
+  await motion.context.close();
+
+  assert.deepEqual(errors, []);
+  console.log('Portfolio home, 8 project scenes, 13 index rows, hosted demos, case study, résumé, classic site and 390px layout passed.');
+} finally {
+  await browser?.close();
+  await new Promise(done => server.close(done));
+}

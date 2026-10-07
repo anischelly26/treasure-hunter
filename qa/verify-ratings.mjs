@@ -24,7 +24,7 @@ try {
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto(publicBase);
+  await page.goto(publicBase + 'classic.html');
   await page.waitForFunction(() =>
     document.querySelectorAll('.project-rating').length === 12 &&
     [...document.querySelectorAll('.project-rating__total')].every(el => !el.textContent.includes('Loading')),

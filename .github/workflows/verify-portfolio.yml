@@ -10,7 +10,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Read the pinned FORM source revision
@@ -56,6 +56,11 @@ jobs:
           npm --prefix .aura-source ci
           npm --prefix .aura-source run build
           node qa/build-aura.mjs
+      - name: Build the portfolio as a static export
+        run: |
+          npm ci --prefix site
+          npm run lint --prefix site
+          cd site && node scripts/build-pages.mjs treasure-hunter
       - name: Check JavaScript syntax
         run: |
           node --check project-demos.js
@@ -81,6 +86,7 @@ jobs:
           node --check qa/build-demo.mjs
           node --check qa/build-aura.mjs
           node --check qa/stage-site.mjs
+          node --check qa/verify-site.mjs
       - name: Install verification dependencies
         run: npm ci --prefix qa
       - name: Install Chromium
@@ -89,14 +95,16 @@ jobs:
         run: node qa/verify-ratings.mjs
       - name: Verify FORM portfolio journey
         run: npm test --prefix qa
+      - name: Stage verified site files
+        run: node qa/stage-site.mjs
+      - name: Verify the staged portfolio and its demos
+        run: node qa/verify-site.mjs
       - name: Keep browser evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: portfolio-browser-evidence
           path: qa/evidence
-      - name: Stage verified site files
-        run: node qa/stage-site.mjs
       - name: Package the verified site for Pages
         uses: actions/upload-pages-artifact@v3
         with:
