@@ -46,8 +46,8 @@ try {
   page.on('response', response => { if (response.status() >= 400) failed.push(response.status() + ' ' + response.url()); });
   await page.goto(base);
   await page.getByRole('heading', { level: 1, name: 'Anis Chelly' }).waitFor();
-  assert.equal(await page.locator('article.project').count(), 9);
-  assert.equal(await page.locator('.index__row').count(), 14);
+  assert.equal(await page.locator('article.project').count(), 10);
+  assert.equal(await page.locator('.index__row').count(), 15);
   for (const image of await page.locator('article.project .project__picture').all()) {
     await image.scrollIntoViewIfNeeded();
     await image.evaluate(img => img.decode());
@@ -63,8 +63,8 @@ try {
     const response = await context.request.get(local(href).split('#')[0]);
     assert.equal(response.status(), 200, 'Demo does not load: ' + href);
   }
-  for (const name of ['aura', 'form-studio', 'padelvision', 'zero-eclipse', 'aura-mech', 'here']) assert.ok(hosted.some(href => href === live + name + '/'), 'Demo not linked: ' + name);
-  assert.equal(await page.locator('article.project a.button--solid').count(), 6);
+  for (const name of ['aura', 'form-studio', 'padelvision', 'zero-eclipse', 'aura-mech', 'mara', 'here']) assert.ok(hosted.some(href => href === live + name + '/'), 'Demo not linked: ' + name);
+  assert.equal(await page.locator('article.project a.button--solid').count(), 7);
   assert.equal(await page.locator('.nav__links a[href$="#demos"]').count(), 1);
 
   // AURA MECH is the desktop app's own window: it must start in a plain browser, with or without WebGL,
@@ -80,6 +80,13 @@ try {
   await mech.getByLabel('Ask AURA MECH').press('Enter');
   await mech.getByRole('heading', { name: 'BMW 3 Series 320d' }).waitFor();
   await mech.close();
+
+  // The game is served as itself: its page, its title and the files its start needs.
+  const mara = await context.request.get(base + 'mara/');
+  assert.equal(mara.status(), 200, 'The game does not load');
+  const maraPage = await mara.text();
+  assert.ok(maraPage.includes('It Only Needs Mara'), 'The game has the wrong title');
+  for (const file of maraPage.match(/assets\/[^"']+\.js/g) ?? []) assert.equal((await context.request.get(base + 'mara/' + file)).status(), 200, 'Missing: ' + file);
 
   // A case study, the résumé, and the pages that kept their old addresses.
   await page.goto(base + 'work/aura-music-house/');
@@ -118,7 +125,7 @@ try {
   await motion.context.close();
 
   assert.deepEqual(errors, []);
-  console.log('Portfolio home, 9 project scenes, 14 index rows, hosted demos, the AURA MECH window, case study, résumé, classic site and 390px layout passed.');
+  console.log('Portfolio home, 10 project scenes, 15 index rows, hosted demos, the AURA MECH window, the game, case study, résumé, classic site and 390px layout passed.');
 } finally {
   await browser?.close();
   await new Promise(done => server.close(done));

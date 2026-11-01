@@ -1,0 +1,173 @@
+{
+  "stone": {
+    "id": "castle_wall_slates",
+    "name": "Castle Wall Slates",
+    "authors": [
+      "Rob Tuytel"
+    ],
+    "sizeMetres": [
+      2.5,
+      2.5
+    ],
+    "url": "https://polyhaven.com/a/castle_wall_slates",
+    "licence": "CC0"
+  },
+  "stoneDark": {
+    "id": "old_stone_wall",
+    "name": "Old Stone Wall",
+    "authors": [
+      "Charlotte Baglioni"
+    ],
+    "sizeMetres": [
+      2,
+      2
+    ],
+    "url": "https://polyhaven.com/a/old_stone_wall",
+    "licence": "CC0"
+  },
+  "floor": {
+    "id": "cobblestone_floor_04",
+    "name": "Cobblestone Floor 04",
+    "authors": [
+      "Rob Tuytel"
+    ],
+    "sizeMetres": [
+      1.5,
+      1.5
+    ],
+    "url": "https://polyhaven.com/a/cobblestone_floor_04",
+    "licence": "CC0"
+  },
+  "grate": {
+    "id": "metal_grate_rusty",
+    "name": "Metal Grate Rusty",
+    "authors": [
+      "Rob Tuytel",
+      "Dimitrios Savva"
+    ],
+    "sizeMetres": [
+      0.5,
+      0.5
+    ],
+    "url": "https://polyhaven.com/a/metal_grate_rusty",
+    "licence": "CC0"
+  },
+  "iron": {
+    "id": "metal_plate",
+    "name": "Metal Plate",
+    "authors": [
+      "Rob Tuytel"
+    ],
+    "sizeMetres": [
+      0.5,
+      0.5
+    ],
+    "url": "https://polyhaven.com/a/metal_plate",
+    "licence": "CC0"
+  },
+  "wood": {
+    "id": "old_planks_02",
+    "name": "Old Planks 02",
+    "authors": [
+      "Rob Tuytel"
+    ],
+    "sizeMetres": [
+      2,
+      2
+    ],
+    "url": "https://polyhaven.com/a/old_planks_02",
+    "licence": "CC0"
+  },
+  "grass": {
+    "id": "leafy_grass",
+    "name": "Leafy Grass",
+    "authors": [
+      "Charlotte Baglioni"
+    ],
+    "sizeMetres": [
+      2,
+      2
+    ],
+    "url": "https://polyhaven.com/a/leafy_grass",
+    "licence": "CC0"
+  },
+  "gravel": {
+    "id": "gravel_road",
+    "name": "Gravel Road",
+    "authors": [
+      "Amal Kumar"
+    ],
+    "sizeMetres": [
+      2,
+      2
+    ],
+    "url": "https://polyhaven.com/a/gravel_road",
+    "licence": "CC0"
+  },
+  "shingle": {
+    "id": "pebbles",
+    "name": "Pebbles",
+    "authors": [
+      "Rob Tuytel"
+    ],
+    "sizeMetres": [
+      4,
+      4
+    ],
+    "url": "https://polyhaven.com/a/pebbles",
+    "licence": "CC0"
+  },
+  "slate": {
+    "id": "roof_slates_02",
+    "name": "Roof Slates 02",
+    "authors": [
+      "Rob Tuytel"
+    ],
+    "sizeMetres": [
+      3,
+      3
+    ],
+    "url": "https://polyhaven.com/a/roof_slates_02",
+    "licence": "CC0"
+  },
+  "mossyStone": {
+    "id": "mossy_stone_wall",
+    "name": "Mossy Stone Wall",
+    "authors": [
+      "Amal Kumar"
+    ],
+    "sizeMetres": [
+      1.9999996423721313,
+      1.9999996423721313
+    ],
+    "url": "https://polyhaven.com/a/mossy_stone_wall",
+    "licence": "CC0"
+  },
+  "sand": {
+    "id": "coast_sand_04",
+    "name": "Coast Sand 04",
+    "authors": [
+      "Rob Tuytel",
+      "Dario Barresi"
+    ],
+    "sizeMetres": [
+      3.940000057220459,
+      3.940000057220459
+    ],
+    "url": "https://polyhaven.com/a/coast_sand_04",
+    "licence": "CC0"
+  },
+  "rock": {
+    "id": "dark_rock",
+    "name": "Dark Rock",
+    "authors": [
+      "Amal Kumar"
+    ],
+    "sizeMetres": [
+      2.4211976528167725,
+      2.421199083328247
+    ],
+    "url": "https://polyhaven.com/a/dark_rock",
+    "licence": "CC0"
+  }
+}

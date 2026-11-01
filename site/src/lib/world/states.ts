@@ -324,6 +324,25 @@ const presets: Record<string, Preset> = {
     tint: 0.03,
     narrow: { scale: 1.9, y: 0.25 },
   },
+  // — Dark water at dusk: deep teal, with one warm lit window.
+  "p-mara": {
+    c1: "#1c5a66",
+    c2: "#071820",
+    c3: "#f0b35a",
+    morph: 1,
+    water: 0.6,
+    scale: 1.3,
+    y: -0.3,
+    rotX: -1.0,
+    rotZ: -0.18,
+    strength: 0.2,
+    density: 0.55,
+    speed: 0.07,
+    lines: 0.4,
+    brightness: 0.7,
+    rim: 0.35,
+    narrow: { brightness: 0.5 },
+  },
   // — A drawing board: a dark ruled sheet, lavender with one amber line.
   "p-mech": {
     c1: "#b9a4e6",

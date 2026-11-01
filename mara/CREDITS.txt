@@ -1,0 +1,20 @@
+It Only Needs Mara: the browser version
+Source: https://github.com/anischelly26/GAME-DEV
+Every asset, source and licence: https://github.com/anischelly26/GAME-DEV/blob/claude/house-slice/docs/ASSETS.md
+
+Credit required (CC BY 4.0, https://creativecommons.org/licenses/by/4.0/):
+
+"Seven Foot Knoll Lighthouse" by Katie Wolfe
+https://sketchfab.com/3d-models/seven-foot-knoll-lighthouse-949111fbde5b4564811cad303b09727c
+Changed: the brick plaza removed, the mesh simplified, the textures reduced.
+
+"Abandoned children's slide" by sergeilihandristov
+https://sketchfab.com/3d-models/abandoned-childrens-slide-11de2b21ec264c0a814ac024c45ab425
+Changed: the meshes merged and welded, the textures resized and re-encoded.
+
+Public domain (CC0), with thanks:
+
+Characters and animation: Quaternius.
+Textures: Poly Haven.
+Sound effects: Kenney.
+Music and ambience: see the asset list above.

@@ -1,0 +1,199 @@
+{
+  "sfx": {
+    "step.stone": [
+      "sfx/impact-sounds-footstep_concrete_000.ogg",
+      "sfx/impact-sounds-footstep_concrete_001.ogg",
+      "sfx/impact-sounds-footstep_concrete_002.ogg",
+      "sfx/impact-sounds-footstep_concrete_003.ogg",
+      "sfx/impact-sounds-footstep_concrete_004.ogg"
+    ],
+    "step.wood": [
+      "sfx/impact-sounds-footstep_wood_000.ogg",
+      "sfx/impact-sounds-footstep_wood_001.ogg",
+      "sfx/impact-sounds-footstep_wood_002.ogg",
+      "sfx/impact-sounds-footstep_wood_003.ogg",
+      "sfx/impact-sounds-footstep_wood_004.ogg"
+    ],
+    "step.metal": [
+      "sfx/impact-sounds-impactPlate_light_000.ogg",
+      "sfx/impact-sounds-impactPlate_light_001.ogg",
+      "sfx/impact-sounds-impactPlate_light_002.ogg",
+      "sfx/impact-sounds-impactPlate_light_003.ogg",
+      "sfx/impact-sounds-impactPlate_light_004.ogg"
+    ],
+    "step.grass": [
+      "sfx/impact-sounds-footstep_grass_000.ogg",
+      "sfx/impact-sounds-footstep_grass_001.ogg",
+      "sfx/impact-sounds-footstep_grass_002.ogg",
+      "sfx/impact-sounds-footstep_grass_003.ogg",
+      "sfx/impact-sounds-footstep_grass_004.ogg"
+    ],
+    "step.sand": [
+      "sfx/impact-sounds-footstep_snow_000.ogg",
+      "sfx/impact-sounds-footstep_snow_001.ogg",
+      "sfx/impact-sounds-footstep_snow_002.ogg",
+      "sfx/impact-sounds-footstep_snow_003.ogg",
+      "sfx/impact-sounds-footstep_snow_004.ogg"
+    ],
+    "step.gravel": [
+      "sfx/rpg-audio-footstep00.ogg",
+      "sfx/rpg-audio-footstep01.ogg",
+      "sfx/rpg-audio-footstep02.ogg",
+      "sfx/rpg-audio-footstep03.ogg",
+      "sfx/rpg-audio-footstep04.ogg",
+      "sfx/rpg-audio-footstep05.ogg",
+      "sfx/rpg-audio-footstep06.ogg",
+      "sfx/rpg-audio-footstep07.ogg",
+      "sfx/rpg-audio-footstep08.ogg",
+      "sfx/rpg-audio-footstep09.ogg"
+    ],
+    "land": [
+      "sfx/impact-sounds-impactSoft_medium_000.ogg",
+      "sfx/impact-sounds-impactSoft_medium_001.ogg",
+      "sfx/impact-sounds-impactSoft_medium_002.ogg",
+      "sfx/impact-sounds-impactSoft_medium_003.ogg",
+      "sfx/impact-sounds-impactSoft_medium_004.ogg"
+    ],
+    "land.heavy": [
+      "sfx/impact-sounds-impactSoft_heavy_000.ogg",
+      "sfx/impact-sounds-impactSoft_heavy_001.ogg",
+      "sfx/impact-sounds-impactSoft_heavy_002.ogg",
+      "sfx/impact-sounds-impactSoft_heavy_003.ogg",
+      "sfx/impact-sounds-impactSoft_heavy_004.ogg"
+    ],
+    "land.metal": [
+      "sfx/impact-sounds-impactPlate_medium_000.ogg",
+      "sfx/impact-sounds-impactPlate_medium_001.ogg",
+      "sfx/impact-sounds-impactPlate_medium_002.ogg",
+      "sfx/impact-sounds-impactPlate_medium_003.ogg",
+      "sfx/impact-sounds-impactPlate_medium_004.ogg"
+    ],
+    "metal.heavy": [
+      "sfx/impact-sounds-impactMetal_heavy_000.ogg",
+      "sfx/impact-sounds-impactMetal_heavy_001.ogg",
+      "sfx/impact-sounds-impactMetal_heavy_002.ogg",
+      "sfx/impact-sounds-impactMetal_heavy_003.ogg",
+      "sfx/impact-sounds-impactMetal_heavy_004.ogg"
+    ],
+    "metal.medium": [
+      "sfx/impact-sounds-impactMetal_medium_000.ogg",
+      "sfx/impact-sounds-impactMetal_medium_001.ogg",
+      "sfx/impact-sounds-impactMetal_medium_002.ogg",
+      "sfx/impact-sounds-impactMetal_medium_003.ogg",
+      "sfx/impact-sounds-impactMetal_medium_004.ogg"
+    ],
+    "metal.light": [
+      "sfx/impact-sounds-impactMetal_light_000.ogg",
+      "sfx/impact-sounds-impactMetal_light_001.ogg",
+      "sfx/impact-sounds-impactMetal_light_002.ogg",
+      "sfx/impact-sounds-impactMetal_light_003.ogg",
+      "sfx/impact-sounds-impactMetal_light_004.ogg"
+    ],
+    "wood.medium": [
+      "sfx/impact-sounds-impactWood_medium_000.ogg",
+      "sfx/impact-sounds-impactWood_medium_001.ogg",
+      "sfx/impact-sounds-impactWood_medium_002.ogg",
+      "sfx/impact-sounds-impactWood_medium_003.ogg",
+      "sfx/impact-sounds-impactWood_medium_004.ogg"
+    ],
+    "cloth": [
+      "sfx/rpg-audio-cloth1.ogg",
+      "sfx/rpg-audio-cloth2.ogg",
+      "sfx/rpg-audio-cloth3.ogg",
+      "sfx/rpg-audio-cloth4.ogg"
+    ],
+    "belt": [
+      "sfx/rpg-audio-clothBelt.ogg",
+      "sfx/rpg-audio-clothBelt2.ogg",
+      "sfx/rpg-audio-handleSmallLeather.ogg",
+      "sfx/rpg-audio-handleSmallLeather2.ogg"
+    ],
+    "creak": [
+      "sfx/rpg-audio-creak1.ogg",
+      "sfx/rpg-audio-creak2.ogg",
+      "sfx/rpg-audio-creak3.ogg"
+    ],
+    "latch": [
+      "sfx/rpg-audio-metalLatch.ogg"
+    ],
+    "click": [
+      "sfx/rpg-audio-metalClick.ogg"
+    ],
+    "pot": [
+      "sfx/rpg-audio-metalPot1.ogg",
+      "sfx/rpg-audio-metalPot2.ogg",
+      "sfx/rpg-audio-metalPot3.ogg"
+    ],
+    "thruster": [
+      "sfx/sci-fi-sounds-thrusterFire_000.ogg",
+      "sfx/sci-fi-sounds-thrusterFire_001.ogg",
+      "sfx/sci-fi-sounds-thrusterFire_002.ogg",
+      "sfx/sci-fi-sounds-thrusterFire_003.ogg",
+      "sfx/sci-fi-sounds-thrusterFire_004.ogg"
+    ],
+    "boom": [
+      "sfx/sci-fi-sounds-lowFrequency_explosion_000.ogg",
+      "sfx/sci-fi-sounds-lowFrequency_explosion_001.ogg"
+    ],
+    "engine.hum": [
+      "sfx/sci-fi-sounds-spaceEngineLow_000.ogg"
+    ],
+    "ui.select": [
+      "sfx/interface-sounds-select_001.ogg",
+      "sfx/interface-sounds-select_002.ogg",
+      "sfx/interface-sounds-select_003.ogg"
+    ],
+    "ui.confirm": [
+      "sfx/interface-sounds-confirmation_001.ogg",
+      "sfx/interface-sounds-confirmation_002.ogg"
+    ],
+    "pluck": [
+      "sfx/interface-sounds-pluck_001.ogg",
+      "sfx/interface-sounds-pluck_002.ogg"
+    ],
+    "glass": [
+      "sfx/interface-sounds-glass_001.ogg",
+      "sfx/interface-sounds-glass_002.ogg",
+      "sfx/interface-sounds-glass_003.ogg"
+    ],
+    "jingle.found": [
+      "sfx/music-jingles-jingles_PIZZI03.ogg"
+    ],
+    "jingle.gadget": [
+      "sfx/music-jingles-jingles_PIZZI07.ogg"
+    ],
+    "jingle.complete": [
+      "sfx/music-jingles-jingles_PIZZI16.ogg"
+    ]
+  },
+  "beds": {
+    "title": {
+      "file": "music/title.ogg",
+      "loop": true
+    },
+    "workshop": {
+      "file": "music/workshop.mp3",
+      "loop": false
+    },
+    "cell": {
+      "file": "music/cell.ogg",
+      "loop": true
+    },
+    "hall": {
+      "file": "music/hall.mp3",
+      "loop": true
+    },
+    "ending": {
+      "file": "music/ending.mp3",
+      "loop": false
+    },
+    "tomb": {
+      "file": "music/tomb.mp3",
+      "loop": true
+    },
+    "waves": {
+      "file": "music/waves.mp3",
+      "loop": true
+    }
+  }
+}
