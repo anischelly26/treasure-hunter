@@ -81,6 +81,27 @@ try {
   await mech.getByRole('heading', { name: 'BMW 3 Series 320d' }).waitFor();
   await mech.close();
 
+  // The type filter: scenes, index and demos all follow it, and its address can be sent to someone.
+  const { context: filtering, page: chooser } = await open({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+  const shown = async () => [await chooser.locator('article.project:visible').count(), await chooser.locator('.index__row:visible').count(), await chooser.locator('.demos__row:visible').count()];
+  await chooser.goto(base + '#work');
+  await chooser.getByRole('button', { name: /^Games/ }).click();
+  assert.deepEqual(await shown(), [2, 3, 3]);
+  assert.ok(chooser.url().endsWith('?type=games#work'), 'The address does not keep the choice: ' + chooser.url());
+  assert.equal(await chooser.locator('.demos__lede').innerText(), 'Not screenshots. 3 games you can open and use right now.');
+  await chooser.getByRole('button', { name: /^All/ }).click();
+  assert.deepEqual(await shown(), [10, 15, 9]);
+  assert.equal(new URL(chooser.url()).search, '');
+  await chooser.goto(base + '?type=data');
+  await chooser.locator('.index__row:visible').first().waitFor();
+  assert.deepEqual(await shown(), [2, 4, 1]);
+  assert.equal(await chooser.locator('.demos__lede').innerText(), 'Not screenshots. 1 data project you can open and use right now.');
+  assert.equal(await chooser.getByRole('button', { name: /^Data/ }).getAttribute('aria-pressed'), 'true');
+  await chooser.goto(base + '?type=nonsense');
+  await chooser.locator('.index__row:visible').first().waitFor();
+  assert.deepEqual(await shown(), [10, 15, 9]);
+  await filtering.close();
+
   // The game is served as itself: its page, its title and the files its start needs.
   const mara = await context.request.get(base + 'mara/');
   assert.equal(mara.status(), 200, 'The game does not load');
@@ -125,7 +146,7 @@ try {
   await motion.context.close();
 
   assert.deepEqual(errors, []);
-  console.log('Portfolio home, 10 project scenes, 15 index rows, hosted demos, the AURA MECH window, the game, case study, résumé, classic site and 390px layout passed.');
+  console.log('Portfolio home, 10 project scenes, 15 index rows, the type filter, hosted demos, the AURA MECH window, the game, case study, résumé, classic site and 390px layout passed.');
 } finally {
   await browser?.close();
   await new Promise(done => server.close(done));

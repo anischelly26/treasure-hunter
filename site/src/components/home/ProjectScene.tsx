@@ -141,6 +141,7 @@ export default function ProjectScene({ project }: { project: Project }) {
       className={`project project--${layout}${stage ? ` project--${stage}` : ""}`}
       id={`p-${slug}`}
       data-world={project.world}
+      data-types={project.types.join(" ")}
       data-section={`${project.num} — ${project.name}`}
       style={{ "--chars": chars } as CSSProperties}
       aria-labelledby={`t-${slug}`}

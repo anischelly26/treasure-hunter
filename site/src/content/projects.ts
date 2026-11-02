@@ -36,6 +36,17 @@ import mlConcept from "@/assets/projects/ml-pipeline-concept.webp";
 import treasure from "@/assets/projects/treasure-hunter.webp";
 import veripathConcept from "@/assets/projects/veripath-concept.webp";
 
+/** What a visitor can narrow the work to. A project can be more than one. */
+export const projectTypes = [
+  { key: "ai", label: "AI", one: "AI project", many: "AI projects" },
+  { key: "games", label: "Games", one: "game", many: "games" },
+  { key: "apps", label: "Apps", one: "app", many: "apps" },
+  { key: "data", label: "Data", one: "data project", many: "data projects" },
+] as const;
+
+export type ProjectType = (typeof projectTypes)[number]["key"];
+export type TypeFilter = ProjectType | "all";
+
 export type Shot = {
   src: StaticImageData;
   alt: string;
@@ -71,6 +82,7 @@ export type Project = {
   title: string[];
   subtitle?: string;
   category: string;
+  types: ProjectType[];
   year: string;
   tech: string[];
   summary: string;
@@ -91,6 +103,7 @@ export type ArchiveProject = {
   num: string;
   name: string;
   category: string;
+  types: ProjectType[];
   year: string;
   summary: string;
   cover: Shot;
@@ -107,6 +120,7 @@ export const projects: Project[] = [
     name: "AURA Music House",
     title: ["AURA", "MUSIC HOUSE"],
     category: "3D / Music / Web Audio",
+    types: ["apps"],
     year: "2026",
     tech: ["Three.js", "Web Audio", "Web MIDI", "IndexedDB"],
     summary:
@@ -173,6 +187,7 @@ export const projects: Project[] = [
     name: "PadelVision AI",
     title: ["PADELVISION", "AI"],
     category: "Computer Vision / Sports AI",
+    types: ["ai", "apps"],
     year: "2026",
     tech: ["MediaPipe Pose", "JavaScript", "Python", "Streamlit"],
     summary:
@@ -235,6 +250,7 @@ export const projects: Project[] = [
     title: ["VERMEG", "AI VISION"],
     subtitle: "FORM — Vision to Code Studio",
     category: "OCR / Vision to Code",
+    types: ["ai", "apps"],
     year: "2024 → 2026",
     tech: ["React", "TypeScript", "FastAPI", "OpenCV", "Tesseract", "Docker"],
     summary:
@@ -301,6 +317,7 @@ export const projects: Project[] = [
     name: "Orange XAI Portal",
     title: ["ORANGE", "XAI PORTAL"],
     category: "Explainable AI / Full Stack",
+    types: ["ai", "apps"],
     year: "2025 — 26",
     tech: ["React", "Node.js", "Express", "MongoDB", "Azure"],
     summary:
@@ -356,6 +373,7 @@ export const projects: Project[] = [
     name: "Monoprix Data Pipeline",
     title: ["MONOPRIX", "DATA PIPELINE"],
     category: "Data Engineering",
+    types: ["data"],
     year: "2024",
     tech: ["Python", "MySQL", "SQL Server", "XAMPP"],
     summary:
@@ -407,6 +425,7 @@ export const projects: Project[] = [
     name: "Barcelona–Dubai Market Explorer",
     title: ["BARCELONA–DUBAI", "MARKET EXPLORER"],
     category: "Data / Geospatial / Full Stack",
+    types: ["data", "apps"],
     year: "2026",
     tech: ["Next.js", "TypeScript", "FastAPI", "PostGIS", "Leaflet", "Docker"],
     summary:
@@ -467,6 +486,7 @@ export const projects: Project[] = [
     name: "SQL Explanation Grader",
     title: ["SQL EXPLANATION", "GRADER"],
     category: "LLM Evaluation",
+    types: ["ai"],
     year: "2026",
     tech: ["Python", "Ollama", "qwen2.5", "SQLite"],
     summary:
@@ -522,6 +542,7 @@ export const projects: Project[] = [
     name: "ZERO ECLIPSE",
     title: ["ZERO", "ECLIPSE"],
     category: "Game / Java",
+    types: ["games"],
     year: "2026",
     tech: ["Java 21", "Custom engine", "Game AI"],
     summary:
@@ -579,6 +600,7 @@ export const projects: Project[] = [
     name: "AURA MECH",
     title: ["AURA", "MECH"],
     category: "Desktop / 3D / Local-first AI",
+    types: ["apps", "ai"],
     year: "2026",
     tech: ["Electron", "TypeScript", "Three.js", "MediaPipe Hands", "whisper.cpp", "Ollama"],
     summary:
@@ -642,6 +664,7 @@ export const projects: Project[] = [
     name: "It Only Needs Mara",
     title: ["IT ONLY", "NEEDS MARA"],
     category: "Game / Three.js / Unreal Engine 5",
+    types: ["games"],
     year: "2026",
     tech: ["Three.js", "Rapier", "TypeScript", "Unreal Engine 5.8", "C++", "Python"],
     summary:
@@ -708,6 +731,7 @@ export const archive: ArchiveProject[] = [
     num: "11",
     name: "HERE — Human Intelligence Network",
     category: "Product AI / Matching",
+    types: ["ai", "apps"],
     year: "2026",
     summary:
       "A need-first AI product concept: it interprets a human request, weighs contextual trust and risk, and ranks people by explainable fit instead of popularity.",
@@ -720,6 +744,7 @@ export const archive: ArchiveProject[] = [
     num: "12",
     name: "VeriPath AI",
     category: "Recommender / EdTech",
+    types: ["ai", "apps"],
     year: "2026",
     summary: "Transparent study-abroad discovery and ranking — a decision-support system built in Python and Streamlit.",
     cover: { src: veripathConcept, alt: "Concept artwork of study-abroad paths and explainable academic fit cards", kind: "concept", caption: "Concept image" },
@@ -731,6 +756,7 @@ export const archive: ArchiveProject[] = [
     num: "13",
     name: "Hidden Markov Weather Analysis",
     category: "Probabilistic ML",
+    types: ["ai", "data"],
     year: "2025",
     summary:
       "A Gaussian HMM that infers hidden weather states from temperature, with Baum-Welch training, Viterbi decoding and AIC/BIC model selection. With Youssef Mani.",
@@ -743,6 +769,7 @@ export const archive: ArchiveProject[] = [
     num: "14",
     name: "Distributed ML Pipeline",
     category: "MLOps / Collaboration",
+    types: ["ai", "data"],
     year: "2026",
     summary: "A multi-stage ingest → clean → train → explain workflow with FastAPI, Supabase and Hugging Face Spaces. Collaborative fork.",
     cover: { src: mlConcept, alt: "Concept artwork of connected ingestion, cleaning, training and explanation modules", kind: "concept", caption: "Concept image" },
@@ -754,6 +781,7 @@ export const archive: ArchiveProject[] = [
     num: "15",
     name: "Treasure Hunter",
     category: "Game / C + SDL2",
+    types: ["games"],
     year: "2025",
     summary: "A team-built C/SDL2 platformer: four levels, spike hazards, crab enemies, health and combat logic, and a final shark boss.",
     cover: { src: treasure, alt: "Treasure Hunter, a pixel-art platform game", kind: "capture", caption: "Team project" },
@@ -764,8 +792,8 @@ export const archive: ArchiveProject[] = [
 
 /** Something a visitor can run right now. */
 export type Demo = {
-  /** Set when the demo belongs to one of the featured projects. */
-  slug?: string;
+  /** The project it belongs to. */
+  slug: string;
   name: string;
   what: string;
   needs: string;
@@ -823,6 +851,7 @@ export const demos: Demo[] = [
     world: "p-mara",
   },
   {
+    slug: "here",
     name: "HERE",
     what: "Describe a need in your own words; see the intent, the risk and an explained match.",
     needs: "In the browser",
@@ -830,6 +859,7 @@ export const demos: Demo[] = [
     world: "a-here",
   },
   {
+    slug: "treasure-hunter",
     name: "Treasure Hunter",
     what: "The C/SDL2 platformer, adapted to run in the browser from the team’s level maps.",
     needs: "Inside the classic site",
@@ -848,6 +878,22 @@ export const demos: Demo[] = [
 
 /** The earlier ANIS.EXE site, kept online with its terminal and in-card project tests. */
 export const classicSite = demo("classic.html");
+
+const listed = [...projects, ...archive];
+
+export const typesOf = (slug: string) => listed.find((p) => p.slug === slug)?.types ?? [];
+
+export const countOf = (type: ProjectType) => listed.filter((p) => p.types.includes(type)).length;
+
+export const listedCount = listed.length;
+
+export const matches = (filter: TypeFilter, types: readonly ProjectType[]) => filter === "all" || types.includes(filter);
+
+/** "3 games", "1 data project", "15 projects". */
+export function tally(filter: TypeFilter, n: number) {
+  const type = projectTypes.find((t) => t.key === filter);
+  return `${n} ${n === 1 ? (type?.one ?? "project") : (type?.many ?? "projects")}`;
+}
 
 export const demoFor = (slug: string) => demos.find((d) => d.slug === slug);
 

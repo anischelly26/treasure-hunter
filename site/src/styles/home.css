@@ -525,6 +525,109 @@ html:not(.motion) .workintro {
   margin: 0;
 }
 
+/* ═══ TYPE FILTER ═══════════════════════════════════════════ */
+html[data-show="ai"] [data-types]:not([data-types~="ai"]),
+html[data-show="games"] [data-types]:not([data-types~="games"]),
+html[data-show="apps"] [data-types]:not([data-types~="apps"]),
+html[data-show="data"] [data-types]:not([data-types~="data"]) {
+  display: none;
+}
+
+.typefilter {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  max-width: calc(100vw - 1.5rem);
+  padding: 0.3rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: rgb(8 7 6 / 0.74);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 1rem);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+}
+
+/* Keyboard users can reach it from anywhere, so their focus shows it too. A click must not hold it open. */
+.typefilter.is-on,
+.typefilter:has(:focus-visible) {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.typefilter__label {
+  padding: 0 0.8em 0 1.1em;
+  color: var(--ink-2);
+}
+
+.typefilter__option {
+  padding: 0.85em 1.15em;
+  border-radius: 999px;
+  font-family: var(--mono-family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: uppercase;
+  transition:
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out);
+}
+
+.typefilter__option i {
+  margin-left: 0.25em;
+  font-style: normal;
+  opacity: 0.56;
+}
+
+.typefilter__option:hover {
+  background: var(--rule);
+}
+
+.typefilter__option[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.typefilter__option:focus-visible {
+  border-radius: 999px;
+  outline-offset: 1px;
+}
+
+@media (max-width: 860px) {
+  .motion .workintro__hint {
+    bottom: 5.4rem;
+  }
+
+  .typefilter__label {
+    display: none;
+  }
+
+  .typefilter__option {
+    padding: 0.85em 0.8em;
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (max-width: 400px) {
+  .typefilter__option {
+    padding: 0.85em 0.62em;
+    font-size: 0.625rem;
+    letter-spacing: 0;
+  }
+
+  .typefilter__option i {
+    margin-left: 0.1em;
+  }
+}
+
 /* ═══ INDEX ═════════════════════════════════════════════════ */
 .index {
   padding: 26vh var(--gutter) 14vh;

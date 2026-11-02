@@ -1,11 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { projects } from "@/content/projects";
+import { matches, projects, projectTypes } from "@/content/projects";
 import { gsap } from "@/lib/motion";
+import { useTypeFilter } from "@/lib/typeFilter";
 import { prime, useScene } from "@/lib/useScene";
-
-const count = String(projects.length).padStart(2, "0");
 
 /**
  * The shader inside typography, once. The stage is a black sheet in multiply
@@ -15,6 +14,9 @@ const count = String(projects.length).padStart(2, "0");
  */
 export default function WorkIntro() {
   const root = useRef<HTMLElement>(null);
+  const filter = useTypeFilter();
+  const shown = projects.filter((p) => matches(filter, p.types));
+  const type = projectTypes.find((t) => t.key === filter);
 
   useScene(root, ({ motion }, el) => {
     if (!motion) return;
@@ -49,7 +51,7 @@ export default function WorkIntro() {
   return (
     <section ref={root} className="workintro" id="work" data-section="02 — Selected work" aria-labelledby="work-title">
       <span className="marker" data-world="work-intro" style={{ top: 0 }} />
-      <span className="marker" data-world="p-aura" data-world-lead="1" style={{ top: "74%" }} />
+      <span className="marker" data-world={shown[0].world} data-world-lead="1" style={{ top: "74%" }} />
 
       <div className="workintro__mask" aria-hidden="true">
         <div className="workintro__clip">
@@ -69,10 +71,10 @@ export default function WorkIntro() {
         <p className="workintro__count mono">
           <span>01</span>
           <i aria-hidden="true" />
-          <span>{count}</span>
+          <span>{String(shown.length).padStart(2, "0")}</span>
         </p>
         <p className="workintro__hint mono">
-          {projects.length} projects · scroll to enter
+          {type ? `${type.label} · scroll to enter` : `${projects.length} projects · pick a type or scroll to enter`}
         </p>
       </div>
     </section>

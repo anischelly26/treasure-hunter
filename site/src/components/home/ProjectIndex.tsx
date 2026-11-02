@@ -2,16 +2,17 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { archive, projects } from "@/content/projects";
+import { archive, matches, projects, tally } from "@/content/projects";
 import { clamp, damp } from "@/lib/math";
 import { gsap, motion, onFrame } from "@/lib/motion";
+import { useTypeFilter } from "@/lib/typeFilter";
 import { useScene } from "@/lib/useScene";
 import { setOverride } from "@/lib/world/store";
 import { ProjectLink } from "../ui/TransitionLink";
 
 const rows = [
-  ...projects.map((p) => ({ key: p.slug, num: p.num, name: p.name, category: p.category, year: p.year, cover: p.cover, world: p.world, href: `/work/${p.slug}`, external: false })),
-  ...archive.map((p) => ({ key: p.slug, num: p.num, name: p.name, category: p.category, year: p.year, cover: p.cover, world: p.world, href: p.href, external: true })),
+  ...projects.map((p) => ({ key: p.slug, num: p.num, name: p.name, category: p.category, types: p.types, year: p.year, cover: p.cover, world: p.world, href: `/work/${p.slug}`, external: false })),
+  ...archive.map((p) => ({ key: p.slug, num: p.num, name: p.name, category: p.category, types: p.types, year: p.year, cover: p.cover, world: p.world, href: p.href, external: true })),
 ];
 
 /**
@@ -23,6 +24,7 @@ export default function ProjectIndex() {
   const preview = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(-1);
   const [seen, setSeen] = useState<Set<number>>(() => new Set());
+  const filter = useTypeFilter();
 
   useScene(root, ({ motion: animate }, el) => {
     if (!animate) return;
@@ -84,7 +86,7 @@ export default function ProjectIndex() {
           </span>
         </h2>
         <p className="mono">
-          {rows.length} projects
+          {tally(filter, rows.filter((row) => matches(filter, row.types)).length)}
           <br />
           2024 — 2026
         </p>
@@ -110,7 +112,7 @@ export default function ProjectIndex() {
             onBlur: leave,
           };
           return (
-            <li className={`index__row${active === i ? " is-active" : ""}${active >= 0 && active !== i ? " is-dim" : ""}`} key={row.key}>
+            <li className={`index__row${active === i ? " is-active" : ""}${active >= 0 && active !== i ? " is-dim" : ""}`} key={row.key} data-types={row.types.join(" ")}>
               {row.external ? (
                 <a {...props} href={row.href} target="_blank" rel="noopener noreferrer" data-cursor="open">
                   {inner}

@@ -7,6 +7,7 @@ import Manifesto from "@/components/home/Manifesto";
 import ProjectIndex from "@/components/home/ProjectIndex";
 import ProjectScene from "@/components/home/ProjectScene";
 import Stack from "@/components/home/Stack";
+import TypeFilter from "@/components/home/TypeFilter";
 import WorkIntro from "@/components/home/WorkIntro";
 import { projects } from "@/content/projects";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <main className="home">
         <Hero />
         <Manifesto />
+        <TypeFilter />
         <WorkIntro />
         <div className="projects">
           {projects.map((project) => (

@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { classicSite, demos } from "@/content/projects";
+import { classicSite, demos, matches, tally, typesOf } from "@/content/projects";
 import { gsap } from "@/lib/motion";
+import { useTypeFilter } from "@/lib/typeFilter";
 import { useScene } from "@/lib/useScene";
 import { setOverride } from "@/lib/world/store";
 import Magnetic from "../ui/Magnetic";
@@ -10,6 +11,8 @@ import Magnetic from "../ui/Magnetic";
 /** Everything that can be run right now, in one place. Each row opens the real thing. */
 export default function Demos() {
   const root = useRef<HTMLElement>(null);
+  const filter = useTypeFilter();
+  const shown = demos.filter((demo) => matches(filter, typesOf(demo.slug)));
 
   useScene(root, ({ motion }, el) => {
     if (!motion) return;
@@ -38,13 +41,15 @@ export default function Demos() {
           </span>
         </h2>
         <p className="demos__lede demos__reveal">
-          Not screenshots. {demos.length} things you can open and use right now — most of them run entirely in your browser.
+          {filter === "all"
+            ? `Not screenshots. ${demos.length} things you can open and use right now — most of them run entirely in your browser.`
+            : `Not screenshots. ${tally(filter, shown.length)} you can open and use right now.`}
         </p>
       </header>
 
       <ol className="demos__list" onPointerLeave={() => setOverride(null)}>
-        {demos.map((demo, i) => (
-          <li className="demos__row demos__reveal" key={demo.name}>
+        {demos.map((demo) => (
+          <li className="demos__row demos__reveal" key={demo.name} data-types={typesOf(demo.slug).join(" ")}>
             <a
               className="demos__link"
               href={demo.href}
@@ -55,7 +60,7 @@ export default function Demos() {
               onFocus={() => setOverride(demo.world)}
               onBlur={() => setOverride(null)}
             >
-              <span className="demos__num mono">{String(i + 1).padStart(2, "0")}</span>
+              <span className="demos__num mono">{String(shown.indexOf(demo) + 1).padStart(2, "0")}</span>
               <span className="demos__name display">{demo.name}</span>
               <span className="demos__what">{demo.what}</span>
               <span className="demos__needs mono">{demo.needs}</span>
