@@ -251,7 +251,7 @@ export const projects: Project[] = [
     subtitle: "FORM — Vision to Code Studio",
     category: "OCR / Vision to Code",
     types: ["ai", "apps"],
-    year: "2024 → 2026",
+    year: "2025 → 2026",
     tech: ["React", "TypeScript", "FastAPI", "OpenCV", "Tesseract", "Docker"],
     summary:
       "A screenshot holds pixels, not structure. What began as a Vermeg internship prototype is now FORM: a studio that turns a screenshot into a workspace you can inspect, correct, preview and export.",
@@ -274,7 +274,7 @@ export const projects: Project[] = [
     stage: "vermeg",
     study: {
       role: "AI intern, then solo rebuild",
-      context: "Vermeg internship, July–August 2024 · Personal rebuild, September 2026",
+      context: "Vermeg internship, July–August 2025 · Personal rebuild, September 2026",
       problem:
         "A screenshot contains pixels, not reusable structure. Generated markup also needs review, correction, and a reliable place to continue working.",
       idea: "Stop treating screenshot-to-code as a one-shot generator. Build a studio around it: detected elements you can search and correct, source overlays, responsive previews beside the original, an editor, and a clean export.",
@@ -295,7 +295,7 @@ export const projects: Project[] = [
         { label: "Export", note: "Sanitized HTML/CSS ZIP" },
       ],
       process: [
-        "2024, at Vermeg: a Python prototype with OpenCV, Tesseract, LLaVA and Ollama, using CLAHE and binarization for low-contrast text.",
+        "2025, at Vermeg: a Python prototype with OpenCV, Tesseract, LLaVA and Ollama, using CLAHE and binarization for low-contrast text.",
         "2026: rebuilt as FORM with a React/TypeScript frontend, a typed FastAPI backend and a shared CLI pipeline, so detection and generation are implemented once.",
         "Operator-key, origin and host checks protect the local deployment; previews are sandboxed.",
         "A locked dependency tree and an unprivileged Docker image make setup reproducible.",

@@ -41,7 +41,7 @@ export const resume = {
     {
       role: "Artificial Intelligence Intern",
       org: "Vermeg",
-      period: "July — August 2024",
+      period: "July — August 2025",
       points: [
         "Built a Python prototype converting UI screenshots into HTML and CSS using OpenCV, Tesseract OCR, LLaVA and Ollama.",
         "Applied contrast and sharpness enhancement, CLAHE and binarization to low-contrast text extraction; validated generated-code syntax and layout relevance.",
@@ -79,7 +79,7 @@ export const resume = {
 export const experiments = [
   {
     word: "OCR",
-    text: "One page-level Tesseract pass, bounded image processing, and — in the 2024 prototype — CLAHE and binarization for low-contrast text.",
+    text: "One page-level Tesseract pass, bounded image processing, and — in the 2025 prototype — CLAHE and binarization for low-contrast text.",
     from: "FORM Studio · Vermeg",
   },
   {

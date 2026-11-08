@@ -1,6 +1,6 @@
 # FORM — Vision to Code Studio
 
-**Origin:** VERMEG internship, July–August 2024.  
+**Origin:** VERMEG internship, July–August 2025.  
 **Current work:** personal product rebuild, September 2026.  
 [Interactive demo](https://anischelly26.github.io/treasure-hunter/form-studio/) · [Visual case study](https://anischelly26.github.io/treasure-hunter/case-studies/form-vision-to-code.html) · [Source and setup](https://github.com/anischelly26/ui-to-html-css-translator)
 

@@ -3,9 +3,9 @@
   const data = {
     vermeg: {
       title: 'FORM — Vision to Code Studio.',
-      meta: 'VERMEG ORIGIN / INTERNSHIP 2024 / PERSONAL REBUILD 2026',
+      meta: 'VERMEG ORIGIN / INTERNSHIP 2025 / PERSONAL REBUILD 2026',
       problem: 'A screenshot contains pixels, not reusable structure. Generated markup also needs review, correction and a reliable place to continue working.',
-      contribution: 'Rebuilt the 2024 internship prototype as FORM in September 2026: a React/TypeScript studio with a typed FastAPI backend, OCR reconstruction, responsive previews, code editing and sanitized HTML/CSS export.',
+      contribution: 'Rebuilt the 2025 internship prototype as FORM in September 2026: a React/TypeScript studio with a typed FastAPI backend, OCR reconstruction, responsive previews, code editing and sanitized HTML/CSS export.',
       decisions: 'Used one page-level Tesseract pass, bounded image processing and worker jobs, isolated previews, and shared CLI/API logic. IndexedDB autosave, validated backups and complete reconstruction Undo make review a repeatable workflow. Ollama vision generation is optional.',
       result: '57 checks passed: 39 Python tests, 14 workspace tests and 4 Chromium journeys. The production Docker runtime and real upload → OCR → correction → Undo → ZIP flow were verified. The case study shows actual light, dark and 390px captures.',
       caveat: 'Current scope: a local, single-operator studio. Live Ollama generation, production load, physical devices and full accessibility compliance remain unverified. The 2026 rebuild is separate from the original VERMEG internship.',

@@ -37,7 +37,7 @@ I build software that **understands, transforms and automates** — from compute
 ### `MISSION_01 // VERMEG // SCREEN → CODE`
 **FORM — Vision to Code Studio**
 
-Personal September 2026 rebuild of the 2024 VERMEG internship prototype. Inspect and correct extracted elements, edit HTML/CSS, compare responsive previews, save workspaces and export sanitized code. 57 automated checks passed; production Docker and real OCR workflows verified.
+Personal September 2026 rebuild of the 2025 VERMEG internship prototype. Inspect and correct extracted elements, edit HTML/CSS, compare responsive previews, save workspaces and export sanitized code. 57 automated checks passed; production Docker and real OCR workflows verified.
 
 `React` `TypeScript` `FastAPI` `OpenCV` `Tesseract OCR` `Docker`
 
